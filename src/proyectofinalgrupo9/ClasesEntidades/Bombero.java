@@ -1,16 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package ProyectoFinalGrupo9.ClasesEntidades;
 
 import java.time.LocalDate;
 
-/**
- *
- * @author Maxi
- */
+
 public class Bombero {
 
     private int id_Bombero;
@@ -19,6 +12,7 @@ public class Bombero {
     private LocalDate fecha_nac;
     private String celular;
     private int codBrigada;
+   
 
     public Bombero(int id_Bombero, String dni, String nombre_ape, LocalDate fecha_nac, String celular, int codBrigada) {
         this.id_Bombero = id_Bombero;
