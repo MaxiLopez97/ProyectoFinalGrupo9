@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ProyectoFinalGrupo9.ClasesEntidades;
+package proyectofinalgrupo9.ClasesEntidades;
 
 /**
  *
@@ -15,6 +15,7 @@ public class Brigada {
     private String nombre_br;
     private String especialidad;
     private Boolean libre;
+    //Cuartel ( cambiar)
     private int nro_cuartel;
 
     public Brigada(int codBrigada, String nombre_br, String especialidad, Boolean libre, int nro_cuartel) {

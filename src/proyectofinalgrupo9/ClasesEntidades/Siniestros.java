@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ProyectoFinalGrupo9.ClasesEntidades;
+package proyectofinalgrupo9.ClasesEntidades;
 
 import java.time.LocalDate;
 
@@ -20,6 +20,7 @@ public class Siniestros {
     private String detalles;
     private LocalDate fecha_resol;
     private int puntuacion;
+    // Brigada ( cambiar )
     private int codBrigada;
 
     public Siniestros(int codigo, String tipo, LocalDate fecha_siniestro, int coord_X, int coord_Y, String detalles, LocalDate fecha_resol, int puntuacion, int codBrigada) {

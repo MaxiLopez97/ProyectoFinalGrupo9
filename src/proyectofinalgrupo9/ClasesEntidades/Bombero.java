@@ -1,5 +1,5 @@
 
-package ProyectoFinalGrupo9.ClasesEntidades;
+package proyectofinalgrupo9.ClasesEntidades;
 
 import java.time.LocalDate;
 
@@ -11,6 +11,7 @@ public class Bombero {
     private String nombre_ape;
     private LocalDate fecha_nac;
     private String celular;
+    //Brigada ( cambiar)
     private int codBrigada;
    
 

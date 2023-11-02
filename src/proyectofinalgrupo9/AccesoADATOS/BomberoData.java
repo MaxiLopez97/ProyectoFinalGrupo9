@@ -4,12 +4,8 @@
  */
 package proyectofinalgrupo9.AccesoADATOS;
 
-import ProyectoFinalGrupo9.AccesoADATOS.Conexion;
-import ProyectoFinalGrupo9.ClasesEntidades.Bombero;
 import java.sql.*;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import proyectofinalgrupo9.ClasesEntidades.Bombero;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -19,10 +15,11 @@ import javax.swing.JOptionPane;
  * @author NAHUEL
  */
 public class BomberoData {
-
+    
     private Connection con = null;
 
     public BomberoData() {
+        
         con = Conexion.getConexion();
     }
 
@@ -35,7 +32,7 @@ public class BomberoData {
             
             ps.setString(1, bombero.getDni());
             ps.setString(2, bombero.getNombre_ape());
-            ps.setDate(3, Date.valueOf(bombero.getFecha_nac())); 
+            ps.setDate(3, Date.valueOf(bombero.getFecha_nac()));
             ps.setString(4, bombero.getCelular());
             ps.setInt(5, bombero.getCodBrigada());
             
@@ -159,4 +156,5 @@ public class BomberoData {
         
         return bomberos;
     }
+    
 }
