@@ -12,24 +12,24 @@ public class Bombero {
     private LocalDate fecha_nac;
     private String celular;
     //Brigada ( cambiar)
-    private int codBrigada;
+    private Brigada Brigada;
    
 
-    public Bombero(int id_Bombero, String dni, String nombre_ape, LocalDate fecha_nac, String celular, int codBrigada) {
+    public Bombero(int id_Bombero, String dni, String nombre_ape, LocalDate fecha_nac, String celular, Brigada codBrigada) {
         this.id_Bombero = id_Bombero;
         this.dni = dni;
         this.nombre_ape = nombre_ape;
         this.fecha_nac = fecha_nac;
         this.celular = celular;
-        this.codBrigada = codBrigada;
+        this.Brigada = codBrigada;
     }
 
-    public Bombero(String dni, String nombre_ape, LocalDate fecha_nac, String celular, int codBrigada) {
+    public Bombero(String dni, String nombre_ape, LocalDate fecha_nac, String celular, Brigada codBrigada) {
         this.dni = dni;
         this.nombre_ape = nombre_ape;
         this.fecha_nac = fecha_nac;
         this.celular = celular;
-        this.codBrigada = codBrigada;
+        this.Brigada = codBrigada;
     }
 
     public Bombero() {
@@ -75,12 +75,12 @@ public class Bombero {
         this.celular = celular;
     }
 
-    public int getCodBrigada() {
-        return codBrigada;
+    public Brigada getCodBrigada() {
+        return Brigada;
     }
 
-    public void setCodBrigada(int codBrigada) {
-        this.codBrigada = codBrigada;
+    public void setCodBrigada(Brigada codBrigada) {
+        this.Brigada = codBrigada;
     }
 
     
@@ -92,7 +92,7 @@ public class Bombero {
                  "Apellido: " + nombre_ape + 
                  "Fecha Nacimiento: " + fecha_nac + 
                  "Numero de Celular: " + celular +
-                 "Codigo de Brigada:" + codBrigada ;
+                 "Codigo de Brigada:" + Brigada ;
     }
 
     

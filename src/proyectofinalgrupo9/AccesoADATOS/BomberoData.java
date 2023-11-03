@@ -62,7 +62,7 @@ public class BomberoData {
             ps.setString(2, bombero.getNombre_ape());
             ps.setDate(3, Date.valueOf(bombero.getFecha_nac()));
             ps.setString(4, bombero.getCelular());
-            ps.setInt(5, bombero.getCodBrigada());
+            ps.setInt(5, (Brigada)bombero.getCodBrigada());
             ps.setInt(6, bombero.getId_Bombero());
             
             int exito = ps.executeUpdate();
