@@ -35,7 +35,7 @@ public class BomberoData {
             ps.setString(2, bombero.getNombre_ape());
             ps.setDate(3, Date.valueOf(bombero.getFecha_nac()));
             ps.setString(4, bombero.getCelular());
-            ps.setInt(5, bombero.getCodBrigada());
+            ps.setInt(5, bombero.getCodBrigada().getCodBrigada());
             
             ps.executeUpdate();
             
@@ -63,7 +63,7 @@ public class BomberoData {
             ps.setString(2, bombero.getNombre_ape());
             ps.setDate(3, Date.valueOf(bombero.getFecha_nac()));
             ps.setString(4, bombero.getCelular());
-            ps.setInt(5, (Brigada)bombero.getCodBrigada());
+            ps.setInt(5, bombero.getCodBrigada().getCodBrigada());
             ps.setInt(6, bombero.getId_Bombero());
             
             int exito = ps.executeUpdate();
@@ -115,7 +115,11 @@ public class BomberoData {
                 bombero.setNombre_ape(rs.getString("nombre_ape"));
                 bombero.setFecha_nac(rs.getDate("fecha_nac").toLocalDate());
                 bombero.setCelular(rs.getString("celular"));
-                bombero.setCodBrigada(rs.getInt("codBrigada"));
+                //bombero.setCodBrigada();
+                //Chequear
+                Brigada brigada = new Brigada();
+                brigada.setCodBrigada(rs.getInt("codBrigada"));
+                bombero.setCodBrigada(brigada);
             } else {
                 JOptionPane.showMessageDialog(null, "No existe el bombero con ese ID");
             }
@@ -145,7 +149,11 @@ public class BomberoData {
                 bombero.setNombre_ape(rs.getString("nombre_ape"));
                 bombero.setFecha_nac(rs.getDate("fecha_nac").toLocalDate());
                 bombero.setCelular(rs.getString("celular"));
-                bombero.setCodBrigada(rs.getInt("codBrigada"));
+                //bombero.setCodBrigada(rs.getInt("codBrigada"));
+                //Chequearrr
+                Brigada brigada = new Brigada();
+                brigada.setCodBrigada(rs.getInt("codBrigada"));
+                bombero.setCodBrigada(brigada);
                 
                 bomberos.add(bombero);
             }
