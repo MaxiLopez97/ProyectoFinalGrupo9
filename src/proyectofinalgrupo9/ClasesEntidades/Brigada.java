@@ -5,6 +5,8 @@
  */
 package proyectofinalgrupo9.ClasesEntidades;
 
+import proyectofinalgrupo9.AccesoADATOS.Especialidades;
+
 /**
  *
  * @author Maxi
@@ -13,12 +15,12 @@ public class Brigada {
    
     private int codBrigada;
     private String nombre_br;
-    private String especialidad;
+    private Especialidades especialidad;
     private Boolean libre;
     //Cuartel ( cambiar)
-    private int nro_cuartel;
+    private CuartelDeBomberos nro_cuartel;
 
-    public Brigada(int codBrigada, String nombre_br, String especialidad, Boolean libre, int nro_cuartel) {
+    public Brigada(int codBrigada, String nombre_br, Especialidades especialidad, Boolean libre, CuartelDeBomberos nro_cuartel) {
         this.codBrigada = codBrigada;
         this.nombre_br = nombre_br;
         this.especialidad = especialidad;
@@ -26,7 +28,7 @@ public class Brigada {
         this.nro_cuartel = nro_cuartel;
     }
 
-    public Brigada(String nombre_br, String especialidad, Boolean libre, int nro_cuartel) {
+    public Brigada(String nombre_br, Especialidades especialidad, Boolean libre, CuartelDeBomberos nro_cuartel) {
         this.nombre_br = nombre_br;
         this.especialidad = especialidad;
         this.libre = libre;
@@ -52,11 +54,11 @@ public class Brigada {
         this.nombre_br = nombre_br;
     }
 
-    public String getEspecialidad() {
+    public Especialidades getEspecialidad() {
         return especialidad;
     }
 
-    public void setEspecialidad(String especialidad) {
+    public void setEspecialidad(Especialidades especialidad) {
         this.especialidad = especialidad;
     }
 
@@ -68,14 +70,18 @@ public class Brigada {
         this.libre = libre;
     }
 
-    public int getNro_cuartel() {
+    public CuartelDeBomberos getNro_cuartel() {
         return nro_cuartel;
     }
 
-    public void setNro_cuartel(int nro_cuartel) {
+    public void setNro_cuartel(CuartelDeBomberos nro_cuartel) {
         this.nro_cuartel = nro_cuartel;
     }
 
+    
+    
+    
+    
     @Override
     public String toString() {
         return  "Brigada: " + 
