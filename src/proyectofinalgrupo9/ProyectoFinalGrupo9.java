@@ -19,10 +19,10 @@ public class ProyectoFinalGrupo9 {
      
        /*-----------------------------------------------*/
        
-       Bombero jose = new Bombero("12345678","Luna jose", LocalDate.of(1980, 4, 25), "35447686", 0);
+       //Bombero jose = new Bombero("12345678","Luna jose", LocalDate.of(1980, 4, 25), "35447686", 0);
        
-       BomberoData bombero = new BomberoData();
-       bombero.guardarBombero(jose);
+       //BomberoData bombero = new BomberoData();
+       //bombero.guardarBombero(jose);
        
     }
   
