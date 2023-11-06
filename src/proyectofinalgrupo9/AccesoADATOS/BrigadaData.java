@@ -146,35 +146,6 @@ public class BrigadaData {
 
     }
      
-     public Brigada modificarEstado (Brigada brigada){
-     
-     String sql = "UPDATE brigada SET nombre_br, especialidad, nro_cuartel FROM brigada"
-                + " WHERE estado = 1 ";
-        
-        try {
-            
-            PreparedStatement ps = con.prepareStatement(sql);
-            
-            ps.setBoolean(1, brigada.isEstado());
-            
-            boolean verificar = brigada.isEstado();
-            
-            verificar = ps.executeUpdate(); // VER COMO HACER
-            
-            if(){
-            
-                JOptionPane.showMessageDialog(null, "Brigada Liberada");
-                
-            }
-            
-        } catch (SQLException ex) {
-            
-            JOptionPane.showMessageDialog(null, "");
-       
-        }
-     
-     }
-     
      public List<Brigada> listarBrigada(){
          
          String sql = "SELECT codBrigada, nombre_br, especialidad, nro_cuartel FROM brigada"
