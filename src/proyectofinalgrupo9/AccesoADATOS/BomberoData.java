@@ -23,19 +23,22 @@ public class BomberoData {
         
         con = Conexion.getConexion();
     }
+    
 
     public void guardarBombero(Bombero bombero) {
-        String sql = "INSERT INTO bombero (dni, nombre_ape, fecha_nac, celular, codBrigada)"
+        String sql = "INSERT INTO bombero (dni, nombre, apellido, fecha_nac, celular, codBrigada, estado)"
                 + " VALUES (?, ?, ?, ?, ?)";
         
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             
             ps.setString(1, bombero.getDni());
-            ps.setString(2, bombero.getNombre_ape());
-            ps.setDate(3, Date.valueOf(bombero.getFecha_nac()));
-            ps.setString(4, bombero.getCelular());
-            ps.setInt(5, bombero.getCodBrigada().getCodBrigada());
+            ps.setString(2, bombero.getNombre());
+            ps.setString(3, bombero.getApellido());
+            ps.setDate(4, Date.valueOf(bombero.getFecha_nac()));
+            ps.setString(5, bombero.getCelular());
+            ps.setInt(6, bombero.getCodBrigada().getCodBrigada());
+            ps.setBoolean(7, bombero.isEstado());
             
             ps.executeUpdate();
             
@@ -53,23 +56,26 @@ public class BomberoData {
     }
 
     public void modificarBombero(Bombero bombero) {
-        String sql = "UPDATE bombero SET dni = ?, nombre_ape = ?, fecha_nac = ?, celular = ?, codBrigada = ?"
+        String sql = "UPDATE bombero SET dni = ?, nombre = ?, apellido = ?, fecha_nac = ?, celular = ?, codBrigada = ?"
                 + " WHERE id_Bombero = ?";
         
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             
             ps.setString(1, bombero.getDni());
-            ps.setString(2, bombero.getNombre_ape());
-            ps.setDate(3, Date.valueOf(bombero.getFecha_nac()));
-            ps.setString(4, bombero.getCelular());
-            ps.setInt(5, bombero.getCodBrigada().getCodBrigada());
-            ps.setInt(6, bombero.getId_Bombero());
+            ps.setString(2, bombero.getNombre());
+            ps.setString(3, bombero.getApellido());
+            ps.setDate(4, Date.valueOf(bombero.getFecha_nac()));
+            ps.setString(5, bombero.getCelular());
+            ps.setInt(6, bombero.getCodBrigada().getCodBrigada());
+            ps.setInt(7, bombero.getId_Bombero());
             
             int exito = ps.executeUpdate();
             
             if (exito == 1) {
+                
                 JOptionPane.showMessageDialog(null, "Bombero modificado");
+                
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla bombero");
@@ -95,8 +101,9 @@ public class BomberoData {
     }
 
     public Bombero buscarBombero(int id_Bombero) {
-        String sql = "SELECT dni, nombre_ape, fecha_nac, celular, codBrigada FROM bombero "
-                + " WHERE id_Bombero = ?";
+        
+        String sql = "SELECT dni, nombre, apellido, fecha_nac, celular, codBrigada FROM bombero "
+                + " WHERE id_Bombero = ? AND estado = 1";
         
         Bombero bombero = null;
         
@@ -112,7 +119,8 @@ public class BomberoData {
                 
                 bombero.setId_Bombero(id_Bombero);
                 bombero.setDni(rs.getString("dni"));
-                bombero.setNombre_ape(rs.getString("nombre_ape"));
+                bombero.setNombre(rs.getString("nombre"));
+                bombero.setApellido(rs.getString("apellido"));
                 bombero.setFecha_nac(rs.getDate("fecha_nac").toLocalDate());
                 bombero.setCelular(rs.getString("celular"));
                 //bombero.setCodBrigada();
@@ -120,7 +128,10 @@ public class BomberoData {
                 Brigada brigada = new Brigada();
                 brigada.setCodBrigada(rs.getInt("codBrigada"));
                 bombero.setCodBrigada(brigada);
+                bombero.setEstado(true);
+                
             } else {
+                
                 JOptionPane.showMessageDialog(null, "No existe el bombero con ese ID");
             }
             
@@ -133,7 +144,8 @@ public class BomberoData {
     }
 
     public List<Bombero> listarBomberos() {
-        String sql = "SELECT id_Bombero, dni, nombre_ape, fecha_nac, celular, codBrigada FROM bombero";
+        String sql = "SELECT id_Bombero, dni, nombre, apellido, fecha_nac, celular, codBrigada FROM bombero "
+                + " WHERE estado = 1";
         
         ArrayList<Bombero> bomberos = new ArrayList<>();
         
@@ -146,7 +158,8 @@ public class BomberoData {
                 
                 bombero.setId_Bombero(rs.getInt("id_Bombero"));
                 bombero.setDni(rs.getString("dni"));
-                bombero.setNombre_ape(rs.getString("nombre_ape"));
+                bombero.setNombre(rs.getString("nombre"));
+                bombero.setApellido(rs.getString("apellido"));
                 bombero.setFecha_nac(rs.getDate("fecha_nac").toLocalDate());
                 bombero.setCelular(rs.getString("celular"));
                 //bombero.setCodBrigada(rs.getInt("codBrigada"));
@@ -154,6 +167,7 @@ public class BomberoData {
                 Brigada brigada = new Brigada();
                 brigada.setCodBrigada(rs.getInt("codBrigada"));
                 bombero.setCodBrigada(brigada);
+                bombero.setEstado(true);
                 
                 bomberos.add(bombero);
             }

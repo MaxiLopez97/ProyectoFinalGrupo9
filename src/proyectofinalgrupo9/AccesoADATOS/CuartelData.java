@@ -25,8 +25,8 @@ public class CuartelData {
     }
 
     public void guardarCuartel(CuartelDeBomberos cuartel) {
-        String sql = "INSERT INTO cuartel (nombre_cuartel, direccion, coord_X, coord_Y, telefono, correo)"
-                + " VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO cuartel (nombre_cuartel, direccion, coord_X, coord_Y, telefono, correo, estado)"
+                + " VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -37,6 +37,7 @@ public class CuartelData {
             ps.setInt(4, cuartel.getCoord_Y());
             ps.setString(5, cuartel.getTelefono());
             ps.setString(6, cuartel.getCorreo());
+            ps.setBoolean(7, cuartel.isEstado());
 
             ps.executeUpdate();
 
@@ -56,7 +57,7 @@ public class CuartelData {
 
     public void modificarCuartel(CuartelDeBomberos cuartel) {
         String sql = "UPDATE cuartel SET nombre_cuartel = ?, direccion = ?, coord_X = ?, coord_Y = ?, telefono = ?, correo = ?"
-                + " WHERE codCuartel = ?";
+                + " WHERE codCuartel = ? and estado = 1";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -67,6 +68,7 @@ public class CuartelData {
             ps.setInt(4, cuartel.getCoord_Y());
             ps.setString(5, cuartel.getTelefono());
             ps.setString(6, cuartel.getCorreo());
+            ps.setBoolean(7, cuartel.isEstado());
 
             int modificar = ps.executeUpdate();
 
@@ -83,7 +85,7 @@ public class CuartelData {
     public CuartelDeBomberos consultarCuartel(int codCuartel) {
 
         String sql = "SELECT nombre_cuartel, direccion, coord_X, coord_Y, telefono, correo FROM cuartel"
-                + " WHERE codCuartel = ? ";
+                + " WHERE codCuartel = ? AND estado = 1";
 
         CuartelDeBomberos mostrarCuartel = null;
 
@@ -106,6 +108,7 @@ public class CuartelData {
                 mostrarCuartel.setCoord_Y(rs.getInt("coord_Y"));
                 mostrarCuartel.setTelefono("telefono");
                 mostrarCuartel.setCorreo("correo");
+                mostrarCuartel.setEstado(true);
 
             } else {
 
@@ -123,7 +126,9 @@ public class CuartelData {
 
     }
 
+    //MÉTODO MOSTRAR CUARTEL CERCA DE SINIESTRO O INCIDENTE
     
+    //FALTA MOSTRAR LAS BRIGADAS DE CADA CUARTEL
    
     
     

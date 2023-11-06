@@ -10,15 +10,16 @@ package proyectofinalgrupo9.ClasesEntidades;
  * @author Maxi
  */
 public class CuartelDeBomberos {
-     private int codCuartel;
+    private int codCuartel;
     private String nombre_cuartel;
     private String direccion;
     private int coord_X;
     private int coord_Y;
     private String telefono;
     private String correo;
+    private boolean estado;
 
-    public CuartelDeBomberos(int codCuartel, String nombre_cuartel, String direccion, int coord_X, int coord_Y, String telefono, String correo) {
+    public CuartelDeBomberos(int codCuartel, String nombre_cuartel, String direccion, int coord_X, int coord_Y, String telefono, String correo, boolean estado) {
         this.codCuartel = codCuartel;
         this.nombre_cuartel = nombre_cuartel;
         this.direccion = direccion;
@@ -26,15 +27,17 @@ public class CuartelDeBomberos {
         this.coord_Y = coord_Y;
         this.telefono = telefono;
         this.correo = correo;
+        this.estado = estado;
     }
 
-    public CuartelDeBomberos(String nombre_cuartel, String direccion, int coord_X, int coord_Y, String telefono, String correo) {
+    public CuartelDeBomberos(String nombre_cuartel, String direccion, int coord_X, int coord_Y, String telefono, String correo, boolean estado) {
         this.nombre_cuartel = nombre_cuartel;
         this.direccion = direccion;
         this.coord_X = coord_X;
         this.coord_Y = coord_Y;
         this.telefono = telefono;
         this.correo = correo;
+        this.estado = estado;
     }
 
     public CuartelDeBomberos() {
@@ -96,6 +99,16 @@ public class CuartelDeBomberos {
         this.correo = correo;
     }
 
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
+    
+
     @Override
     public String toString() {
         return  "Cuartel De Bomberos: " + 
@@ -105,7 +118,8 @@ public class CuartelDeBomberos {
                 "Coordenada X: " + coord_X + 
                 "Coordenada Y: " + coord_Y + 
                 "Telefono: " + telefono + 
-                "Correo: " + correo ;
+                "Correo: " + correo +
+                "Estado: " + estado;
     }
     
     

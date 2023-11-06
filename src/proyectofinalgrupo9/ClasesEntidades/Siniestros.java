@@ -20,10 +20,10 @@ public class Siniestros {
     private String detalles;
     private LocalDate fecha_resol;
     private int puntuacion;
-    // Brigada ( cambiar )
     private Brigada codBrigada;
+    private boolean estado;
 
-    public Siniestros(int codigo, String tipo, LocalDate fecha_siniestro, int coord_X, int coord_Y, String detalles, LocalDate fecha_resol, int puntuacion, Brigada codBrigada) {
+    public Siniestros(int codigo, String tipo, LocalDate fecha_siniestro, int coord_X, int coord_Y, String detalles, LocalDate fecha_resol, int puntuacion, Brigada codBrigada, boolean estado) {
         this.codigo = codigo;
         this.tipo = tipo;
         this.fecha_siniestro = fecha_siniestro;
@@ -33,9 +33,10 @@ public class Siniestros {
         this.fecha_resol = fecha_resol;
         this.puntuacion = puntuacion;
         this.codBrigada = codBrigada;
+        this.estado = estado;
     }
 
-    public Siniestros(String tipo, LocalDate fecha_siniestro, int coord_X, int coord_Y, String detalles, LocalDate fecha_resol, int puntuacion, Brigada codBrigada) {
+    public Siniestros(String tipo, LocalDate fecha_siniestro, int coord_X, int coord_Y, String detalles, LocalDate fecha_resol, int puntuacion, Brigada codBrigada, boolean estado) {
         this.tipo = tipo;
         this.fecha_siniestro = fecha_siniestro;
         this.coord_X = coord_X;
@@ -44,6 +45,7 @@ public class Siniestros {
         this.fecha_resol = fecha_resol;
         this.puntuacion = puntuacion;
         this.codBrigada = codBrigada;
+        this.estado = estado;
     }
 
     public Siniestros() {
@@ -120,10 +122,17 @@ public class Siniestros {
     public void setCodBrigada(Brigada codBrigada) {
         this.codBrigada = codBrigada;
     }
-    
-    
-    
 
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
+    
+    
     @Override
     public String toString() {
         return  "Siniestros: " + 
@@ -135,7 +144,8 @@ public class Siniestros {
                 "Detalles: " + detalles + 
                 "Fecha de Resolucion: " + fecha_resol + 
                 "Puntuacion: " + puntuacion +
-                "Codigo de Brigada: " + codBrigada ;
+                "Codigo de Brigada: " + codBrigada +
+                "Estado: " + estado;
     }
     
     

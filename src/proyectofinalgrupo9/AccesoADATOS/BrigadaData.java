@@ -6,8 +6,11 @@
 package proyectofinalgrupo9.AccesoADATOS;
 
 import java.sql.*;
+import java.util.ArrayList;
 import proyectofinalgrupo9.ClasesEntidades.Brigada;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import proyectofinalgrupo9.ClasesEntidades.CuartelDeBomberos;
 
@@ -25,7 +28,8 @@ public class BrigadaData {
     }
 
     public void guardarBrigada(Brigada brigada) {
-        String sql = "INSERT INTO brigada (nombre_br, especialidad, libre, nro_cuartel)"
+        
+        String sql = "INSERT INTO brigada (nombre_br, especialidad, nro_cuartel, estado)"
                 + " VALUES (?, ?, ?, ?)";
 
         try {
@@ -33,21 +37,28 @@ public class BrigadaData {
 
             ps.setString(1, brigada.getNombre_br());
             ps.setString(2, (Especialidades.valueOf(brigada.getEspecialidad().toString()))); //VERIFICAR
-            ps.setBoolean(3, brigada.getLibre());
+            ps.setBoolean(3, brigada.isEstado());
             ps.setInt(4, brigada.getNro_cuartel().getCodCuartel());
+            ps.setBoolean(5, brigada.isEstado());
 
             ps.executeUpdate();
 
             ResultSet rs = ps.getGeneratedKeys();
 
             if (rs.next()) {
+                
                 brigada.setCodBrigada(rs.getInt(1));
+                
                 JOptionPane.showMessageDialog(null, "Se agregó exitósamente la brigada");
+                
             }
 
             ps.close();
+            
         } catch (SQLException ex) {
+            
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla brigada");
+            
         }
 
     }
@@ -55,8 +66,8 @@ public class BrigadaData {
     
     public Brigada consultarBrigada() {
 
-        String sql = "SELECT nombre_br, especialidad, libre, nro_cuartel FROM brigada"
-                + " WHERE codBrigada = ? ";
+        String sql = "SELECT nombre_br, especialidad, nro_cuartel, estado FROM brigada"
+                + " WHERE codBrigada = ? AND estado = 1";
 
         Brigada consultarBrigada = null;
 
@@ -75,13 +86,9 @@ public class BrigadaData {
                 consultarBrigada.setCodBrigada(consultarBrigada.getCodBrigada());
                 consultarBrigada.setNombre_br("nombre_br");
                 consultarBrigada.setEspecialidad(Especialidades.valueOf(consultarBrigada.getEspecialidad().toString()));
-                consultarBrigada.setLibre(Boolean.TRUE);
                 consultarBrigada.setNro_cuartel(consultarBrigada.getNro_cuartel());
-                
-                
-                
-                
-
+                consultarBrigada.isEstado();
+            
             } else {
 
                 JOptionPane.showMessageDialog(null, "No existe el ID de la brigada ingresada.");
@@ -99,13 +106,11 @@ public class BrigadaData {
     }
     
     
-    
      public Brigada brigadasLibres(Boolean libre) {
 
         String sql = "SELECT codBrigada, nombre_br, especialidad,  nro_cuartel FROM brigada"
-                + " WHERE libre = 1 ";
+                + " WHERE estado = 1 ";
 
-      
         Brigada brigadasLibres = null;
 
         try {
@@ -143,19 +148,20 @@ public class BrigadaData {
      
      public Brigada modificarEstado (Brigada brigada){
      
-     String sql = "UPDATE brigada SET nombre_br, especialidad,  nro_cuartel FROM brigada"
-                + " WHERE libre = 1 ";
+     String sql = "UPDATE brigada SET nombre_br, especialidad, nro_cuartel FROM brigada"
+                + " WHERE estado = 1 ";
         
         try {
             
             PreparedStatement ps = con.prepareStatement(sql);
             
-            ps.setBoolean(1, brigada.getLibre());
+            ps.setBoolean(1, brigada.isEstado());
             
+            boolean verificar = brigada.isEstado();
             
-            Boolean brigada = ps.executeUpdate();
+            verificar = ps.executeUpdate(); // VER COMO HACER
             
-            if(brigada == true){
+            if(){
             
                 JOptionPane.showMessageDialog(null, "Brigada Liberada");
                 
@@ -166,12 +172,40 @@ public class BrigadaData {
             JOptionPane.showMessageDialog(null, "");
        
         }
-        
-     
-     
      
      }
-    
+     
+     public List<Brigada> listarBrigada(){
+         
+         String sql = "SELECT codBrigada, nombre_br, especialidad, nro_cuartel FROM brigada"
+                 + "WHERE estado = 1";
+         
+         ArrayList<Brigada> brigada = new ArrayList();
+         
+         try{
+             
+              // brigadasLibres.setEspecialidad(brigadasLibres.getEspecialidad());
+               PreparedStatement ps = con.prepareStatement(sql);
+               ResultSet rs = ps.executeQuery();
+               
+               while(rs.next()){
+                   
+                   Brigada brigadas = new Brigada();
+                   
+                   brigadas.setCodBrigada(rs.getInt("codBrigada"));
+                   brigadas.setNombre_br(rs.getString("nombre_br"));
+                   brigadas.setEspecialidad(rs.getString(brigadas.getEspecialidad())); // VER COMO HACER
+                   
+               }
+             
+         } catch (SQLException ex) {
+             
+            Logger.getLogger(BrigadaData.class.getName()).log(Level.SEVERE, null, ex);
+            
+        }
+         
+     }
+
     
     
 

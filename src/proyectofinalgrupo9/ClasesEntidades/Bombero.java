@@ -8,28 +8,32 @@ public class Bombero {
 
     private int id_Bombero;
     private String dni;
-    private String nombre_ape;
+    private String nombre;
+    private String apellido;
     private LocalDate fecha_nac;
     private String celular;
-    //Brigada ( cambiar)
-    private Brigada Brigada;
-   
+    private Brigada codBrigada;
+    private boolean estado;
 
-    public Bombero(int id_Bombero, String dni, String nombre_ape, LocalDate fecha_nac, String celular, Brigada codBrigada) {
+    public Bombero(int id_Bombero, String dni, String nombre, String apellido, LocalDate fecha_nac, String celular, Brigada codBrigada, boolean estado) {
         this.id_Bombero = id_Bombero;
         this.dni = dni;
-        this.nombre_ape = nombre_ape;
+        this.nombre = nombre;
+        this.apellido = apellido;
         this.fecha_nac = fecha_nac;
         this.celular = celular;
-        this.Brigada = codBrigada;
+        this.codBrigada = codBrigada;
+        this.estado = estado;
     }
 
-    public Bombero(String dni, String nombre_ape, LocalDate fecha_nac, String celular, Brigada codBrigada) {
+    public Bombero(String dni, String nombre, String apellido, LocalDate fecha_nac, String celular, Brigada codBrigada, boolean estado) {
         this.dni = dni;
-        this.nombre_ape = nombre_ape;
+        this.nombre = nombre;
+        this.apellido = apellido;
         this.fecha_nac = fecha_nac;
         this.celular = celular;
-        this.Brigada = codBrigada;
+        this.codBrigada = codBrigada;
+        this.estado = estado;
     }
 
     public Bombero() {
@@ -51,12 +55,20 @@ public class Bombero {
         this.dni = dni;
     }
 
-    public String getNombre_ape() {
-        return nombre_ape;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setNombre_ape(String nombre_ape) {
-        this.nombre_ape = nombre_ape;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
 
     public LocalDate getFecha_nac() {
@@ -76,23 +88,33 @@ public class Bombero {
     }
 
     public Brigada getCodBrigada() {
-        return Brigada;
+        return codBrigada;
     }
 
     public void setCodBrigada(Brigada codBrigada) {
-        this.Brigada = codBrigada;
+        this.codBrigada = codBrigada;
     }
 
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+    
     
     
     @Override
     public String toString() {
-        return   "Bombero: "+
+        return   "Bombero: " +
                  "DNI: " + dni + 
-                 "Apellido: " + nombre_ape + 
+                 "Nombre: " + nombre + 
+                 "Apellido: " + apellido +
                  "Fecha Nacimiento: " + fecha_nac + 
                  "Numero de Celular: " + celular +
-                 "Codigo de Brigada:" + Brigada ;
+                 "Codigo de Brigada:" + codBrigada +
+                 "Estado: " + estado;
     }
 
     

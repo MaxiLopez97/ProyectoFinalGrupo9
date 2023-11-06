@@ -16,23 +16,22 @@ public class Brigada {
     private int codBrigada;
     private String nombre_br;
     private Especialidades especialidad;
-    private Boolean libre;
-    //Cuartel ( cambiar)
     private CuartelDeBomberos nro_cuartel;
+    private boolean estado;
 
-    public Brigada(int codBrigada, String nombre_br, Especialidades especialidad, Boolean libre, CuartelDeBomberos nro_cuartel) {
+    public Brigada(int codBrigada, String nombre_br, Especialidades especialidad, CuartelDeBomberos nro_cuartel, boolean estado) {
         this.codBrigada = codBrigada;
         this.nombre_br = nombre_br;
         this.especialidad = especialidad;
-        this.libre = libre;
         this.nro_cuartel = nro_cuartel;
+        this.estado = estado;
     }
 
-    public Brigada(String nombre_br, Especialidades especialidad, Boolean libre, CuartelDeBomberos nro_cuartel) {
+    public Brigada(String nombre_br, Especialidades especialidad, CuartelDeBomberos nro_cuartel, boolean estado) {
         this.nombre_br = nombre_br;
         this.especialidad = especialidad;
-        this.libre = libre;
         this.nro_cuartel = nro_cuartel;
+        this.estado = estado;
     }
 
     public Brigada() {
@@ -62,14 +61,6 @@ public class Brigada {
         this.especialidad = especialidad;
     }
 
-    public Boolean getLibre() {
-        return libre;
-    }
-
-    public void setLibre(Boolean libre) {
-        this.libre = libre;
-    }
-
     public CuartelDeBomberos getNro_cuartel() {
         return nro_cuartel;
     }
@@ -78,7 +69,13 @@ public class Brigada {
         this.nro_cuartel = nro_cuartel;
     }
 
-    
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
     
     
     
@@ -88,7 +85,9 @@ public class Brigada {
                 "Codigo de Brigada: " + codBrigada +
                 "Nombre de Brigada: " + nombre_br + 
                 "Especialidad: " + especialidad + 
-                "Numero de Cuartel: " + nro_cuartel ;
+                "Numero de Cuartel: " + nro_cuartel +
+                "Estado: " + estado;
+                
     }
     
     

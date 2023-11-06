@@ -23,10 +23,14 @@ public class SiniestrosData {
     public SiniestrosData() {
         
         con = Conexion.getConexion();
+        
     }
     
+    //MODIFICAR LA FECHA DE RESOLUCION REGISTRAR SINIESTROS
+    
     public void registrarSiniestros(Siniestros siniestro) {
-        String sql = "INSERT INTO siniestro (codigo, tipo, fecha_siniestro, coord_X, coord_Y, detalles, fecha_resol, puntuacion, codBrigada) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO siniestro (codigo, tipo, fecha_siniestro, coord_X, coord_Y, detalles, fecha_resol, puntuacion, codBrigada, estado)"
+                + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -40,6 +44,7 @@ public class SiniestrosData {
             ps.setDate(7, Date.valueOf(siniestro.getFecha_resol()));
             ps.setInt(8, siniestro.getPuntuacion());
             ps.setInt(9, siniestro.getCodBrigada().getCodBrigada());
+            ps.setBoolean(10, siniestro.isEstado());
             
             ps.executeUpdate();
             
@@ -64,9 +69,9 @@ public class SiniestrosData {
             String tipoEmergencia = siniestro.getTipo();
 
             // Consultar brigadas disponibles
-            String sql = "SELECT codBrigada, especialidad, nro_cuartel, SQRT(POW(? - coord_X, 2) + POW(? - coord_Y, 2)) AS distancia " +
+            String sql = "SELECT codBrigada, especialidad, nro_cuartel, SQRT(POW(? - coord_X, 2) + POW(? - coord_Y, 2)) AS distancia " + //Fórmula para calcular la distancia entre dos puntos
                          "FROM brigada " +
-                         "WHERE libre = 1 " +
+                         "WHERE estado = 1 " +
                          "ORDER BY distancia";
 
             PreparedStatement ps = con.prepareStatement(sql);
@@ -206,40 +211,5 @@ public class SiniestrosData {
         
         return siniestros;
     }
-    
-    //Despues ver este metodo y los demas
-    
-    public Brigada buscarBrigadaPorCodigo(int codigo) {
-    String sql = "SELECT codBrigada, nombre_br, especialidad, libre, nro_cuartel FROM brigada WHERE codBrigada = ?";
-    Brigada brigada = null;
-
-    try {
-        PreparedStatement ps = con.prepareStatement(sql);
-        ps.setInt(1, codigo);
-        ResultSet rs = ps.executeQuery();
-
-        if (rs.next()) {
-            brigada = new Brigada();
-            brigada.setCodBrigada(rs.getInt("codBrigada"));
-            brigada.setNombre_br(rs.getString("nombre_br"));
-            brigada.setEspecialidad(Especialidades.DERRUMBES.INCENDIO.INUNDACIONES.OPERATIVOS_PREVENCION.RESCATES_MONTAÑAS.RESCATES_TRAFICO);
-            brigada.setLibre(rs.getBoolean("libre"));
-           // brigada.setNro_cuartel(nro_cuartel);
-        } else {
-            JOptionPane.showMessageDialog(null, "No se encontró ninguna brigada con el código especificado");
-        }
-
-        ps.close();
-    } catch (SQLException ex) {
-        JOptionPane.showMessageDialog(null, "Error al acceder a la tabla brigada");
-    }
-
-    return brigada;
-}
-    
-    
-    
-    
-    
-    
+    //Eliminé buscar brigada por código porque estaba mal
 }
