@@ -45,12 +45,12 @@ public class CuartelData {
 
             if (rs.next()) {
                 cuartel.setCodCuartel(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "Se agregó exitósamente al bombero");
+                JOptionPane.showMessageDialog(null, "Se agregó exitósamente el cuartel");
             }
 
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla bombero");
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cuartel");
         }
 
     }

@@ -28,16 +28,18 @@ public class BrigadaData {
         String sql = "INSERT INTO brigada (nombre_br, especialidad, nro_cuartel, estado)"
                 + " VALUES (?, ?, ?, ?)";
 
-        
-        
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-
+            
+           
+            String cuartel =  ;
+            
+            
             ps.setString(1, brigada.getNombre_br());
-            ps.setString(2, brigada.getEspecialidad().name()); 
-            ps.setBoolean(3, brigada.isEstado());
-            ps.setInt(4, brigada.getNro_cuartel().getCodCuartel());
-            ps.setBoolean(5, brigada.isEstado());
+            ps.setObject(2, Especialidades.values());
+            
+            ps.setInt(3, brigada.getNro_cuartel().getCodCuartel());
+            ps.setBoolean(4, brigada.isEstado());
 
             ps.executeUpdate();
 
@@ -82,7 +84,7 @@ public class BrigadaData {
 
                 consultarBrigada.setCodBrigada(consultarBrigada.getCodBrigada());
                 consultarBrigada.setNombre_br("nombre_br");
-                consultarBrigada.setEspecialidad(Especialidades.valueOf(consultarBrigada.getEspecialidad().toString()));
+                consultarBrigada.setEspecialidad(Especialidades.valueOf(consultarBrigada.getEspecialidad().toString())); // modificar
                 consultarBrigada.setNro_cuartel(consultarBrigada.getNro_cuartel());
                 consultarBrigada.isEstado();
 
@@ -194,15 +196,14 @@ public class BrigadaData {
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-           
 
             ResultSet rs = ps.executeQuery();
             int contadorBomberos = 0;
 
             while (rs.next()) {
 
-                if (contadorBomberos <=5) {
-                    
+                if (contadorBomberos <= 5) {
+
                     Bombero bombero = new Bombero();
                     bombero.setNombre(rs.getString("nombre"));
                     bombero.setApellido(rs.getString("apellido"));
@@ -225,7 +226,4 @@ public class BrigadaData {
         return Bombero;
     }
 
-    
-    
-    
 }
