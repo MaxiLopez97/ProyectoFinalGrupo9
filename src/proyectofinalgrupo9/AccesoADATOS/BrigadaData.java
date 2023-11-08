@@ -155,9 +155,15 @@ public class BrigadaData {
          
          try{
              
-              // brigadasLibres.setEspecialidad(brigadasLibres.getEspecialidad());
                PreparedStatement ps = con.prepareStatement(sql);
                ResultSet rs = ps.executeQuery();
+               
+               String especialidadString = rs.getString("especialidad");
+               Especialidades especialidad = Especialidades.valueOf(especialidadString);
+               
+               String numeroCuartel = rs.getString("nro_cuartel");
+               CuartelDeBomberos cuartel = new CuartelDeBomberos();
+               
                
                while(rs.next()){
                    
@@ -165,7 +171,8 @@ public class BrigadaData {
                    
                    brigadas.setCodBrigada(rs.getInt("codBrigada"));
                    brigadas.setNombre_br(rs.getString("nombre_br"));
-                   brigadas.setEspecialidad(rs.getString(brigadas.getEspecialidad())); // VER COMO HACER
+                   brigadas.setEspecialidad(especialidad); 
+                   brigadas.setNro_cuartel(rs.getString("nro_cuartel")); // VER COMO HACER
                    
                }
              
@@ -176,6 +183,8 @@ public class BrigadaData {
         }
          
      }
+     
+     
 
     
     
