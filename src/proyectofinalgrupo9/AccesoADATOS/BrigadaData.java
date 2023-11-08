@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import proyectofinalgrupo9.ClasesEntidades.Bombero;
 import proyectofinalgrupo9.ClasesEntidades.CuartelDeBomberos;
 
 /**
@@ -28,7 +29,7 @@ public class BrigadaData {
     }
 
     public void guardarBrigada(Brigada brigada) {
-        
+
         String sql = "INSERT INTO brigada (nombre_br, especialidad, nro_cuartel, estado)"
                 + " VALUES (?, ?, ?, ?)";
 
@@ -46,24 +47,23 @@ public class BrigadaData {
             ResultSet rs = ps.getGeneratedKeys();
 
             if (rs.next()) {
-                
+
                 brigada.setCodBrigada(rs.getInt(1));
-                
+
                 JOptionPane.showMessageDialog(null, "Se agregó exitósamente la brigada");
-                
+
             }
 
             ps.close();
-            
+
         } catch (SQLException ex) {
-            
+
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla brigada");
-            
+
         }
 
     }
-    
-    
+
     public Brigada consultarBrigada() {
 
         String sql = "SELECT nombre_br, especialidad, nro_cuartel, estado FROM brigada"
@@ -88,7 +88,7 @@ public class BrigadaData {
                 consultarBrigada.setEspecialidad(Especialidades.valueOf(consultarBrigada.getEspecialidad().toString()));
                 consultarBrigada.setNro_cuartel(consultarBrigada.getNro_cuartel());
                 consultarBrigada.isEstado();
-            
+
             } else {
 
                 JOptionPane.showMessageDialog(null, "No existe el ID de la brigada ingresada.");
@@ -104,9 +104,8 @@ public class BrigadaData {
         return consultarBrigada;
 
     }
-    
-    
-     public Brigada brigadasLibres(Boolean libre) {
+
+    public Brigada brigadasLibres(Boolean libre) {
 
         String sql = "SELECT codBrigada, nombre_br, especialidad,  nro_cuartel FROM brigada"
                 + " WHERE estado = 1 ";
@@ -128,8 +127,8 @@ public class BrigadaData {
                 brigadasLibres.setCodBrigada(0);
                 brigadasLibres.setNombre_br(sql);
                 brigadasLibres.setEspecialidad(brigadasLibres.getEspecialidad());
-                brigadasLibres.setNro_cuartel(brigadasLibres.getNro_cuartel());              
-                
+                brigadasLibres.setNro_cuartel(brigadasLibres.getNro_cuartel());
+
             } else {
 
                 JOptionPane.showMessageDialog(null, "No hay brigadas libres para atender el siniestro.");
@@ -145,47 +144,61 @@ public class BrigadaData {
         return brigadasLibres;
 
     }
-     
-     public List<Brigada> listarBrigada(){
-         
-         String sql = "SELECT codBrigada, nombre_br, especialidad, nro_cuartel FROM brigada"
-                 + "WHERE estado = 1";
-         
-         ArrayList<Brigada> brigada = new ArrayList();
-         
-         try{
-             
-               PreparedStatement ps = con.prepareStatement(sql);
-               ResultSet rs = ps.executeQuery();
-               
-               String especialidadString = rs.getString("especialidad");
-               Especialidades especialidad = Especialidades.valueOf(especialidadString);
-               
-               String numeroCuartel = rs.getString("nro_cuartel");
-               CuartelDeBomberos cuartel = new CuartelDeBomberos();
-               
-               
-               while(rs.next()){
-                   
-                   Brigada brigadas = new Brigada();
-                   
-                   brigadas.setCodBrigada(rs.getInt("codBrigada"));
-                   brigadas.setNombre_br(rs.getString("nombre_br"));
-                   brigadas.setEspecialidad(especialidad); 
-                   brigadas.setNro_cuartel(rs.getString("nro_cuartel")); // VER COMO HACER
-                   
-               }
-             
-         } catch (SQLException ex) {
-             
-            Logger.getLogger(BrigadaData.class.getName()).log(Level.SEVERE, null, ex);
-            
-        }
-         
-     }
-     
-     
 
+    public List<Brigada> listarBrigada() {
+
+        String sql = "SELECT codBrigada, nombre_br, especialidad, nro_cuartel FROM brigada"
+                + "WHERE estado = 1";
+
+        ArrayList<Brigada> brigada = new ArrayList();
+
+        try {
+
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            String especialidadString = rs.getString("especialidad");
+            Especialidades especialidad = Especialidades.valueOf(especialidadString);
+
+            String numeroCuartel = rs.getString("nro_cuartel");
+
+            CuartelData cuartelD = new CuartelData();
+
+            while (rs.next()) {
+
+                Brigada brigadas = new Brigada();
+
+                brigadas.setCodBrigada(rs.getInt("codBrigada"));
+                brigadas.setNombre_br(rs.getString("nombre_br"));
+                brigadas.setEspecialidad(especialidad);
+
+                CuartelDeBomberos cuartel = cuartelD.consultarCuartel(rs.getInt("nro_cuartel"));
+                brigadas.setNro_cuartel(cuartel);
+
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+
+            Logger.getLogger(BrigadaData.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+        return brigada;
+
+    }
+    
+    
+    public Brigada agregarBombero (){
+    
+    ArrayList<Bombero> bomberos = new ArrayList();
+    
+    
+    
+    
+    
+    
+        return null;
+    }
     
     
 
