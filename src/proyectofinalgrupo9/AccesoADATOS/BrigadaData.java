@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package proyectofinalgrupo9.AccesoADATOS;
 
 import java.sql.*;
@@ -186,20 +181,46 @@ public class BrigadaData {
         return brigada;
 
     }
-    
-    
-    public Brigada agregarBombero (){
-    
-    ArrayList<Bombero> bomberos = new ArrayList();
-    
-    
-    
-    
-    
-    
-        return null;
+
+    public List<Bombero> asignarBomberoABrigada() {
+
+        ArrayList<Bombero> Bombero = new ArrayList<>();
+
+        String sql = "SELECT brigada.codBrigada, dni, nombre, apellido FROM brigada, bombero"
+                + "WHERE brigada.codBrigada = bombero.codBrigada"
+                + "AND brigada.nombre_br = ? ";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+           
+
+            ResultSet rs = ps.executeQuery();
+            int contadorBomberos = 0;
+
+            while (rs.next()) {
+
+                if (contadorBomberos <=5) {
+                    
+                    Bombero bombero = new Bombero();
+                    bombero.setNombre(rs.getString("nombre"));
+                    bombero.setApellido(rs.getString("apellido"));
+                    bombero.setDni(rs.getString("dni"));
+                    bombero.setCelular(rs.getString("celular"));
+
+                    Bombero.add(bombero);
+                    contadorBomberos++;
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "La brigada esta llena.");
+                }
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Brigada");
+        }
+
+        return Bombero;
     }
-    
-    
 
 }
