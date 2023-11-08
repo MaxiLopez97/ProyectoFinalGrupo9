@@ -28,11 +28,13 @@ public class BrigadaData {
         String sql = "INSERT INTO brigada (nombre_br, especialidad, nro_cuartel, estado)"
                 + " VALUES (?, ?, ?, ?)";
 
+        
+        
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             ps.setString(1, brigada.getNombre_br());
-            ps.setString(2, (Especialidades.valueOf(brigada.getEspecialidad().toString()))); //VERIFICAR
+            ps.setString(2, brigada.getEspecialidad().name()); 
             ps.setBoolean(3, brigada.isEstado());
             ps.setInt(4, brigada.getNro_cuartel().getCodCuartel());
             ps.setBoolean(5, brigada.isEstado());
@@ -223,4 +225,7 @@ public class BrigadaData {
         return Bombero;
     }
 
+    
+    
+    
 }
