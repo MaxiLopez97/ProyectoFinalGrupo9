@@ -34,10 +34,14 @@ public class BrigadaData {
                 + " VALUES (?, ?, ?, ?)";
 
         try {
+            
+//            String especialidadString = rs.getString("especialidad");
+//            Especialidades especialidad = Especialidades.valueOf(especialidadString);
+            
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-
+            
             ps.setString(1, brigada.getNombre_br());
-            ps.setString(2, (Especialidades.valueOf(brigada.getEspecialidad().toString()))); //VERIFICAR
+            ps.setString(2, (Especialidades.valueOf(brigada.getEspecialidad().toString())));
             ps.setBoolean(3, brigada.isEstado());
             ps.setInt(4, brigada.getNro_cuartel().getCodCuartel());
             ps.setBoolean(5, brigada.isEstado());
@@ -160,8 +164,6 @@ public class BrigadaData {
             String especialidadString = rs.getString("especialidad");
             Especialidades especialidad = Especialidades.valueOf(especialidadString);
 
-            String numeroCuartel = rs.getString("nro_cuartel");
-
             CuartelData cuartelD = new CuartelData();
 
             while (rs.next()) {
@@ -187,19 +189,4 @@ public class BrigadaData {
 
     }
     
-    
-    public Brigada agregarBombero (){
-    
-    ArrayList<Bombero> bomberos = new ArrayList();
-    
-    
-    
-    
-    
-    
-        return null;
-    }
-    
-    
-
 }
