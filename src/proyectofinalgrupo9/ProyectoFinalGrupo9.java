@@ -77,9 +77,10 @@ public class ProyectoFinalGrupo9 {
        
        
        SiniestrosData sin= new SiniestrosData();
-       Siniestros bs= sin.consultarBrigadaID(13);
        
-       Siniestros A = new Siniestros ("Incendio", LocalDate.of(2023, 11, 10), 1574,1234, "Localizado en barrio Juarez", LocalDate.of(2023, 11, 11), 7, bs.getCodBrigada(), true );
+       Siniestros bs= sin.consultarBrigadaID(brigada.getCodBrigada());
+       
+       Siniestros as = new Siniestros ("Incendio", LocalDate.of(2023, 11, 10), 1574,1234, "Localizado en barrio Juarez", LocalDate.of(2023, 11, 11), 7, bs.getCodBrigada(), true );
        
     }
   

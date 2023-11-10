@@ -262,7 +262,7 @@ public class SiniestrosData {
     //Eliminé buscar brigada por código porque estaba mal
     
     
-    public Brigada consultarBrigadaID(int id){
+    public Siniestros consultarBrigadaID(int id){
     
         String sql = "SELECT codBrigada, nombre_br, especialidad, nro_cuartel, estado FROM brigada"
                 + " WHERE codBrigada = ? AND estado = 1";
@@ -303,7 +303,7 @@ public class SiniestrosData {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla brigada"+ ex);
 
         }
-        return consultarBrigadaID;
+        return null;
 
     }
     
