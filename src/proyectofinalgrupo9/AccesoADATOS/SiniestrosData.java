@@ -22,11 +22,11 @@ import proyectofinalgrupo9.ClasesEntidades.Siniestros;
 public class SiniestrosData {
 
     private Connection con = null;
-
+    private CuartelData cd= new CuartelData();      
     public SiniestrosData() {
 
         con = Conexion.getConexion();
-
+        
     }
 
     //MODIFICAR LA FECHA DE RESOLUCION REGISTRAR SINIESTROS
@@ -143,6 +143,8 @@ public class SiniestrosData {
             JOptionPane.showMessageDialog(null, "Error al resolver el siniestro.");
         }
     }
+    
+    
 
     public Siniestros buscarSiniestros(int codigo) {
         String sql = "SELECT * FROM siniestro WHERE codigo = ?";
@@ -180,6 +182,7 @@ public class SiniestrosData {
 
         return null;
     }
+    //--------------------LISTAR SINIESTROS-----------------------------------------------
 
     public List<Siniestros> listarSiniestros() {
         String sql = "SELECT * FROM siniestro";
@@ -216,6 +219,9 @@ public class SiniestrosData {
         return siniestros;
     }
 
+    
+    //--------------------------------BUSCAR BRIGADA POR CODIGO-----------------------------------
+    
     public List<Brigada> buscarBrigadaPorCodigo(int codBrigada) {
         String sql = "SELECT* FROM brigada WHERE codBrigada =?";
         List<Brigada> brigadas = new ArrayList<>();
@@ -239,6 +245,7 @@ public class SiniestrosData {
                 brigada.setCodBrigada(rs.getInt("codBrigada"));
                 brigada.setNombre_br("nombre_br");
                 brigada.setEspecialidad(especialidad);
+                
                 CuartelDeBomberos cuartel = cuartelD.consultarCuartel(rs.getInt("nro_cuartel"));
                 brigada.setNro_cuartel(cuartel);
                 brigada.setEstado(true);
@@ -247,10 +254,66 @@ public class SiniestrosData {
 
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Brigada");
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Brigada" + ex);
         }
 
         return brigadas;
     }
     //Eliminé buscar brigada por código porque estaba mal
-}
+    
+    
+    public Brigada consultarBrigadaID(int id){
+    
+        String sql = "SELECT codBrigada, nombre_br, especialidad, nro_cuartel, estado FROM brigada"
+                + " WHERE codBrigada = ? AND estado = 1";
+        
+        
+        
+        Brigada consultarBrigadaID = null;
+
+        try {
+
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ps.setInt(1, id);
+
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs.next()) {
+
+                consultarBrigadaID = new Brigada();
+
+                consultarBrigadaID.setCodBrigada(id);
+                consultarBrigadaID.setNombre_br(rs.getString("nombre_br"));
+                consultarBrigadaID.setEspecialidad(Especialidades.valueOf(rs.getString("especialidad"))); 
+                int codCuartel1=rs.getInt("nro_cuartel");
+                CuartelDeBomberos cuartel= cd.consultarCuartel(codCuartel1);
+                consultarBrigadaID.setNro_cuartel(cuartel);
+                consultarBrigadaID.setEstado(true);
+
+            } else {
+
+                JOptionPane.showMessageDialog(null, "No existe el ID de la brigada ingresada.");
+
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla brigada"+ ex);
+
+        }
+        return consultarBrigadaID;
+
+    }
+    
+    
+    
+    
+    
+    
+    
+    }
+    
+    
+

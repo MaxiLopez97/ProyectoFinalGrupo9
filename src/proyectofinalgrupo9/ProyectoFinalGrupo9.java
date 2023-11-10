@@ -11,8 +11,10 @@ import proyectofinalgrupo9.AccesoADATOS.BrigadaData;
 import proyectofinalgrupo9.AccesoADATOS.CuartelData;
 import proyectofinalgrupo9.AccesoADATOS.Especialidades;
 import static proyectofinalgrupo9.AccesoADATOS.Especialidades.INCENDIO;
+import proyectofinalgrupo9.AccesoADATOS.SiniestrosData;
 import proyectofinalgrupo9.ClasesEntidades.Brigada;
 import proyectofinalgrupo9.ClasesEntidades.CuartelDeBomberos;
+import proyectofinalgrupo9.ClasesEntidades.Siniestros;
 
 //Comportamientos. Se necesita:
 //
@@ -54,18 +56,30 @@ public class ProyectoFinalGrupo9 {
        
        /*-----------------BRIGADA------------------------------*/
        
-       CuartelData dataCuartel= new CuartelData();
-       CuartelDeBomberos cuartel2 = dataCuartel.consultarCuartel(2);
-       
-       Brigada brigada = new Brigada("Ala Norte", Especialidades.INCENDIO, cuartel2 ,true);
+//       CuartelData dataCuartel= new CuartelData();
+//       CuartelDeBomberos cuartel2 = dataCuartel.consultarCuartel(2);
+//       
+//       Brigada brigada = new Brigada("Ala Norte", Especialidades.INCENDIO, cuartel2 ,true);
        BrigadaData brig= new BrigadaData();
+//       
+//       brig.guardarBrigada(brigada);
+//       
+//        System.out.println( brig.consultarBrigada(13) );
+//        
+
+        Brigada brigada = brig.consultarBrigada(13);
+       Bombero jose = new Bombero("12345678", "Dario", "Menendez", LocalDate.of(1980, 4, 25), "35447686", brigada , true);
        
-       brig.guardarBrigada(brigada);
+       BomberoData bombero = new BomberoData();
+       bombero.guardarBombero(jose);
        
-       //Bombero jose = new Bombero("12345678", "Luna", "Menendez", LocalDate.of(1980, 4, 25), "35447686", 1, true);
        
-       //BomberoData bombero = new BomberoData();
-       //bombero.guardarBombero(jose);
+       
+       
+       SiniestrosData sin= new SiniestrosData();
+       Siniestros bs= sin.consultarBrigadaID(13);
+       
+       Siniestros A = new Siniestros ("Incendio", LocalDate.of(2023, 11, 10), 1574,1234, "Localizado en barrio Juarez", LocalDate.of(2023, 11, 11), 7, bs.getCodBrigada(), true );
        
     }
   

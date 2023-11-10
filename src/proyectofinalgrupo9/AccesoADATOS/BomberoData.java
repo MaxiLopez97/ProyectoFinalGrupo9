@@ -24,10 +24,10 @@ public class BomberoData {
         con = Conexion.getConexion();
     }
     
-
+//------------------------------------GUARDAR BOMBERO--------------------------------------------
     public void guardarBombero(Bombero bombero) {
         String sql = "INSERT INTO bombero (dni, nombre, apellido, fecha_nac, celular, codBrigada, estado)"
-                + " VALUES (?, ?, ?, ?, ?)";
+                + " VALUES (?, ?, ?, ?, ?, ? , ?)";
         
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -51,10 +51,11 @@ public class BomberoData {
             
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla bombero");
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla bombero"+ ex);
         }
     }
-
+    
+//------------------------------------MODIFICAR BOMBERO--------------------------------------------
     public void modificarBombero(Bombero bombero) {
         String sql = "UPDATE bombero SET dni = ?, nombre = ?, apellido = ?, fecha_nac = ?, celular = ?, codBrigada = ?"
                 + " WHERE id_Bombero = ?";
@@ -81,7 +82,8 @@ public class BomberoData {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla bombero");
         }
     }
-
+    
+//------------------------------------DAR DE BAJA--------------------------------------------
     public void darBajaPorInactividad(int id_Bombero) {
         String sql = "DELETE FROM bombero WHERE id_Bombero = ?";
         
@@ -125,6 +127,8 @@ public class BomberoData {
                 bombero.setCelular(rs.getString("celular"));
                 //bombero.setCodBrigada();
                 //Chequear
+                
+                
                 Brigada brigada = new Brigada();
                 brigada.setCodBrigada(rs.getInt("codBrigada"));
                 bombero.setCodBrigada(brigada);

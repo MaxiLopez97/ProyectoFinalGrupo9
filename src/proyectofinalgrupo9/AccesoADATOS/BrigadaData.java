@@ -17,6 +17,7 @@ import proyectofinalgrupo9.ClasesEntidades.CuartelDeBomberos;
 public class BrigadaData {
 
     private Connection con = null;
+    private CuartelData cd= new CuartelData();
 
     public BrigadaData() {
 
@@ -31,13 +32,8 @@ public class BrigadaData {
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             
-           
-            String cuartel =  ;
-            
-            
             ps.setString(1, brigada.getNombre_br());
-            ps.setObject(2, Especialidades.values());
-            
+            ps.setObject(2, brigada.getEspecialidad().name());
             ps.setInt(3, brigada.getNro_cuartel().getCodCuartel());
             ps.setBoolean(4, brigada.isEstado());
 
@@ -57,36 +53,38 @@ public class BrigadaData {
 
         } catch (SQLException ex) {
 
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla brigada");
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla brigada" + ex.getMessage());
 
         }
 
     }
 
-    public Brigada consultarBrigada() {
+    public Brigada consultarBrigada(int id) {
 
         String sql = "SELECT nombre_br, especialidad, nro_cuartel, estado FROM brigada"
                 + " WHERE codBrigada = ? AND estado = 1";
-
+        
         Brigada consultarBrigada = null;
 
         try {
 
             PreparedStatement ps = con.prepareStatement(sql);
 
-            ps.setInt(1, consultarBrigada.getCodBrigada());
+            ps.setInt(1, id);
 
             ResultSet rs = ps.executeQuery();
-
+            
             if (rs.next()) {
 
                 consultarBrigada = new Brigada();
 
-                consultarBrigada.setCodBrigada(consultarBrigada.getCodBrigada());
-                consultarBrigada.setNombre_br("nombre_br");
-                consultarBrigada.setEspecialidad(Especialidades.valueOf(consultarBrigada.getEspecialidad().toString())); // modificar
-                consultarBrigada.setNro_cuartel(consultarBrigada.getNro_cuartel());
-                consultarBrigada.isEstado();
+                consultarBrigada.setCodBrigada(id);
+                consultarBrigada.setNombre_br(rs.getString("nombre_br"));
+                consultarBrigada.setEspecialidad(Especialidades.valueOf(rs.getString("especialidad"))); 
+                int codCuartel1=rs.getInt("nro_cuartel");
+                CuartelDeBomberos cuartel= cd.consultarCuartel(codCuartel1);
+                consultarBrigada.setNro_cuartel(cuartel);
+                consultarBrigada.setEstado(true);
 
             } else {
 
@@ -103,6 +101,7 @@ public class BrigadaData {
         return consultarBrigada;
 
     }
+    
 
     public Brigada brigadasLibres(Boolean libre) {
 
