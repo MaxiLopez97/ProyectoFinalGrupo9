@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package proyectofinalgrupo9.AccesoADATOS;
 
 import java.sql.*;
@@ -11,10 +7,6 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import proyectofinalgrupo9.ClasesEntidades.Brigada;
 
-/**
- *
- * @author NAHUEL
- */
 public class BomberoData {
     
     private Connection con = null;

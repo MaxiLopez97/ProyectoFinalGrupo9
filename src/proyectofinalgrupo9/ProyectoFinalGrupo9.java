@@ -60,27 +60,27 @@ public class ProyectoFinalGrupo9 {
 //       CuartelDeBomberos cuartel2 = dataCuartel.consultarCuartel(2);
 //       
 //       Brigada brigada = new Brigada("Ala Norte", Especialidades.INCENDIO, cuartel2 ,true);
-       BrigadaData brig= new BrigadaData();
 //       
 //       brig.guardarBrigada(brigada);
 //       
 //        System.out.println( brig.consultarBrigada(13) );
-//        
-
-        Brigada brigada = brig.consultarBrigada(13);
-       Bombero jose = new Bombero("12345678", "Dario", "Menendez", LocalDate.of(1980, 4, 25), "35447686", brigada , true);
+//                
+        
+       //Bombero jose = new Bombero("12345678", "Dario", "Menendez", LocalDate.of(1980, 4, 25), "35447686", brigada , true);
        
-       BomberoData bombero = new BomberoData();
-       bombero.guardarBombero(jose);
-       
+//       BomberoData bombero = new BomberoData();
+//       bombero.guardarBombero(jose);
        
        
+       BrigadaData brig= new BrigadaData();
+       Brigada brigada = brig.consultarBrigada(13);
        
        SiniestrosData sin= new SiniestrosData();
        
-       Siniestros bs= sin.consultarBrigadaID(brigada.getCodBrigada());
        
-       Siniestros as = new Siniestros ("Incendio", LocalDate.of(2023, 11, 10), 1574,1234, "Localizado en barrio Juarez", LocalDate.of(2023, 11, 11), 7, bs.getCodBrigada(), true );
+       Siniestros as = new Siniestros ("Incendio", LocalDate.of(2023, 11, 10), 1574,1234, "Localizado en barrio Juarez", LocalDate.of(2023, 11, 11), 7, brigada, true );
+       
+       sin.registrarSiniestros(as);
        
     }
   

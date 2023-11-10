@@ -59,7 +59,7 @@ public class SiniestrosData {
 
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla siniestro");
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla siniestro" + ex);
         }
     }
 
@@ -306,14 +306,7 @@ public class SiniestrosData {
         return null;
 
     }
-    
-    
-    
-    
-    
-    
-    
-    }
+   }
     
     
 

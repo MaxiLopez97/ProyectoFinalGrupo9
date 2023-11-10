@@ -36,23 +36,10 @@ public class BrigadaData {
             
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             
-
-            ps.setString(1, brigada.getNombre_br());
-            ps.setString(2, (Especialidades.valueOf(brigada.getEspecialidad().toString())));
-            ps.setBoolean(3, brigada.isEstado());
-            ps.setInt(4, brigada.getNro_cuartel().getCodCuartel());
-            ps.setBoolean(5, brigada.isEstado());
-
-           
-       
-            
-            
-
             ps.setString(1, brigada.getNombre_br());
             ps.setObject(2, brigada.getEspecialidad().name());
             ps.setInt(3, brigada.getNro_cuartel().getCodCuartel());
             ps.setBoolean(4, brigada.isEstado());
-
 
             ps.executeUpdate();
 
