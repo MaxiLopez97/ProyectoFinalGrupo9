@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package proyectofinalgrupo9.AccesoADATOS;
 
 import java.sql.*;
@@ -40,11 +35,23 @@ public class BrigadaData {
             
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             
+<<<<<<< HEAD
             ps.setString(1, brigada.getNombre_br());
             ps.setString(2, (Especialidades.valueOf(brigada.getEspecialidad().toString())));
             ps.setBoolean(3, brigada.isEstado());
             ps.setInt(4, brigada.getNro_cuartel().getCodCuartel());
             ps.setBoolean(5, brigada.isEstado());
+=======
+           
+            String cuartel =  ;
+            
+            
+            ps.setString(1, brigada.getNombre_br());
+            ps.setObject(2, Especialidades.values());
+            
+            ps.setInt(3, brigada.getNro_cuartel().getCodCuartel());
+            ps.setBoolean(4, brigada.isEstado());
+>>>>>>> 2aed7e157aad293205eabfe7b898f7a007085721
 
             ps.executeUpdate();
 
@@ -89,7 +96,7 @@ public class BrigadaData {
 
                 consultarBrigada.setCodBrigada(consultarBrigada.getCodBrigada());
                 consultarBrigada.setNombre_br("nombre_br");
-                consultarBrigada.setEspecialidad(Especialidades.valueOf(consultarBrigada.getEspecialidad().toString()));
+                consultarBrigada.setEspecialidad(Especialidades.valueOf(consultarBrigada.getEspecialidad().toString())); // modificar
                 consultarBrigada.setNro_cuartel(consultarBrigada.getNro_cuartel());
                 consultarBrigada.isEstado();
 
@@ -188,5 +195,49 @@ public class BrigadaData {
         return brigada;
 
     }
+<<<<<<< HEAD
     
+=======
+
+    public List<Bombero> asignarBomberoABrigada() {
+
+        ArrayList<Bombero> Bombero = new ArrayList<>();
+
+        String sql = "SELECT brigada.codBrigada, dni, nombre, apellido FROM brigada, bombero"
+                + "WHERE brigada.codBrigada = bombero.codBrigada"
+                + "AND brigada.nombre_br = ? ";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ResultSet rs = ps.executeQuery();
+            int contadorBomberos = 0;
+
+            while (rs.next()) {
+
+                if (contadorBomberos <= 5) {
+
+                    Bombero bombero = new Bombero();
+                    bombero.setNombre(rs.getString("nombre"));
+                    bombero.setApellido(rs.getString("apellido"));
+                    bombero.setDni(rs.getString("dni"));
+                    bombero.setCelular(rs.getString("celular"));
+
+                    Bombero.add(bombero);
+                    contadorBomberos++;
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "La brigada esta llena.");
+                }
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Brigada");
+        }
+
+        return Bombero;
+    }
+
+>>>>>>> 2aed7e157aad293205eabfe7b898f7a007085721
 }

@@ -7,6 +7,12 @@ import java.sql.Connection;
 import java.time.LocalDate;
 import java.time.Month;
 import proyectofinalgrupo9.AccesoADATOS.BomberoData;
+import proyectofinalgrupo9.AccesoADATOS.BrigadaData;
+import proyectofinalgrupo9.AccesoADATOS.CuartelData;
+import proyectofinalgrupo9.AccesoADATOS.Especialidades;
+import static proyectofinalgrupo9.AccesoADATOS.Especialidades.INCENDIO;
+import proyectofinalgrupo9.ClasesEntidades.Brigada;
+import proyectofinalgrupo9.ClasesEntidades.CuartelDeBomberos;
 
 //Comportamientos. Se necesita:
 //
@@ -38,7 +44,25 @@ public class ProyectoFinalGrupo9 {
      
        /*-----------------------------------------------*/
        
-       //Bombero jose = new Bombero("12345678","Luna jose", LocalDate.of(1980, 4, 25), "35447686", 0);
+       /*-----------------CUARTEL------------------------------*/
+//       CuartelDeBomberos cuartel = new CuartelDeBomberos("Sureste", "Lafinur 471", 1532, 1745, "265712548", "sur@gmail.com", true );
+////       
+//       CuartelData cuartel1= new CuartelData();
+//       cuartel1.guardarCuartel(cuartel);
+       
+       /*-----------------------------------------------*/
+       
+       /*-----------------BRIGADA------------------------------*/
+       
+       CuartelData dataCuartel= new CuartelData();
+       CuartelDeBomberos cuartel2 = dataCuartel.consultarCuartel(2);
+       
+       Brigada brigada = new Brigada("Ala Norte", Especialidades.INCENDIO, cuartel2 ,true);
+       BrigadaData brig= new BrigadaData();
+       
+       brig.guardarBrigada(brigada);
+       
+       //Bombero jose = new Bombero("12345678", "Luna", "Menendez", LocalDate.of(1980, 4, 25), "35447686", 1, true);
        
        //BomberoData bombero = new BomberoData();
        //bombero.guardarBombero(jose);
