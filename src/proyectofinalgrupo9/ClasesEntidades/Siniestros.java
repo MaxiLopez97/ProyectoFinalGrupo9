@@ -6,6 +6,7 @@
 package proyectofinalgrupo9.ClasesEntidades;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  *
@@ -14,7 +15,7 @@ import java.time.LocalDate;
 public class Siniestros {
     private int codigo;
     private String tipo;
-    private LocalDate fecha_siniestro;
+    private LocalDateTime fecha_siniestro;
     private int coord_X;
     private int coord_Y;
     private String detalles;
@@ -23,7 +24,7 @@ public class Siniestros {
     private Brigada codBrigada;
     private boolean estado;
 
-    public Siniestros(int codigo, String tipo, LocalDate fecha_siniestro, int coord_X, int coord_Y, String detalles, LocalDate fecha_resol, int puntuacion, Brigada codBrigada, boolean estado) {
+    public Siniestros(int codigo, String tipo, LocalDateTime fecha_siniestro, int coord_X, int coord_Y, String detalles, LocalDate fecha_resol, int puntuacion, Brigada codBrigada, boolean estado) {
         this.codigo = codigo;
         this.tipo = tipo;
         this.fecha_siniestro = fecha_siniestro;
@@ -36,7 +37,7 @@ public class Siniestros {
         this.estado = estado;
     }
 
-    public Siniestros(String tipo, LocalDate fecha_siniestro, int coord_X, int coord_Y, String detalles, LocalDate fecha_resol, int puntuacion, Brigada codBrigada, boolean estado) {
+    public Siniestros(String tipo, LocalDateTime fecha_siniestro, int coord_X, int coord_Y, String detalles, LocalDate fecha_resol, int puntuacion, Brigada codBrigada, boolean estado) {
         this.tipo = tipo;
         this.fecha_siniestro = fecha_siniestro;
         this.coord_X = coord_X;
@@ -67,11 +68,11 @@ public class Siniestros {
         this.tipo = tipo;
     }
 
-    public LocalDate getFecha_siniestro() {
+    public LocalDateTime getFecha_siniestro() {
         return fecha_siniestro;
     }
 
-    public void setFecha_siniestro(LocalDate fecha_siniestro) {
+    public void setFecha_siniestro(LocalDateTime fecha_siniestro) {
         this.fecha_siniestro = fecha_siniestro;
     }
 
@@ -136,16 +137,16 @@ public class Siniestros {
     @Override
     public String toString() {
         return  "Siniestros: " + 
-                "Codigo: " + codigo + 
-                "Tipo: " + tipo +
-                "Fecha de Siniestro: " + fecha_siniestro + 
-                "Coordenada X: " + coord_X + 
-                "Coordenada Y: " + coord_Y + 
-                "Detalles: " + detalles + 
-                "Fecha de Resolucion: " + fecha_resol + 
-                "Puntuacion: " + puntuacion +
-                "Codigo de Brigada: " + codBrigada +
-                "Estado: " + estado;
+                " Codigo: " + codigo + 
+                " Tipo: " + tipo +
+                " Fecha de Siniestro: " + fecha_siniestro + 
+                " Coordenada X: " + coord_X + 
+                " Coordenada Y: " + coord_Y + 
+                " Detalles: " + detalles + 
+                " Fecha de Resolucion: " + fecha_resol + 
+                " Puntuacion: " + puntuacion +
+                " Codigo de Brigada: " + codBrigada.getCodBrigada() +
+                " Estado: " + estado;
     }
     
     

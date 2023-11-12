@@ -17,11 +17,13 @@ public class BomberoData {
     }
     
 //------------------------------------GUARDAR BOMBERO--------------------------------------------
+    
     public void guardarBombero(Bombero bombero) {
         String sql = "INSERT INTO bombero (dni, nombre, apellido, fecha_nac, celular, codBrigada, estado)"
                 + " VALUES (?, ?, ?, ?, ?, ? , ?)";
         
         try {
+            
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             
             ps.setString(1, bombero.getDni());
@@ -42,13 +44,18 @@ public class BomberoData {
             }
             
             ps.close();
+            
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla bombero"+ ex);
+            
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla bombero");
+            
         }
     }
     
 //------------------------------------MODIFICAR BOMBERO--------------------------------------------
+    
     public void modificarBombero(Bombero bombero) {
+        
         String sql = "UPDATE bombero SET dni = ?, nombre = ?, apellido = ?, fecha_nac = ?, celular = ?, codBrigada = ?"
                 + " WHERE id_Bombero = ?";
         
@@ -76,7 +83,9 @@ public class BomberoData {
     }
     
 //------------------------------------DAR DE BAJA--------------------------------------------
+    
     public void darBajaPorInactividad(int id_Bombero) {
+        
         String sql = "DELETE FROM bombero WHERE id_Bombero = ?";
         
         try {
@@ -117,9 +126,6 @@ public class BomberoData {
                 bombero.setApellido(rs.getString("apellido"));
                 bombero.setFecha_nac(rs.getDate("fecha_nac").toLocalDate());
                 bombero.setCelular(rs.getString("celular"));
-                //bombero.setCodBrigada();
-                //Chequear
-                
                 
                 Brigada brigada = new Brigada();
                 brigada.setCodBrigada(rs.getInt("codBrigada"));
@@ -175,5 +181,5 @@ public class BomberoData {
         
         return bomberos;
     }
-    
 }
+    

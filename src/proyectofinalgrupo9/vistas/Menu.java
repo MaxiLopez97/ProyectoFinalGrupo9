@@ -5,6 +5,8 @@
  */
 package proyectofinalgrupo9.vistas;
 
+import java.awt.Color;
+
 /**
  *
  * @author Maxi
@@ -27,25 +29,233 @@ public class Menu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuItem1 = new javax.swing.JMenuItem();
+        escritorio = new javax.swing.JDesktopPane();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jListarCuartel = new javax.swing.JMenu();
+        jMGestionarCuartel = new javax.swing.JMenuItem();
+        jMListarCuartel = new javax.swing.JMenuItem();
+        jBrigadas = new javax.swing.JMenu();
+        jMGestionarBrigada = new javax.swing.JMenuItem();
+        jMBrigadasLibres = new javax.swing.JMenuItem();
+        jBomberos = new javax.swing.JMenu();
+        jMGestionarBombero = new javax.swing.JMenuItem();
+        jSiniestros = new javax.swing.JMenu();
+        jMGestionarSiniestro = new javax.swing.JMenuItem();
+        jDistancias = new javax.swing.JMenu();
+        jDistancias1 = new javax.swing.JMenu();
+
+        jMenuItem1.setText("jMenuItem1");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(500, 500));
+        setPreferredSize(new java.awt.Dimension(606, 500));
+        setSize(new java.awt.Dimension(500, 500));
+
+        javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
+        escritorio.setLayout(escritorioLayout);
+        escritorioLayout.setHorizontalGroup(
+            escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 606, Short.MAX_VALUE)
+        );
+        escritorioLayout.setVerticalGroup(
+            escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 8311, Short.MAX_VALUE)
+        );
+
+        jListarCuartel.setText("Cuarteles");
+        jListarCuartel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jListarCuartelActionPerformed(evt);
+            }
+        });
+
+        jMGestionarCuartel.setText("Gestionar Cuartel");
+        jMGestionarCuartel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMGestionarCuartelActionPerformed(evt);
+            }
+        });
+        jListarCuartel.add(jMGestionarCuartel);
+
+        jMListarCuartel.setText("Lista de Cuarteles");
+        jMListarCuartel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMListarCuartelActionPerformed(evt);
+            }
+        });
+        jListarCuartel.add(jMListarCuartel);
+
+        jMenuBar1.add(jListarCuartel);
+
+        jBrigadas.setText("Brigadas");
+
+        jMGestionarBrigada.setText("Gestionar Brigada");
+        jMGestionarBrigada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMGestionarBrigadaActionPerformed(evt);
+            }
+        });
+        jBrigadas.add(jMGestionarBrigada);
+
+        jMBrigadasLibres.setText("Brigadas Libres");
+        jMBrigadasLibres.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMBrigadasLibresActionPerformed(evt);
+            }
+        });
+        jBrigadas.add(jMBrigadasLibres);
+
+        jMenuBar1.add(jBrigadas);
+
+        jBomberos.setText("Bomberos");
+
+        jMGestionarBombero.setText("Gestionar Bombero");
+        jMGestionarBombero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMGestionarBomberoActionPerformed(evt);
+            }
+        });
+        jBomberos.add(jMGestionarBombero);
+
+        jMenuBar1.add(jBomberos);
+
+        jSiniestros.setText("Siniestros");
+
+        jMGestionarSiniestro.setText("Gestionar Siniestro");
+        jMGestionarSiniestro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMGestionarSiniestroActionPerformed(evt);
+            }
+        });
+        jSiniestros.add(jMGestionarSiniestro);
+
+        jMenuBar1.add(jSiniestros);
+
+        jDistancias.setText("Distancias");
+        jMenuBar1.add(jDistancias);
+
+        jDistancias1.setText("Salir");
+        jDistancias1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jDistancias1MouseClicked(evt);
+            }
+        });
+        jDistancias1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jDistancias1ActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(jDistancias1);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(escritorio)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 24015, Short.MAX_VALUE)
+                .addComponent(escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
+    // GESTIONAR CUARTEL
+    private void jMGestionarCuartelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMGestionarCuartelActionPerformed
+
+        escritorio.removeAll();
+        escritorio.repaint();
+        GestionarCuartel GC = new GestionarCuartel();
+        GC.setVisible(true);
+        GC.getContentPane().setBackground(Color.white);
+        escritorio.add(GC);
+
+
+    }//GEN-LAST:event_jMGestionarCuartelActionPerformed
+//-------------------------------------------------------------------------------------------
+
+    //GESTIONAR BRIGADA
+    private void jMGestionarBrigadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMGestionarBrigadaActionPerformed
+
+        escritorio.removeAll();
+        escritorio.repaint();
+        GestionarBrigada GB = new GestionarBrigada();
+        GB.setVisible(true);
+        GB.getContentPane().setBackground(Color.white);
+        escritorio.add(GB);
+    }//GEN-LAST:event_jMGestionarBrigadaActionPerformed
+//-------------------------------------------------------------------------------------------
+    //GESTIONAR BRIGADAS LIBRES
+    private void jMBrigadasLibresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMBrigadasLibresActionPerformed
+
+        escritorio.removeAll();
+        escritorio.repaint();
+        GestionarBrigadaLibres GBL = new GestionarBrigadaLibres();
+        GBL.setVisible(true);
+        GBL.getContentPane().setBackground(Color.white);
+        escritorio.add(GBL);
+    }//GEN-LAST:event_jMBrigadasLibresActionPerformed
+//-------------------------------------------------------------------------------------------
+    //GESTIONAR BOMBERO
+    private void jMGestionarBomberoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMGestionarBomberoActionPerformed
+
+        escritorio.removeAll();
+        escritorio.repaint();
+        GestionarBombero GBom = new GestionarBombero();
+        GBom.setVisible(true);
+        GBom.getContentPane().setBackground(Color.white);
+        escritorio.add(GBom);
+    }//GEN-LAST:event_jMGestionarBomberoActionPerformed
+//-------------------------------------------------------------------------------------------
+    //GESTIONAR SINIESTRO
+    private void jMGestionarSiniestroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMGestionarSiniestroActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        GestionarSiniestros GS = new GestionarSiniestros();
+        GS.setVisible(true);
+        GS.getContentPane().setBackground(Color.white);
+        escritorio.add(GS);
+    }//GEN-LAST:event_jMGestionarSiniestroActionPerformed
+//-------------------------------------------------------------------------------------------
+    //LISTA DE CUARTELES
+    private void jListarCuartelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jListarCuartelActionPerformed
+
+        escritorio.removeAll();
+        escritorio.repaint();
+        ListarCuartel LC = new ListarCuartel();
+        LC.setVisible(true);
+        LC.getContentPane().setBackground(Color.white);
+        escritorio.add(LC);
+    }//GEN-LAST:event_jListarCuartelActionPerformed
+
+    private void jMListarCuartelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMListarCuartelActionPerformed
+
+        escritorio.removeAll();
+        escritorio.repaint();
+        ListarCuartel LC = new ListarCuartel();
+        LC.setVisible(true);
+        LC.getContentPane().setBackground(Color.white);
+        escritorio.add(LC);
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMListarCuartelActionPerformed
+
+    private void jDistancias1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDistancias1ActionPerformed
+        
+    }//GEN-LAST:event_jDistancias1ActionPerformed
+
+    private void jDistancias1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jDistancias1MouseClicked
+        dispose();
+
+    }//GEN-LAST:event_jDistancias1MouseClicked
+//-------------------------------------------------------------------------------------------
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -79,5 +289,20 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JDesktopPane escritorio;
+    private javax.swing.JMenu jBomberos;
+    private javax.swing.JMenu jBrigadas;
+    private javax.swing.JMenu jDistancias;
+    private javax.swing.JMenu jDistancias1;
+    private javax.swing.JMenu jListarCuartel;
+    private javax.swing.JMenuItem jMBrigadasLibres;
+    private javax.swing.JMenuItem jMGestionarBombero;
+    private javax.swing.JMenuItem jMGestionarBrigada;
+    private javax.swing.JMenuItem jMGestionarCuartel;
+    private javax.swing.JMenuItem jMGestionarSiniestro;
+    private javax.swing.JMenuItem jMListarCuartel;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenu jSiniestros;
     // End of variables declaration//GEN-END:variables
 }

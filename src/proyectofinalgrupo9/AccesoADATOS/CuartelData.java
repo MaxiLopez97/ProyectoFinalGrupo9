@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package proyectofinalgrupo9.AccesoADATOS;
 
 import java.sql.*;
@@ -69,6 +64,7 @@ public class CuartelData {
             ps.setString(5, cuartel.getTelefono());
             ps.setString(6, cuartel.getCorreo());
             ps.setBoolean(7, cuartel.isEstado());
+            ps.setInt(8, cuartel.getCodCuartel());
 
             int modificar = ps.executeUpdate();
 
@@ -76,7 +72,7 @@ public class CuartelData {
                 JOptionPane.showMessageDialog(null, "Cuartel modificado");
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla bombero");
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Cuartel");
         }
     }
 
@@ -102,12 +98,12 @@ public class CuartelData {
                 mostrarCuartel = new CuartelDeBomberos();
 
                 mostrarCuartel.setCodCuartel(codCuartel);
-                mostrarCuartel.setNombre_cuartel("nombre_cuartel");
-                mostrarCuartel.setDireccion("direccion");
+                mostrarCuartel.setNombre_cuartel(rs.getString("nombre_cuartel"));
+                mostrarCuartel.setDireccion(rs.getString("direccion"));
                 mostrarCuartel.setCoord_X(rs.getInt("coord_X"));
                 mostrarCuartel.setCoord_Y(rs.getInt("coord_Y"));
-                mostrarCuartel.setTelefono("telefono");
-                mostrarCuartel.setCorreo("correo");
+                mostrarCuartel.setTelefono(rs.getString("telefono"));
+                mostrarCuartel.setCorreo(rs.getString("correo"));
                 mostrarCuartel.setEstado(true);
 
             } else {
@@ -125,15 +121,79 @@ public class CuartelData {
         return mostrarCuartel;
 
     }
+    
+    public void eliminarCuartel(int codCuartel){
+    
+        String sql = "DELETE FROM cuartel WHERE codCuartel = ?";
+        
+        try{
+        
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            ps.setInt(1, codCuartel);
+            
+            int eliminar = ps.executeUpdate();
+            
+            if(eliminar == 1){
+                
+                JOptionPane.showMessageDialog(null, "Cuartel eliminado");
+                
+            }
+        
+        } catch(SQLException ex){
+        
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Cuartel");
+        
+        }
+    
+    }
 
     //MÉTODO MOSTRAR CUARTEL CERCA DE SINIESTRO O INCIDENTE
     
     //FALTA MOSTRAR LAS BRIGADAS DE CADA CUARTEL
    
+    public List<CuartelDeBomberos> listarCuarteles(){
+        
+        String sql =  "SELECT * FROM cuartel";
+        
+        List<CuartelDeBomberos> cuarteles = new ArrayList();
+        
+        try{
+            
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+            
+                CuartelDeBomberos cuartel = new CuartelDeBomberos();
+                
+                cuartel.setCodCuartel(rs.getInt("codCuartel"));
+                cuartel.setNombre_cuartel(rs.getString("nombre_cuartel"));
+                cuartel.setDireccion(rs.getString("direccion"));
+                cuartel.setCoord_X(rs.getInt("coord_X"));
+                cuartel.setCoord_Y(rs.getInt("coord_Y"));
+                cuartel.setTelefono(rs.getString("telefono"));
+                cuartel.setCorreo(rs.getString("correo"));
+                
+                cuarteles.add(cuartel);
+            
+            }
+            
+            ps.close();
+            
+        }catch(SQLException ex){
+        
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Cuartel");
+        
+        }
+        
+        return cuarteles;
+        
+    }
     
     
-    
-    
+   
     
     
 }

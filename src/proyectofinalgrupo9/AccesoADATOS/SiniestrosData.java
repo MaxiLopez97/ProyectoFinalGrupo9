@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package proyectofinalgrupo9.AccesoADATOS;
 
 import java.sql.*;
@@ -31,22 +27,21 @@ public class SiniestrosData {
 
     //MODIFICAR LA FECHA DE RESOLUCION REGISTRAR SINIESTROS
     public void registrarSiniestros(Siniestros siniestro) {
-        String sql = "INSERT INTO siniestro (codigo, tipo, fecha_siniestro, coord_X, coord_Y, detalles, fecha_resol, puntuacion, codBrigada, estado)"
-                + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO siniestro (tipo, fecha_siniestro, coord_X, coord_Y, detalles, fecha_resol, puntuacion, codBrigada, estado)"
+                + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-            ps.setInt(1, siniestro.getCodigo());
-            ps.setString(2, siniestro.getTipo());
-            ps.setDate(3, Date.valueOf(siniestro.getFecha_siniestro()));
-            ps.setInt(4, siniestro.getCoord_X());
-            ps.setInt(5, siniestro.getCoord_Y());
-            ps.setString(6, siniestro.getDetalles());
-            ps.setDate(7, Date.valueOf(siniestro.getFecha_resol()));
-            ps.setInt(8, siniestro.getPuntuacion());
-            ps.setInt(9, siniestro.getCodBrigada().getCodBrigada());
-            ps.setBoolean(10, siniestro.isEstado());
+            ps.setString(1, siniestro.getTipo());
+            ps.setTimestamp(2, Timestamp.valueOf(siniestro.getFecha_siniestro()));
+            ps.setInt(3, siniestro.getCoord_X());
+            ps.setInt(4, siniestro.getCoord_Y());
+            ps.setString(5, siniestro.getDetalles());
+            ps.setDate(6, Date.valueOf(siniestro.getFecha_resol()));
+            ps.setInt(7, siniestro.getPuntuacion());
+            ps.setInt(8, siniestro.getCodBrigada().getCodBrigada());
+            ps.setBoolean(9, siniestro.isEstado());
 
             ps.executeUpdate();
 
@@ -144,10 +139,11 @@ public class SiniestrosData {
         }
     }
     
-    
 
     public Siniestros buscarSiniestros(int codigo) {
         String sql = "SELECT * FROM siniestro WHERE codigo = ?";
+        
+        Siniestros siniestro = null;
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -157,30 +153,38 @@ public class SiniestrosData {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                Siniestros siniestro = new Siniestros();
+                
+                siniestro = new Siniestros();
 
-                siniestro.setCodigo(rs.getInt("codigo"));
+                siniestro.setCodigo(codigo);
                 siniestro.setTipo(rs.getString("tipo"));
-                siniestro.setFecha_siniestro(rs.getDate("fecha_siniestro").toLocalDate());
+                siniestro.setFecha_siniestro(rs.getTimestamp("fecha_siniestro").toLocalDateTime());
                 siniestro.setCoord_X(rs.getInt("coord_X"));
                 siniestro.setCoord_Y(rs.getInt("coord_Y"));
                 siniestro.setDetalles(rs.getString("detalles"));
                 siniestro.setFecha_resol(rs.getDate("fecha_resol").toLocalDate());
                 siniestro.setPuntuacion(rs.getInt("puntuacion"));
-                // Puedes cargar la brigada asociada al siniestro si es necesario
-//                siniestro.setCodBrigada(buscarBrigadaPorCodigo(rs.getInt("codBrigada")));
+                
+                Brigada brigada = new Brigada();
+                brigada.setCodBrigada(rs.getInt("codBrigada"));
+                siniestro.setCodBrigada(brigada);
+                siniestro.setEstado(true);
 
-                return siniestro;
             } else {
+                
                 JOptionPane.showMessageDialog(null, "No se encontró el siniestro con ese código");
+            
             }
 
             ps.close();
+            
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla siniestro");
+            
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla siniestro" + ex);
+            
         }
 
-        return null;
+        return siniestro;
     }
     //--------------------LISTAR SINIESTROS-----------------------------------------------
 
@@ -198,16 +202,12 @@ public class SiniestrosData {
 
                 siniestro.setCodigo(rs.getInt("codigo"));
                 siniestro.setTipo(rs.getString("tipo"));
-                siniestro.setFecha_siniestro(rs.getDate("fecha_siniestro").toLocalDate());
+                siniestro.setFecha_siniestro(rs.getTimestamp("fecha_siniestro").toLocalDateTime());
                 siniestro.setCoord_X(rs.getInt("coord_X"));
                 siniestro.setCoord_Y(rs.getInt("coord_Y"));
                 siniestro.setDetalles(rs.getString("detalles"));
                 siniestro.setFecha_resol(rs.getDate("fecha_resol").toLocalDate());
                 siniestro.setPuntuacion(rs.getInt("puntuacion"));
-                // Puedes cargar la brigada asociada al siniestro si es necesario
-                /*siniestro.setCodBrigada(buscarBrigadaPorCodigo(rs.getInt(codBrigada)));
-                siniestro.setCodBrigada(buscarBrigadaPorCodigo(rs.getInt("codBrigada")));
-*/
                 siniestros.add(siniestro);
             }
 
@@ -218,47 +218,81 @@ public class SiniestrosData {
 
         return siniestros;
     }
+    
+    public void modificarSiniestro(Siniestros siniestro){
+        
+        String sql = "UPDATE siniestro SET tipo = ?, fecha_siniestro = ?, coord_X = ?, coord_Y = ?, detalles = ?, fecha_resol = ?, puntuacion = ?, codBrigada = ? "
+                + "WHERE codigo = ? AND estado = 1";
+        
+        try{
+            
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            ps.setString(1, siniestro.getTipo());
+            ps.setTimestamp(2, Timestamp.valueOf(siniestro.getFecha_siniestro()));
+            ps.setInt(3, siniestro.getCoord_X());
+            ps.setInt(4, siniestro.getCoord_Y());
+            ps.setString(5, siniestro.getDetalles());
+            ps.setDate(6, Date.valueOf(siniestro.getFecha_resol()));
+            ps.setInt(7, siniestro.getPuntuacion());
+            ps.setInt(8, siniestro.getCodBrigada().getCodBrigada());
+            ps.setBoolean(9, siniestro.isEstado());
+            ps.setInt(10, siniestro.getCodigo());
+            
+            int modificar = ps.executeUpdate();
+            
+            if(modificar == 1){
+                
+                JOptionPane.showMessageDialog(null, "Siniestro Modificado");
+                
+            }   
+            
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Siniestro");
+        }
+        
+    }
 
     
     //--------------------------------BUSCAR BRIGADA POR CODIGO-----------------------------------
     
-    public List<Brigada> buscarBrigadaPorCodigo(int codBrigada) {
-        String sql = "SELECT* FROM brigada WHERE codBrigada =?";
-        List<Brigada> brigadas = new ArrayList<>();
-
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, codBrigada);
-            ResultSet rs = ps.executeQuery();
-
-            String especialidadString = rs.getString("especialidad");
-            Especialidades especialidad = Especialidades.valueOf(especialidadString);
-
-            String numeroCuartel = rs.getString("nro_cuartel");
-
-            CuartelData cuartelD = new CuartelData();
-
-            while (rs.next()) {
-
-                Brigada brigada = new Brigada();
-
-                brigada.setCodBrigada(rs.getInt("codBrigada"));
-                brigada.setNombre_br("nombre_br");
-                brigada.setEspecialidad(especialidad);
-                
-                CuartelDeBomberos cuartel = cuartelD.consultarCuartel(rs.getInt("nro_cuartel"));
-                brigada.setNro_cuartel(cuartel);
-                brigada.setEstado(true);
-
-            }
-
-            ps.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Brigada" + ex);
-        }
-
-        return brigadas;
-    }
+//    public List<Brigada> buscarBrigadaPorCodigo(int codBrigada) {
+//        String sql = "SELECT* FROM brigada WHERE codBrigada =?";
+//        List<Brigada> brigadas = new ArrayList<>();
+//
+//        try {
+//            PreparedStatement ps = con.prepareStatement(sql);
+//            ps.setInt(1, codBrigada);
+//            ResultSet rs = ps.executeQuery();
+//
+//            String especialidadString = rs.getString("especialidad");
+//            Especialidades especialidad = Especialidades.valueOf(especialidadString);
+//
+//            String numeroCuartel = rs.getString("nro_cuartel");
+//
+//            CuartelData cuartelD = new CuartelData();
+//
+//            while (rs.next()) {
+//
+//                Brigada brigada = new Brigada();
+//
+//                brigada.setCodBrigada(rs.getInt("codBrigada"));
+//                brigada.setNombre_br("nombre_br");
+//                brigada.setEspecialidad(especialidad);
+//                
+//                CuartelDeBomberos cuartel = cuartelD.consultarCuartel(rs.getInt("nro_cuartel"));
+//                brigada.setNro_cuartel(cuartel);
+//                brigada.setEstado(true);
+//
+//            }
+//
+//            ps.close();
+//        } catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Brigada" + ex);
+//        }
+//
+//        return brigadas;
+//    }
     //Eliminé buscar brigada por código porque estaba mal
     
     
@@ -266,8 +300,6 @@ public class SiniestrosData {
     
         String sql = "SELECT codBrigada, nombre_br, especialidad, nro_cuartel, estado FROM brigada"
                 + " WHERE codBrigada = ? AND estado = 1";
-        
-        
         
         Brigada consultarBrigadaID = null;
 
@@ -304,9 +336,32 @@ public class SiniestrosData {
 
         }
         return null;
-
     }
+    
+    public void eliminarSiniestro(int codigo){
+        
+        String sql = "DELETE FROM siniestro WHERE codigo = ?";
+        
+        try{
+            
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            ps.setInt(1, codigo);
+            
+            int eliminar = ps.executeUpdate();
+            
+            if(eliminar == 1){
+                
+                JOptionPane.showMessageDialog(null, "Siniestro eliminado");
+                
+            }
+            
+        }catch(SQLException ex){
+            
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Siniestro");
+            
+        }
+        
+    }
+    
    }
-    
-    
-

@@ -31,9 +31,6 @@ public class BrigadaData {
 
         try {
             
-//            String especialidadString = rs.getString("especialidad");
-//            Especialidades especialidad = Especialidades.valueOf(especialidadString);
-            
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             
             ps.setString(1, brigada.getNombre_br());
@@ -105,52 +102,11 @@ public class BrigadaData {
         return consultarBrigada;
 
     }
-    
-
-    public Brigada brigadasLibres(Boolean libre) {
-
-        String sql = "SELECT codBrigada, nombre_br, especialidad,  nro_cuartel FROM brigada"
-                + " WHERE estado = 1 ";
-
-        Brigada brigadasLibres = null;
-
-        try {
-
-            PreparedStatement ps = con.prepareStatement(sql);
-
-            ps.setBoolean(1, libre);
-
-            ResultSet rs = ps.executeQuery();
-
-            if (rs.next()) {
-
-                brigadasLibres = new Brigada();
-
-                brigadasLibres.setCodBrigada(0);
-                brigadasLibres.setNombre_br(sql);
-                brigadasLibres.setEspecialidad(brigadasLibres.getEspecialidad());
-                brigadasLibres.setNro_cuartel(brigadasLibres.getNro_cuartel());
-
-            } else {
-
-                JOptionPane.showMessageDialog(null, "No hay brigadas libres para atender el siniestro.");
-
-            }
-            ps.close();
-
-        } catch (SQLException ex) {
-
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla brigada");
-
-        }
-        return brigadasLibres;
-
-    }
 
     public List<Brigada> listarBrigada() {
 
-        String sql = "SELECT codBrigada, nombre_br, especialidad, nro_cuartel FROM brigada"
-                + "WHERE estado = 1";
+        String sql = "SELECT codBrigada, nombre_br, especialidad, nro_cuartel FROM brigada "
+                + " WHERE estado = 1";
 
         ArrayList<Brigada> brigada = new ArrayList();
 
@@ -159,73 +115,92 @@ public class BrigadaData {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
-            String especialidadString = rs.getString("especialidad");
-            Especialidades especialidad = Especialidades.valueOf(especialidadString);
-
-            CuartelData cuartelD = new CuartelData();
-
             while (rs.next()) {
 
                 Brigada brigadas = new Brigada();
 
                 brigadas.setCodBrigada(rs.getInt("codBrigada"));
                 brigadas.setNombre_br(rs.getString("nombre_br"));
+                
+                String especialidadString = rs.getString("especialidad");
+                Especialidades especialidad = Especialidades.valueOf(especialidadString);
                 brigadas.setEspecialidad(especialidad);
-
+                
+                CuartelData cuartelD = new CuartelData();
                 CuartelDeBomberos cuartel = cuartelD.consultarCuartel(rs.getInt("nro_cuartel"));
+                
                 brigadas.setNro_cuartel(cuartel);
+                brigadas.setEstado(true);
+                
+                brigada.add(brigadas);
 
             }
             ps.close();
 
         } catch (SQLException ex) {
 
-            Logger.getLogger(BrigadaData.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla brigada" + ex);
 
         }
         return brigada;
 
     }
-
-
-    public List<Bombero> asignarBomberoABrigada() {
-
-        ArrayList<Bombero> Bombero = new ArrayList<>();
-
-        String sql = "SELECT brigada.codBrigada, dni, nombre, apellido FROM brigada, bombero"
-                + "WHERE brigada.codBrigada = bombero.codBrigada"
-                + "AND brigada.nombre_br = ? ";
-
-        try {
+  
+    public void eliminarBrigada(int codBrigada){
+    
+        String sql = "DELETE FROM brigada WHERE codBrigada = ?";
+        
+        try{
+        
             PreparedStatement ps = con.prepareStatement(sql);
-
-            ResultSet rs = ps.executeQuery();
-            int contadorBomberos = 0;
-
-            while (rs.next()) {
-
-                if (contadorBomberos <= 5) {
-
-                    Bombero bombero = new Bombero();
-                    bombero.setNombre(rs.getString("nombre"));
-                    bombero.setApellido(rs.getString("apellido"));
-                    bombero.setDni(rs.getString("dni"));
-                    bombero.setCelular(rs.getString("celular"));
-
-                    Bombero.add(bombero);
-                    contadorBomberos++;
-
-                } else {
-                    JOptionPane.showMessageDialog(null, "La brigada esta llena.");
-                }
+            
+            ps.setInt(1, codBrigada);
+            
+            int eliminar = ps.executeUpdate();
+            
+            if(eliminar == 1){
+            
+                JOptionPane.showMessageDialog(null, "Brigada eliminada");
+            
             }
-            ps.close();
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Brigada");
+        
+        } catch(SQLException ex){
+        
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla brigada");
+        
         }
-
-        return Bombero;
+    
+    }
+    
+    public void modificarBrigada(Brigada brigada){
+        
+        String sql = "UPDATE brigada SET nombre_br = ? especialidad = ?, nro_cuartel = ? "
+                + "WHERE codBrigada = ? AND estado = 1";
+        
+        try{
+        
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            ps.setString(1, brigada.getNombre_br());
+            ps.setString(2, brigada.getEspecialidad().name());
+            ps.setInt(3, brigada.getNro_cuartel().getCodCuartel());
+            ps.setBoolean(4, brigada.isEstado());
+            ps.setInt(5, brigada.getCodBrigada());
+            
+            int modificar = ps.executeUpdate();
+            
+            if(modificar == 1){
+                
+                JOptionPane.showMessageDialog(null, "Brigada modificada");
+                
+            }
+            
+        }catch(SQLException ex) {
+            
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Brigada");
+            
+        }
+            
     }
 
 

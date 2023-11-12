@@ -1,4 +1,3 @@
-
 package proyectofinalgrupo9.ClasesEntidades;
 
 import java.time.LocalDate;
@@ -108,15 +107,13 @@ public class Bombero {
     @Override
     public String toString() {
         return   "Bombero: " +
-                 "DNI: " + dni + 
-                 "Nombre: " + nombre + 
-                 "Apellido: " + apellido +
-                 "Fecha Nacimiento: " + fecha_nac + 
-                 "Numero de Celular: " + celular +
-                 "Codigo de Brigada:" + codBrigada +
-                 "Estado: " + estado;
+                 " DNI: " + dni + 
+                 " Nombre: " + nombre + 
+                 " Apellido: " + apellido +
+                 " Fecha Nacimiento: " + fecha_nac + 
+                 " Numero de Celular: " + celular +
+                 " Codigo de Brigada:" + codBrigada.getCodBrigada() +
+                 " Estado: " + estado;
     }
 
-    
-    
 }

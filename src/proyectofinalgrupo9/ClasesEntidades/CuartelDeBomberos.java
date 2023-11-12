@@ -112,19 +112,14 @@ public class CuartelDeBomberos {
     @Override
     public String toString() {
         return  "Cuartel De Bomberos: " + 
-                "Codigo de Cuartel: " + codCuartel +
-                "Nombre de Cuartel: " + nombre_cuartel + 
-                "Direccion: " + direccion + 
-                "Coordenada X: " + coord_X + 
-                "Coordenada Y: " + coord_Y + 
-                "Telefono: " + telefono + 
-                "Correo: " + correo +
-                "Estado: " + estado;
+                " Codigo de Cuartel: " + codCuartel +
+                " Nombre de Cuartel: " + nombre_cuartel + 
+                " Direccion: " + direccion + 
+                " Coordenada X: " + coord_X + 
+                " Coordenada Y: " + coord_Y + 
+                " Telefono: " + telefono + 
+                " Correo: " + correo +
+                " Estado: " + estado;
     }
-    
-    
-    
-    
-    
     
 }
