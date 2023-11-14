@@ -34,15 +34,12 @@ public class Menu extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jListarCuartel = new javax.swing.JMenu();
         jMGestionarCuartel = new javax.swing.JMenuItem();
-        jMListarCuartel = new javax.swing.JMenuItem();
         jBrigadas = new javax.swing.JMenu();
         jMGestionarBrigada = new javax.swing.JMenuItem();
-        jMBrigadasLibres = new javax.swing.JMenuItem();
         jBomberos = new javax.swing.JMenu();
         jMGestionarBombero = new javax.swing.JMenuItem();
         jSiniestros = new javax.swing.JMenu();
         jMGestionarSiniestro = new javax.swing.JMenuItem();
-        jDistancias = new javax.swing.JMenu();
         jDistancias1 = new javax.swing.JMenu();
 
         jMenuItem1.setText("jMenuItem1");
@@ -79,14 +76,6 @@ public class Menu extends javax.swing.JFrame {
         });
         jListarCuartel.add(jMGestionarCuartel);
 
-        jMListarCuartel.setText("Lista de Cuarteles");
-        jMListarCuartel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMListarCuartelActionPerformed(evt);
-            }
-        });
-        jListarCuartel.add(jMListarCuartel);
-
         jMenuBar1.add(jListarCuartel);
 
         jBrigadas.setText("Brigadas");
@@ -98,14 +87,6 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         jBrigadas.add(jMGestionarBrigada);
-
-        jMBrigadasLibres.setText("Brigadas Libres");
-        jMBrigadasLibres.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMBrigadasLibresActionPerformed(evt);
-            }
-        });
-        jBrigadas.add(jMBrigadasLibres);
 
         jMenuBar1.add(jBrigadas);
 
@@ -132,9 +113,6 @@ public class Menu extends javax.swing.JFrame {
         jSiniestros.add(jMGestionarSiniestro);
 
         jMenuBar1.add(jSiniestros);
-
-        jDistancias.setText("Distancias");
-        jMenuBar1.add(jDistancias);
 
         jDistancias1.setText("Salir");
         jDistancias1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -178,17 +156,7 @@ public class Menu extends javax.swing.JFrame {
         GB.getContentPane().setBackground(Color.white);
         escritorio.add(GB);
     }//GEN-LAST:event_jMGestionarBrigadaActionPerformed
-//-------------------------------------------------------------------------------------------
-    //GESTIONAR BRIGADAS LIBRES
-    private void jMBrigadasLibresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMBrigadasLibresActionPerformed
 
-        escritorio.removeAll();
-        escritorio.repaint();
-        GestionarBrigadaLibres GBL = new GestionarBrigadaLibres();
-        GBL.setVisible(true);
-        GBL.getContentPane().setBackground(Color.white);
-        escritorio.add(GBL);
-    }//GEN-LAST:event_jMBrigadasLibresActionPerformed
 //-------------------------------------------------------------------------------------------
     //GESTIONAR BOMBERO
     private void jMGestionarBomberoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMGestionarBomberoActionPerformed
@@ -211,28 +179,9 @@ public class Menu extends javax.swing.JFrame {
         escritorio.add(GS);
     }//GEN-LAST:event_jMGestionarSiniestroActionPerformed
 //-------------------------------------------------------------------------------------------
-    //LISTA DE CUARTELES
+    //LISTA DE CUARTELES (YA NO SE USA)
     private void jListarCuartelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jListarCuartelActionPerformed
-
-        escritorio.removeAll();
-        escritorio.repaint();
-        ListarCuartel LC = new ListarCuartel();
-        LC.setVisible(true);
-        LC.getContentPane().setBackground(Color.white);
-        escritorio.add(LC);
     }//GEN-LAST:event_jListarCuartelActionPerformed
-
-    private void jMListarCuartelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMListarCuartelActionPerformed
-
-        escritorio.removeAll();
-        escritorio.repaint();
-        ListarCuartel LC = new ListarCuartel();
-        LC.setVisible(true);
-        LC.getContentPane().setBackground(Color.white);
-        escritorio.add(LC);
-
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMListarCuartelActionPerformed
 
     private void jDistancias1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDistancias1ActionPerformed
         
@@ -280,15 +229,12 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JDesktopPane escritorio;
     private javax.swing.JMenu jBomberos;
     private javax.swing.JMenu jBrigadas;
-    private javax.swing.JMenu jDistancias;
     private javax.swing.JMenu jDistancias1;
     private javax.swing.JMenu jListarCuartel;
-    private javax.swing.JMenuItem jMBrigadasLibres;
     private javax.swing.JMenuItem jMGestionarBombero;
     private javax.swing.JMenuItem jMGestionarBrigada;
     private javax.swing.JMenuItem jMGestionarCuartel;
     private javax.swing.JMenuItem jMGestionarSiniestro;
-    private javax.swing.JMenuItem jMListarCuartel;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenu jSiniestros;

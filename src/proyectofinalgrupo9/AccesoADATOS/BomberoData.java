@@ -106,7 +106,7 @@ public class BomberoData {
     public Bombero buscarBombero(int id_Bombero) {
         
         String sql = "SELECT dni, nombre, apellido, fecha_nac, celular, codBrigada FROM bombero "
-                + " WHERE id_Bombero = ? AND estado = 1";
+                + " WHERE dni = ? AND estado = 1";
         
         Bombero bombero = null;
         

@@ -177,5 +177,17 @@ public class ProyectoFinalGrupo9 {
 //          SiniestrosData siniestro = new SiniestrosData();
 //          
 //          siniestro.eliminarSiniestro(3);
+
+        // ------------ RESOLVER SINIESTRO ------------
+//        SiniestrosData sin = new SiniestrosData();
+//        
+//           
+//        Siniestros sini= new Siniestros(1, LocalDate.of(2023, Month.DECEMBER, 14), 6, false);
+//        sin.resolverSiniestro(sini);
+        
+          
+
+
     }
+    
 }

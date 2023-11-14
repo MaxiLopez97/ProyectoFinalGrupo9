@@ -25,14 +25,6 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMGestionarCuartelActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMListarCuartel">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Lista de Cuarteles"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMListarCuartelActionPerformed"/>
-              </Events>
-            </MenuItem>
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="jBrigadas">
@@ -46,14 +38,6 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMGestionarBrigadaActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMBrigadasLibres">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Brigadas Libres"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMBrigadasLibresActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
@@ -87,11 +71,6 @@
               </Events>
             </MenuItem>
           </SubComponents>
-        </Menu>
-        <Menu class="javax.swing.JMenu" name="jDistancias">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Distancias"/>
-          </Properties>
         </Menu>
         <Menu class="javax.swing.JMenu" name="jDistancias1">
           <Properties>

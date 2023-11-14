@@ -49,6 +49,15 @@ public class Siniestros {
         this.estado = estado;
     }
 
+    public Siniestros(int codigo, LocalDate fecha_resol, int puntuacion, boolean estado) {
+        this.codigo=codigo;
+        this.fecha_resol = fecha_resol;
+        this.puntuacion = puntuacion;
+        this.estado=estado;
+    }
+    
+    
+
     public Siniestros() {
     }
 

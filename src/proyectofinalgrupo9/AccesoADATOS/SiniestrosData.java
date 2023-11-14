@@ -27,8 +27,8 @@ public class SiniestrosData {
 
     //MODIFICAR LA FECHA DE RESOLUCION REGISTRAR SINIESTROS
     public void registrarSiniestros(Siniestros siniestro) {
-        String sql = "INSERT INTO siniestro (tipo, fecha_siniestro, coord_X, coord_Y, detalles, fecha_resol, puntuacion, codBrigada, estado)"
-                + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO siniestro (tipo, fecha_siniestro, coord_X, coord_Y, detalles,  codBrigada, estado)"
+                + " VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -38,10 +38,10 @@ public class SiniestrosData {
             ps.setInt(3, siniestro.getCoord_X());
             ps.setInt(4, siniestro.getCoord_Y());
             ps.setString(5, siniestro.getDetalles());
-            ps.setDate(6, Date.valueOf(siniestro.getFecha_resol()));
-            ps.setInt(7, siniestro.getPuntuacion());
-            ps.setInt(8, siniestro.getCodBrigada().getCodBrigada());
-            ps.setBoolean(9, siniestro.isEstado());
+//            ps.setDate(6, Date.valueOf(siniestro.getFecha_resol()));
+//            ps.setInt(7, siniestro.getPuntuacion());
+            ps.setInt(6, siniestro.getCodBrigada().getCodBrigada());
+            ps.setBoolean(7, siniestro.isEstado());
 
             ps.executeUpdate();
 
@@ -57,6 +57,34 @@ public class SiniestrosData {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla siniestro" + ex);
         }
     }
+    
+    //Actualizar Estado
+    
+    public void resolverSiniestro (Siniestros siniestro){
+    String sql= "UPDATE siniestro SET fecha_resol= ?, puntuacion=?, estado=? WHERE codigo=?";
+    
+        try {
+            PreparedStatement ps=con.prepareStatement(sql);
+            
+            ps.setDate(1, Date.valueOf(siniestro.getFecha_resol()));
+            ps.setInt(2, siniestro.getPuntuacion());
+            ps.setBoolean(3, siniestro.isEstado());
+            ps.setInt(4, siniestro.getCodigo());
+            
+              int exito = ps.executeUpdate();
+            
+            if (exito == 1) {
+                
+                JOptionPane.showMessageDialog(null, "Siniestro resuelto");
+            }
+            
+        } catch (SQLException ex) {
+             JOptionPane.showMessageDialog(null, "Error al actualizar el estado del siniestro."+ex);
+        }
+    
+    }
+    
+    // Asignar Brigada
 
     public void asignarBrigada(Siniestros siniestro) {
         try {
