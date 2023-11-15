@@ -148,7 +148,7 @@ public class BrigadaData {
   
     public void eliminarBrigada(int codBrigada){
     
-        String sql = "DELETE FROM brigada WHERE codBrigada = ?";
+        String sql = "UPDATE brigada SET estado = 0 WHERE codBrigada = ?";
         
         try{
         
@@ -202,6 +202,5 @@ public class BrigadaData {
         }
             
     }
-
 
 }

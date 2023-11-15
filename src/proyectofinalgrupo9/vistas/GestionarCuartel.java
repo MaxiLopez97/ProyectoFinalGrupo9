@@ -5,9 +5,7 @@
  */
 package proyectofinalgrupo9.vistas;
 
-import java.awt.event.ItemEvent;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -22,12 +20,37 @@ public class GestionarCuartel extends javax.swing.JInternalFrame {
 
     private CuartelData cuartel = new CuartelData();
     private CuartelDeBomberos cuartelActual = null;
+
     private DefaultTableModel modelo;
-    private ArrayList<CuartelData> lista;
+
+    private List<CuartelDeBomberos> lista;
     private CuartelData cuartel1;
 
     public GestionarCuartel() {
+
         initComponents();
+        cuartel1 = new CuartelData();
+        lista = cuartel1.listarCuarteles();
+
+        modelo = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int f, int c) {
+                if (c == 0) {
+                    return false;
+                }
+
+                if (c == 7) {
+
+                    return false;
+                }
+                return true;
+            }
+
+        };
+
+        cabecera();
+        cargarTabla();
+
     }
 
     @SuppressWarnings("unchecked")
@@ -57,8 +80,6 @@ public class GestionarCuartel extends javax.swing.JInternalFrame {
         jTCuarteles = new javax.swing.JTable();
         jBSalirCuarteles = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jCSeleccionarCuartel = new javax.swing.JComboBox<>();
 
         setClosable(true);
 
@@ -67,7 +88,7 @@ public class GestionarCuartel extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("INCORPORACIÓN DE CUARTELES");
-        jDesktopPane1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(86, 0, -1, 30));
+        jDesktopPane1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 0, -1, 30));
 
         jLabel2.setText("Nombre del Cuartel:");
         jDesktopPane1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 80, -1, -1));
@@ -93,11 +114,6 @@ public class GestionarCuartel extends javax.swing.JInternalFrame {
         jDesktopPane1.add(jTNombreDelCuartel, new org.netbeans.lib.awtextra.AbsoluteConstraints(141, 76, 274, -1));
 
         jCEstado.setText("Activo");
-        jCEstado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCEstadoActionPerformed(evt);
-            }
-        });
         jDesktopPane1.add(jCEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(141, 328, -1, -1));
 
         jLabel7.setText("Estado");
@@ -109,10 +125,15 @@ public class GestionarCuartel extends javax.swing.JInternalFrame {
                 jBGuardarActionPerformed(evt);
             }
         });
-        jDesktopPane1.add(jBGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 370, -1, -1));
+        jDesktopPane1.add(jBGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, -1, -1));
 
         jBModificar.setText("Modificar");
-        jDesktopPane1.add(jBModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 370, -1, -1));
+        jBModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBModificarActionPerformed(evt);
+            }
+        });
+        jDesktopPane1.add(jBModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 750, -1, -1));
 
         jBBorrar.setText("Borrar");
         jBBorrar.addActionListener(new java.awt.event.ActionListener() {
@@ -120,7 +141,7 @@ public class GestionarCuartel extends javax.swing.JInternalFrame {
                 jBBorrarActionPerformed(evt);
             }
         });
-        jDesktopPane1.add(jBBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(246, 370, -1, -1));
+        jDesktopPane1.add(jBBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 750, -1, -1));
         jDesktopPane1.add(jTCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(141, 286, 274, -1));
 
         jTCuarteles.setModel(new javax.swing.table.DefaultTableModel(
@@ -136,7 +157,7 @@ public class GestionarCuartel extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTCuarteles);
 
-        jDesktopPane1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 506, 390, 265));
+        jDesktopPane1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 450, 570, 265));
 
         jBSalirCuarteles.setText("Salir");
         jBSalirCuarteles.addActionListener(new java.awt.event.ActionListener() {
@@ -144,33 +165,18 @@ public class GestionarCuartel extends javax.swing.JInternalFrame {
                 jBSalirCuartelesActionPerformed(evt);
             }
         });
-        jDesktopPane1.add(jBSalirCuarteles, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 777, 65, -1));
+        jDesktopPane1.add(jBSalirCuarteles, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 750, 65, -1));
 
         jLabel10.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("CUARTELES");
-        jDesktopPane1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 420, -1, -1));
-
-        jLabel9.setText("Seleccionar Cuartel:");
-        jDesktopPane1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 460, 120, -1));
-
-        jCSeleccionarCuartel.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jCSeleccionarCuartelItemStateChanged(evt);
-            }
-        });
-        jCSeleccionarCuartel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCSeleccionarCuartelActionPerformed(evt);
-            }
-        });
-        jDesktopPane1.add(jCSeleccionarCuartel, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 450, 240, -1));
+        jDesktopPane1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 410, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 449, Short.MAX_VALUE)
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 624, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -182,11 +188,7 @@ public class GestionarCuartel extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jCEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCEstadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCEstadoActionPerformed
-
-    // GUARDAR CUARTEL
+    // GUARDAR CUARTEL (esta bien)
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
 
         try {
@@ -198,7 +200,7 @@ public class GestionarCuartel extends javax.swing.JInternalFrame {
             String correo = jTCorreo.getText();
             Boolean estado = jCEstado.isSelected();
 
-            if (nombre.isEmpty() || direccion.isEmpty() || coor_x == null || coor_y == null || correo.isEmpty() || numero.isEmpty() || estado == true) {
+            if (nombre.isEmpty() || direccion.isEmpty() || coor_x == null || coor_y == null || correo.isEmpty() || numero.isEmpty() || estado == false) {
 
                 JOptionPane.showMessageDialog(this, "No puede haber campos vacios");
 
@@ -209,6 +211,8 @@ public class GestionarCuartel extends javax.swing.JInternalFrame {
                 cuartelActual = new CuartelDeBomberos(nombre, direccion, coor_x, coor_y, numero, correo, estado);
                 cuartel.guardarCuartel(cuartelActual);
                 limpiarCampos();
+                limpiarTabla();
+                cargarTabla();
             }
 
         } catch (NumberFormatException nfe) {
@@ -217,19 +221,27 @@ public class GestionarCuartel extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jBGuardarActionPerformed
 
-    //BORRAR
+    //BORRAR (FUNCIONA)
     private void jBBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBorrarActionPerformed
 
-        if (cuartelActual != null) {
-            cuartel.eliminarCuartel(cuartelActual.getCodCuartel());
-            cuartelActual = null;
-            limpiarCampos();
+        try {
+            int fila = jTCuarteles.getSelectedRow();
+            int count = jTCuarteles.getSelectedRowCount();
+            if (count == 1) {
+                int idCuartel = (int) modelo.getValueAt(fila, 0);
+                cuartel1.eliminarCuartel(idCuartel);
+                limpiarTabla();
+                cargarTabla();
 
-        } else {
+            } else {
+                JOptionPane.showMessageDialog(this, "No seleccionaste ningun cuartel");
+            }
 
-            JOptionPane.showMessageDialog(this, "No hay un alumno seleccionado");
+//         
+        } catch (NullPointerException ex) {
+
+            JOptionPane.showMessageDialog(this, "No se puede eliminar este cuartel" + ex);
         }
-
     }//GEN-LAST:event_jBBorrarActionPerformed
 
     //SALIR
@@ -237,44 +249,47 @@ public class GestionarCuartel extends javax.swing.JInternalFrame {
         dispose();
     }//GEN-LAST:event_jBSalirCuartelesActionPerformed
 
-    //SELECCIONAR CUARTEL
-    private void jCSeleccionarCuartelItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCSeleccionarCuartelItemStateChanged
+    //MODIFICAR
+    private void jBModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBModificarActionPerformed
 
-        if (evt.getStateChange() == ItemEvent.SELECTED) {
+        try {
+            int fila = jTCuarteles.getSelectedRow();
+
+            int codCuartel = (int) modelo.getValueAt(fila, 0);
+            String nombre = (String) modelo.getValueAt(fila, 1);
+            String direccion = (String) modelo.getValueAt(fila, 2);
+
+            String coord_xString = modelo.getValueAt(fila, 3).toString();
+            int coord_x = Integer.parseInt(coord_xString);
+
+            String coord_yString = modelo.getValueAt(fila, 4).toString();
+            int coord_y = Integer.parseInt(coord_yString);
+
+            String telefono = (String) modelo.getValueAt(fila, 5);
+            String correo = (String) modelo.getValueAt(fila, 6);
+
+            CuartelDeBomberos cuartelito = new CuartelDeBomberos(codCuartel, nombre, direccion, coord_x, coord_y, telefono, correo, true);
+
+            cuartel.modificarCuartel(cuartelito);
             limpiarTabla();
-            llenar();
+            cargarTabla();
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            JOptionPane.showMessageDialog(this, "No se ha modificado el Cuartel" + ex);
         }
+    }//GEN-LAST:event_jBModificarActionPerformed
 
-    }//GEN-LAST:event_jCSeleccionarCuartelItemStateChanged
-
-    private void jCSeleccionarCuartelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCSeleccionarCuartelActionPerformed
-
-
-
-    }//GEN-LAST:event_jCSeleccionarCuartelActionPerformed
-
-    //LLENAR TABLA
-    private void llenar() {
-        jCSeleccionarCuartel.getSelectedItem();
-        List<CuartelData> listarCuarteles = lista;
-
-        for (CuartelData item : listarCuarteles) {
-            jCSeleccionarCuartel.addItem(item);
-
-        }
-
-    }
-
+    //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     // LIMPIAR TABLA
     private void limpiarTabla() {
-        DefaultTableModel modelo = (DefaultTableModel) jTCuarteles.getModel();
+
         modelo.setRowCount(0);
     }
 
-    //--------------Cabecera de la Tabla-----------------------------------
+    // CABECERA DE LA TABLA  (ESTA BIEN)
     private void cabecera() {
 
         ArrayList<Object> filaCabecera = new ArrayList<>();
+        filaCabecera.add("ID:");
         filaCabecera.add(" Nombre: ");
         filaCabecera.add(" Direccion: ");
         filaCabecera.add(" Coordenada X: ");
@@ -292,16 +307,35 @@ public class GestionarCuartel extends javax.swing.JInternalFrame {
 
     }
 
-    //--------------Cargar -----------------------------------
-    private void carga() {
+    private void cargarTabla() {
 
-        List<CuartelData> todo = lista;
-        for (CuartelData item : todo) {
-            jCSeleccionarCuartel.addItem(item);
+        List<CuartelDeBomberos> lista = cuartel1.listarCuarteles();
+        for (CuartelDeBomberos a : lista) {
+            modelo.addRow(new Object[]{
+                a.getCodCuartel(),
+                a.getNombre_cuartel(),
+                a.getDireccion(),
+                a.getCoord_X(),
+                a.getCoord_Y(),
+                a.getTelefono(),
+                a.getCorreo(),
+                a.isEstado()
+            });
+        }
+
+    }
+
+    //borrar datos de tabla
+    private void borrarTabla() {
+
+        int indice = modelo.getRowCount() - 1;
+
+        for (int i = indice; i >= 0; i--) {
+            modelo.removeRow(i);
         }
     }
 
-    //--------------Limpiar Campos-----------------------------------
+    //--------------Limpiar Campos (FUNCIONA BIEN)-----------------------------------
     public void limpiarCampos() {
 
         jTNombreDelCuartel.setText("");
@@ -314,13 +348,13 @@ public class GestionarCuartel extends javax.swing.JInternalFrame {
 
     }
 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBBorrar;
     private javax.swing.JButton jBGuardar;
     private javax.swing.JButton jBModificar;
     private javax.swing.JButton jBSalirCuarteles;
     private javax.swing.JCheckBox jCEstado;
-    private javax.swing.JComboBox<CuartelData> jCSeleccionarCuartel;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -331,7 +365,6 @@ public class GestionarCuartel extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTCoor_X;
     private javax.swing.JTextField jTCoord_Y;

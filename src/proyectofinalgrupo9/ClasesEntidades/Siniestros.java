@@ -1,17 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package proyectofinalgrupo9.ClasesEntidades;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-/**
- *
- * @author Maxi
- */
 public class Siniestros {
     private int codigo;
     private String tipo;
@@ -24,27 +15,23 @@ public class Siniestros {
     private Brigada codBrigada;
     private boolean estado;
 
-    public Siniestros(int codigo, String tipo, LocalDateTime fecha_siniestro, int coord_X, int coord_Y, String detalles, LocalDate fecha_resol, int puntuacion, Brigada codBrigada, boolean estado) {
+    public Siniestros(int codigo, String tipo, LocalDateTime fecha_siniestro, int coord_X, int coord_Y, String detalles, Brigada codBrigada, boolean estado) {
         this.codigo = codigo;
         this.tipo = tipo;
         this.fecha_siniestro = fecha_siniestro;
         this.coord_X = coord_X;
         this.coord_Y = coord_Y;
         this.detalles = detalles;
-        this.fecha_resol = fecha_resol;
-        this.puntuacion = puntuacion;
         this.codBrigada = codBrigada;
         this.estado = estado;
     }
 
-    public Siniestros(String tipo, LocalDateTime fecha_siniestro, int coord_X, int coord_Y, String detalles, LocalDate fecha_resol, int puntuacion, Brigada codBrigada, boolean estado) {
+    public Siniestros(String tipo, LocalDateTime fecha_siniestro, int coord_X, int coord_Y, String detalles, Brigada codBrigada, boolean estado) {
         this.tipo = tipo;
         this.fecha_siniestro = fecha_siniestro;
         this.coord_X = coord_X;
         this.coord_Y = coord_Y;
         this.detalles = detalles;
-        this.fecha_resol = fecha_resol;
-        this.puntuacion = puntuacion;
         this.codBrigada = codBrigada;
         this.estado = estado;
     }
@@ -53,9 +40,8 @@ public class Siniestros {
         this.codigo=codigo;
         this.fecha_resol = fecha_resol;
         this.puntuacion = puntuacion;
-        this.estado=estado;
+        this.estado = estado;
     }
-    
     
 
     public Siniestros() {
@@ -147,17 +133,32 @@ public class Siniestros {
     public String toString() {
         return  "Siniestros: " + 
                 " Codigo: " + codigo + 
+                " Tipo: " + tipo;
+    }
+    
+    public String listar(){
+    
+        return  "Siniestros: " + 
+                " Codigo: " + codigo + 
                 " Tipo: " + tipo +
                 " Fecha de Siniestro: " + fecha_siniestro + 
                 " Coordenada X: " + coord_X + 
                 " Coordenada Y: " + coord_Y + 
                 " Detalles: " + detalles + 
-                " Fecha de Resolucion: " + fecha_resol + 
-                " Puntuacion: " + puntuacion +
                 " Codigo de Brigada: " + codBrigada.getCodBrigada() +
                 " Estado: " + estado;
+    
     }
     
+    public String resuelto(){
+    
+        return "Siniestro resuelto: " +
+               "Codigo: " + codigo +
+               "Tipo: " + tipo +
+               "Fecha de resolución: " + fecha_resol +
+               "Puntuación: " + puntuacion;
+        
+    }
     
     
     

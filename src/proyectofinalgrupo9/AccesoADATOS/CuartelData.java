@@ -52,7 +52,7 @@ public class CuartelData {
 
     public void modificarCuartel(CuartelDeBomberos cuartel) {
         String sql = "UPDATE cuartel SET nombre_cuartel = ?, direccion = ?, coord_X = ?, coord_Y = ?, telefono = ?, correo = ?"
-                + " WHERE codCuartel = ? and estado = 1";
+                + " WHERE codCuartel = ?";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -63,8 +63,7 @@ public class CuartelData {
             ps.setInt(4, cuartel.getCoord_Y());
             ps.setString(5, cuartel.getTelefono());
             ps.setString(6, cuartel.getCorreo());
-            ps.setBoolean(7, cuartel.isEstado());
-            ps.setInt(8, cuartel.getCodCuartel());
+            ps.setInt(7, cuartel.getCodCuartel());
 
             int modificar = ps.executeUpdate();
 
@@ -124,7 +123,7 @@ public class CuartelData {
     
     public void eliminarCuartel(int codCuartel){
     
-        String sql = "DELETE FROM cuartel WHERE codCuartel = ?";
+        String sql = "UPDATE cuartel SET estado=0 WHERE codCuartel=?";
         
         try{
         
@@ -142,7 +141,7 @@ public class CuartelData {
         
         } catch(SQLException ex){
         
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Cuartel");
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Cuartel"+ex);
         
         }
     
@@ -154,7 +153,7 @@ public class CuartelData {
    
     public List<CuartelDeBomberos> listarCuarteles(){
         
-        String sql =  "SELECT * FROM cuartel";
+        String sql =  "SELECT * FROM cuartel WHERE estado=1";
         
         List<CuartelDeBomberos> cuarteles = new ArrayList();
         
@@ -175,7 +174,8 @@ public class CuartelData {
                 cuartel.setCoord_Y(rs.getInt("coord_Y"));
                 cuartel.setTelefono(rs.getString("telefono"));
                 cuartel.setCorreo(rs.getString("correo"));
-                
+                cuartel.setEstado(true);
+               
                 cuarteles.add(cuartel);
             
             }
@@ -190,6 +190,41 @@ public class CuartelData {
         
         return cuarteles;
         
+    }
+    
+    public List<CuartelDeBomberos> mostrarCuartelCBX(){
+    
+        String sql = "SELECT codCuartel, nombre_cuartel, estado FROM cuartel";
+        
+        List<CuartelDeBomberos> cuarteles = new ArrayList();
+        
+        try{
+        
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+            
+                CuartelDeBomberos cuartel = new CuartelDeBomberos();
+                
+                cuartel.setCodCuartel(rs.getInt("codCuartel"));
+                cuartel.setNombre_cuartel(rs.getString("nombre_cuartel"));
+                cuartel.setEstado(true);
+                
+                cuarteles.add(cuartel);
+            
+            }
+            
+            ps.close();
+        
+        }catch(SQLException ex){
+        
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Cuartel");
+            
+        }
+        
+        return cuarteles;
+    
     }
     
     

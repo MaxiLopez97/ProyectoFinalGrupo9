@@ -1,14 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package proyectofinalgrupo9.ClasesEntidades;
 
-/**
- *
- * @author Maxi
- */
 public class CuartelDeBomberos {
     private int codCuartel;
     private String nombre_cuartel;
@@ -111,6 +102,12 @@ public class CuartelDeBomberos {
 
     @Override
     public String toString() {
+        return  "Codigo: " + codCuartel +
+                " Nombre:  " + nombre_cuartel;
+    }
+    
+    public String listar(){
+    
         return  "Cuartel De Bomberos: " + 
                 " Codigo de Cuartel: " + codCuartel +
                 " Nombre de Cuartel: " + nombre_cuartel + 
@@ -120,6 +117,7 @@ public class CuartelDeBomberos {
                 " Telefono: " + telefono + 
                 " Correo: " + correo +
                 " Estado: " + estado;
+    
     }
     
 }

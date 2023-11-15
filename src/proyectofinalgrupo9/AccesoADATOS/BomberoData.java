@@ -57,7 +57,7 @@ public class BomberoData {
     public void modificarBombero(Bombero bombero) {
         
         String sql = "UPDATE bombero SET dni = ?, nombre = ?, apellido = ?, fecha_nac = ?, celular = ?, codBrigada = ?"
-                + " WHERE id_Bombero = ?";
+                + " WHERE id_bombero = ?";
         
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -86,7 +86,7 @@ public class BomberoData {
     
     public void darBajaPorInactividad(int id_Bombero) {
         
-        String sql = "DELETE FROM bombero WHERE id_Bombero = ?";
+        String sql = "UPDATE bombero SET estado=0 WHERE id_bombero=?";
         
         try {
             PreparedStatement ps = con.prepareStatement(sql);
