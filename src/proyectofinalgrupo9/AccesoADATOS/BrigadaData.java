@@ -62,7 +62,7 @@ public class BrigadaData {
 
     public Brigada consultarBrigada(int id) {
 
-        String sql = "SELECT nombre_br, especialidad, nro_cuartel, estado FROM brigada"
+        String sql = "SELECT nombre_br, especialidad, nro_cuartel, estado FROM brigada "
                 + " WHERE codBrigada = ? AND estado = 1";
         
         Brigada consultarBrigada = null;

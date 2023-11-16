@@ -18,6 +18,7 @@ import proyectofinalgrupo9.ClasesEntidades.Siniestros;
 public class SiniestrosData {
 
     private Connection con = null;
+    private BrigadaData brig = new BrigadaData();
     private CuartelData cd= new CuartelData();      
     public SiniestrosData() {
 
@@ -27,7 +28,7 @@ public class SiniestrosData {
 
     //MODIFICAR LA FECHA DE RESOLUCION REGISTRAR SINIESTROS
     public void registrarSiniestros(Siniestros siniestro) {
-        String sql = "INSERT INTO siniestro (tipo, fecha_siniestro, coord_X, coord_Y, detalles,  codBrigada, estado)"
+        String sql = "INSERT INTO siniestro (tipo, fecha_siniestro, coord_X, coord_Y, detalles, codBrigada, estado)"
                 + " VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try {
@@ -147,27 +148,8 @@ public class SiniestrosData {
             JOptionPane.showMessageDialog(null, "Error al asignar brigada al siniestro.");
         }
     }
-
-    public void resolverSiniestros(Siniestros siniestro, LocalDate fechaResolucion, int puntuacion) {
-        try {
-            if (siniestro.getCodBrigada() != null) {
-                // Actualizar el registro del siniestro con fecha de resolución y puntuación
-                String sql = "UPDATE siniestro SET fecha_resol = ?, puntuacion = ? WHERE codigo = ?";
-                PreparedStatement ps = con.prepareStatement(sql);
-                ps.setDate(1, Date.valueOf(fechaResolucion));
-                ps.setInt(2, puntuacion);
-                ps.setInt(3, siniestro.getCodigo());
-                ps.executeUpdate();
-                JOptionPane.showMessageDialog(null, "Siniestro resuelto exitosamente.");
-            } else {
-                JOptionPane.showMessageDialog(null, "No se puede resolver un siniestro sin asignar una brigada.");
-            }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al resolver el siniestro.");
-        }
-    }
+   
     
-
     public Siniestros buscarSiniestros(int codigo) {
         String sql = "SELECT * FROM siniestro WHERE codigo = ?";
         
@@ -214,10 +196,10 @@ public class SiniestrosData {
 
         return siniestro;
     }
-    //--------------------LISTAR SINIESTROS-----------------------------------------------
+    //--------------------LISTAR SINIESTROS----------------------------------------------
 
-    public List<Siniestros> listarSiniestros() {
-        String sql = "SELECT * FROM siniestro";
+    public List<Siniestros> listarSiniestrosResueltos() {
+        String sql = "SELECT * FROM siniestro WHERE estado = 0";
 
         List<Siniestros> siniestros = new ArrayList<>();
 
@@ -236,6 +218,8 @@ public class SiniestrosData {
                 siniestro.setDetalles(rs.getString("detalles"));
                 siniestro.setFecha_resol(rs.getDate("fecha_resol").toLocalDate());
                 siniestro.setPuntuacion(rs.getInt("puntuacion"));
+                siniestro.setEstado(true);
+                
                 siniestros.add(siniestro);
             }
 
@@ -247,25 +231,59 @@ public class SiniestrosData {
         return siniestros;
     }
     
+    public List<Siniestros> listarSiniestros() {
+        String sql = "SELECT codigo, tipo, fecha_siniestro, coord_X, coord_Y, detalles, codBrigada FROM siniestro WHERE estado = 1 ";
+
+        List<Siniestros> siniestros = new ArrayList<>();
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Siniestros siniestro = new Siniestros();
+
+                siniestro.setCodigo(rs.getInt("codigo"));
+                siniestro.setTipo(rs.getString("tipo"));
+                siniestro.setFecha_siniestro(rs.getTimestamp("fecha_siniestro").toLocalDateTime());
+                siniestro.setCoord_X(rs.getInt("coord_X"));
+                siniestro.setCoord_Y(rs.getInt("coord_Y"));
+                siniestro.setDetalles(rs.getString("detalles"));
+                
+                int codBrigada = rs.getInt("codBrigada");
+                Brigada brigada = brig.consultarBrigada(codBrigada);
+                siniestro.setCodBrigada(brigada);
+                
+                siniestro.setEstado(true);
+                
+                siniestros.add(siniestro);
+            }
+
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla siniestro " + ex);
+        }
+
+        return siniestros;
+    }
+    
     public void modificarSiniestro(Siniestros siniestro){
         
-        String sql = "UPDATE siniestro SET tipo = ?, fecha_siniestro = ?, coord_X = ?, coord_Y = ?, detalles = ?, fecha_resol = ?, puntuacion = ?, codBrigada = ? "
-                + "WHERE codigo = ? AND estado = 1";
+        String sql = "UPDATE siniestro SET codigo = ?, tipo = ?, fecha_siniestro = ?, coord_X = ?, coord_Y = ?, detalles = ?, codBrigada = ? "
+                + "WHERE estado = 1";
         
         try{
             
             PreparedStatement ps = con.prepareStatement(sql);
             
-            ps.setString(1, siniestro.getTipo());
-            ps.setTimestamp(2, Timestamp.valueOf(siniestro.getFecha_siniestro()));
-            ps.setInt(3, siniestro.getCoord_X());
-            ps.setInt(4, siniestro.getCoord_Y());
-            ps.setString(5, siniestro.getDetalles());
-            ps.setDate(6, Date.valueOf(siniestro.getFecha_resol()));
-            ps.setInt(7, siniestro.getPuntuacion());
-            ps.setInt(8, siniestro.getCodBrigada().getCodBrigada());
-            ps.setBoolean(9, siniestro.isEstado());
-            ps.setInt(10, siniestro.getCodigo());
+            ps.setInt(1, siniestro.getCodigo());
+            ps.setString(2, siniestro.getTipo());
+            ps.setTimestamp(3, Timestamp.valueOf(siniestro.getFecha_siniestro()));
+            ps.setInt(4, siniestro.getCoord_X());
+            ps.setInt(5, siniestro.getCoord_Y());
+            ps.setString(6, siniestro.getDetalles());
+            ps.setInt(7, siniestro.getCodBrigada().getCodBrigada());
+            ps.setBoolean(8, siniestro.isEstado());
             
             int modificar = ps.executeUpdate();
             
@@ -280,95 +298,10 @@ public class SiniestrosData {
         }
         
     }
-
-    
-    //--------------------------------BUSCAR BRIGADA POR CODIGO-----------------------------------
-    
-//    public List<Brigada> buscarBrigadaPorCodigo(int codBrigada) {
-//        String sql = "SELECT* FROM brigada WHERE codBrigada =?";
-//        List<Brigada> brigadas = new ArrayList<>();
-//
-//        try {
-//            PreparedStatement ps = con.prepareStatement(sql);
-//            ps.setInt(1, codBrigada);
-//            ResultSet rs = ps.executeQuery();
-//
-//            String especialidadString = rs.getString("especialidad");
-//            Especialidades especialidad = Especialidades.valueOf(especialidadString);
-//
-//            String numeroCuartel = rs.getString("nro_cuartel");
-//
-//            CuartelData cuartelD = new CuartelData();
-//
-//            while (rs.next()) {
-//
-//                Brigada brigada = new Brigada();
-//
-//                brigada.setCodBrigada(rs.getInt("codBrigada"));
-//                brigada.setNombre_br("nombre_br");
-//                brigada.setEspecialidad(especialidad);
-//                
-//                CuartelDeBomberos cuartel = cuartelD.consultarCuartel(rs.getInt("nro_cuartel"));
-//                brigada.setNro_cuartel(cuartel);
-//                brigada.setEstado(true);
-//
-//            }
-//
-//            ps.close();
-//        } catch (SQLException ex) {
-//            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Brigada" + ex);
-//        }
-//
-//        return brigadas;
-//    }
-    //Eliminé buscar brigada por código porque estaba mal
-    
-    
-    public Siniestros consultarBrigadaID(int id){
-    
-        String sql = "SELECT codBrigada, nombre_br, especialidad, nro_cuartel, estado FROM brigada"
-                + " WHERE codBrigada = ? AND estado = 1";
-        
-        Brigada consultarBrigadaID = null;
-
-        try {
-
-            PreparedStatement ps = con.prepareStatement(sql);
-
-            ps.setInt(1, id);
-
-            ResultSet rs = ps.executeQuery();
-            
-            if (rs.next()) {
-
-                consultarBrigadaID = new Brigada();
-
-                consultarBrigadaID.setCodBrigada(id);
-                consultarBrigadaID.setNombre_br(rs.getString("nombre_br"));
-                consultarBrigadaID.setEspecialidad(Especialidades.valueOf(rs.getString("especialidad"))); 
-                int codCuartel1=rs.getInt("nro_cuartel");
-                CuartelDeBomberos cuartel= cd.consultarCuartel(codCuartel1);
-                consultarBrigadaID.setNro_cuartel(cuartel);
-                consultarBrigadaID.setEstado(true);
-
-            } else {
-
-                JOptionPane.showMessageDialog(null, "No existe el ID de la brigada ingresada.");
-
-            }
-            ps.close();
-
-        } catch (SQLException ex) {
-
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla brigada"+ ex);
-
-        }
-        return null;
-    }
     
     public void eliminarSiniestro(int codigo){
         
-        String sql = "DELETE FROM siniestro WHERE codigo = ?";
+        String sql = "UPDATE siniestro SET estado = 0 WHERE codigo = ?";
         
         try{
             

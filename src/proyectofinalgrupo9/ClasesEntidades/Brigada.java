@@ -82,10 +82,11 @@ public class Brigada {
     @Override
     public String toString() {
         return  
-               
-                " Nombre: " + nombre_br + 
-                " Especialidad: " + especialidad + 
-                " Cuartel: " + nro_cuartel.getCodCuartel() ;
+                codBrigada +
+                nombre_br + 
+                " - " + especialidad + 
+                " Cuartel: " + nro_cuartel.getCodCuartel();
+                
              
                 
     }

@@ -69,7 +69,7 @@ public class ProyectoFinalGrupo9 {
 //       
 //       SiniestrosData sin= new SiniestrosData();
 //       
-//       Siniestros as = new Siniestros ("Inundaciones", LocalDateTime.of(2023, Month.APRIL, 10, 12, 30, 13), 1090, 1224, "Av. Sol", LocalDate.of(2023, 5, 2), 10, brigada, true);
+//       Siniestros as = new Siniestros ("Derrumbe", LocalDateTime.of(2023, Month.FEBRUARY, 17, 14, 13, 59), 802, 154, "Calle Av. Norte", brigada, true);
 //       
 //       sin.registrarSiniestros(as);
         // ------------ MODIFICAR BOMBERO ------------

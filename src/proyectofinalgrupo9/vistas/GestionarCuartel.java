@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package proyectofinalgrupo9.vistas;
 
 import java.util.ArrayList;
@@ -12,10 +7,6 @@ import javax.swing.table.DefaultTableModel;
 import proyectofinalgrupo9.AccesoADATOS.CuartelData;
 import proyectofinalgrupo9.ClasesEntidades.CuartelDeBomberos;
 
-/**
- *
- * @author Maxi
- */
 public class GestionarCuartel extends javax.swing.JInternalFrame {
 
     private CuartelData cuartel = new CuartelData();
@@ -91,33 +82,33 @@ public class GestionarCuartel extends javax.swing.JInternalFrame {
         jDesktopPane1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 0, -1, 30));
 
         jLabel2.setText("Nombre del Cuartel:");
-        jDesktopPane1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 80, -1, -1));
+        jDesktopPane1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, -1, 20));
 
         jLabel3.setText("Direccion:");
-        jDesktopPane1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 122, 75, -1));
+        jDesktopPane1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 75, -1));
 
         jLabel4.setText("Coordenada X:");
-        jDesktopPane1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 164, 99, -1));
+        jDesktopPane1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, 99, -1));
 
         jLabel5.setText("Coordenada Y:");
-        jDesktopPane1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 206, 99, -1));
+        jDesktopPane1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 200, 99, -1));
 
         jLabel6.setText("Telefono:");
-        jDesktopPane1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 248, 75, -1));
+        jDesktopPane1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 250, 75, -1));
 
         jLabel8.setText("Correo:");
-        jDesktopPane1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 290, 99, -1));
-        jDesktopPane1.add(jTTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(141, 244, 274, -1));
-        jDesktopPane1.add(jTCoord_Y, new org.netbeans.lib.awtextra.AbsoluteConstraints(141, 202, 274, -1));
-        jDesktopPane1.add(jTCoor_X, new org.netbeans.lib.awtextra.AbsoluteConstraints(141, 160, 274, -1));
-        jDesktopPane1.add(jTDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(141, 118, 274, -1));
-        jDesktopPane1.add(jTNombreDelCuartel, new org.netbeans.lib.awtextra.AbsoluteConstraints(141, 76, 274, -1));
+        jDesktopPane1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 290, 70, -1));
+        jDesktopPane1.add(jTTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 240, 274, -1));
+        jDesktopPane1.add(jTCoord_Y, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 200, 274, -1));
+        jDesktopPane1.add(jTCoor_X, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, 274, -1));
+        jDesktopPane1.add(jTDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, 274, -1));
+        jDesktopPane1.add(jTNombreDelCuartel, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 80, 274, -1));
 
         jCEstado.setText("Activo");
-        jDesktopPane1.add(jCEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(141, 328, -1, -1));
+        jDesktopPane1.add(jCEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 324, -1, 30));
 
-        jLabel7.setText("Estado");
-        jDesktopPane1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 328, -1, -1));
+        jLabel7.setText("Estado:");
+        jDesktopPane1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 330, -1, -1));
 
         jBGuardar.setText("Guardar");
         jBGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -142,7 +133,7 @@ public class GestionarCuartel extends javax.swing.JInternalFrame {
             }
         });
         jDesktopPane1.add(jBBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 750, -1, -1));
-        jDesktopPane1.add(jTCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(141, 286, 274, -1));
+        jDesktopPane1.add(jTCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 290, 274, -1));
 
         jTCuarteles.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -180,9 +171,7 @@ public class GestionarCuartel extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jDesktopPane1)
-                .addContainerGap())
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 788, Short.MAX_VALUE)
         );
 
         pack();
