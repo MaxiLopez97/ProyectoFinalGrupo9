@@ -83,7 +83,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jCCuarteles">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Cuarteles"/>
+                <Property name="text" type="java.lang.String" value="Brigadas"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCCuartelesActionPerformed"/>
@@ -91,7 +91,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jCBrigadas">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Brigadas"/>
+                <Property name="text" type="java.lang.String" value="Bomberos"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCBrigadasActionPerformed"/>

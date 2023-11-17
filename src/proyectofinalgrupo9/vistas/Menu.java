@@ -129,7 +129,7 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        jCCuarteles.setText("Cuarteles");
+        jCCuarteles.setText("Brigadas");
         jCCuarteles.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCCuartelesActionPerformed(evt);
@@ -137,7 +137,7 @@ public class Menu extends javax.swing.JFrame {
         });
         jConsulta.add(jCCuarteles);
 
-        jCBrigadas.setText("Brigadas");
+        jCBrigadas.setText("Bomberos");
         jCBrigadas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCBrigadasActionPerformed(evt);

@@ -62,7 +62,7 @@ public class ConsultarSiniestro extends javax.swing.JInternalFrame {
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel1.setText("SINIESTROS OCURRIDOS ENTRE AYER Y HOY");
-        escritorio.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 20, -1, -1));
+        escritorio.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 20, -1, -1));
 
         jSiniestros.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -77,7 +77,7 @@ public class ConsultarSiniestro extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jSiniestros);
 
-        escritorio.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 890, 560));
+        escritorio.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 1290, 560));
 
         jSalir.setText("Salir");
         jSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -85,13 +85,13 @@ public class ConsultarSiniestro extends javax.swing.JInternalFrame {
                 jSalirActionPerformed(evt);
             }
         });
-        escritorio.add(jSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 630, -1, -1));
+        escritorio.add(jSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 650, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 956, Short.MAX_VALUE)
+            .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 1358, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

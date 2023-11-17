@@ -54,6 +54,7 @@ public class ConsultarCuartel extends javax.swing.JInternalFrame {
         jCuarteles = new javax.swing.JTable();
         jSalir = new javax.swing.JButton();
         jBoton = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         setClosable(true);
 
@@ -61,12 +62,12 @@ public class ConsultarCuartel extends javax.swing.JInternalFrame {
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel1.setText("CONSULTAR BRIGADAS EN CUARTELES");
-        escritorio.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 40, -1, -1));
+        escritorio.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, -1, -1));
 
         jLabel2.setText("Seleccionar Cuartel :");
-        escritorio.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, -1, -1));
+        escritorio.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, -1, -1));
 
-        escritorio.add(jCSeleccionarCuarteles, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, 360, -1));
+        escritorio.add(jCSeleccionarCuarteles, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 90, 360, -1));
 
         jCuarteles.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -81,7 +82,7 @@ public class ConsultarCuartel extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jCuarteles);
 
-        escritorio.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 170, 660, -1));
+        escritorio.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 660, -1));
 
         jSalir.setText("Salir");
         jSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -89,7 +90,7 @@ public class ConsultarCuartel extends javax.swing.JInternalFrame {
                 jSalirActionPerformed(evt);
             }
         });
-        escritorio.add(jSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 620, -1, -1));
+        escritorio.add(jSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 650, -1, -1));
 
         jBoton.setText("Buscar");
         jBoton.addActionListener(new java.awt.event.ActionListener() {
@@ -97,7 +98,11 @@ public class ConsultarCuartel extends javax.swing.JInternalFrame {
                 jBotonActionPerformed(evt);
             }
         });
-        escritorio.add(jBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 120, -1, -1));
+        escritorio.add(jBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 82, -1, 40));
+
+        jLabel3.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel3.setText("BRIGADAS: ");
+        escritorio.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 160, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -220,6 +225,7 @@ public class ConsultarCuartel extends javax.swing.JInternalFrame {
     private javax.swing.JTable jCuarteles;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JButton jSalir;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables

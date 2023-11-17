@@ -113,6 +113,10 @@ public class GestionarSiniestros extends javax.swing.JInternalFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTCuartelCercano = new javax.swing.JTable();
         jBValidar = new javax.swing.JButton();
+        jLabel18 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jSeparator2 = new javax.swing.JSeparator();
+        jSeparator3 = new javax.swing.JSeparator();
 
         setClosable(true);
 
@@ -121,11 +125,11 @@ public class GestionarSiniestros extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(51, 255, 204));
         jLabel1.setText("REGISTRAR UN SINIESTRO");
-        jDesktopPane1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, -1, -1));
+        jDesktopPane1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, -1, -1));
         jDesktopPane1.add(jTTipoDeSiniestro, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 260, -1));
 
         jLabel2.setText("Seleccionar Siniestro:");
-        jDesktopPane1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, -1));
+        jDesktopPane1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 60, -1, -1));
 
         jLabel3.setText("Tipo de Siniestro:");
         jDesktopPane1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, -1, -1));
@@ -163,7 +167,7 @@ public class GestionarSiniestros extends javax.swing.JInternalFrame {
                 jBBuscarActionPerformed(evt);
             }
         });
-        jDesktopPane1.add(jBBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 30, -1, 40));
+        jDesktopPane1.add(jBBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1170, 50, -1, 50));
 
         jBBorrar.setText("Borrar");
         jBBorrar.addActionListener(new java.awt.event.ActionListener() {
@@ -173,7 +177,7 @@ public class GestionarSiniestros extends javax.swing.JInternalFrame {
         });
         jDesktopPane1.add(jBBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 450, -1, -1));
 
-        jDesktopPane1.add(jCAsignarBrigada, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 360, 340, -1));
+        jDesktopPane1.add(jCAsignarBrigada, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 360, 310, -1));
 
         jLabel14.setText("Brigada:");
         jDesktopPane1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 360, -1, -1));
@@ -184,7 +188,7 @@ public class GestionarSiniestros extends javax.swing.JInternalFrame {
                 jBSalirActionPerformed(evt);
             }
         });
-        jDesktopPane1.add(jBSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 450, -1, -1));
+        jDesktopPane1.add(jBSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(1250, 740, -1, -1));
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -192,8 +196,8 @@ public class GestionarSiniestros extends javax.swing.JInternalFrame {
 
         jDesktopPane1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 260, 260, -1));
 
-        jDesktopPane1.add(jCSeleccionarSiniestro, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, 260, -1));
-        jDesktopPane1.add(jDFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 176, -1));
+        jDesktopPane1.add(jCSeleccionarSiniestro, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 60, 260, -1));
+        jDesktopPane1.add(jDFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 260, -1));
 
         jLabel8.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(51, 255, 204));
@@ -247,14 +251,14 @@ public class GestionarSiniestros extends javax.swing.JInternalFrame {
         });
         jDesktopPane1.add(jModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 450, -1, -1));
 
-        jLabel13.setText("ID");
-        jDesktopPane1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(371, 120, 20, 30));
-        jDesktopPane1.add(jTID, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 120, 40, 30));
+        jLabel13.setText("ID Siniestro: ");
+        jDesktopPane1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 110, 80, 30));
+        jDesktopPane1.add(jTID, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 110, 40, 30));
 
         jLabel17.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(51, 255, 204));
         jLabel17.setText("CUARTELES MÁS CERCANOS");
-        jDesktopPane1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 0, -1, -1));
+        jDesktopPane1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 250, -1, -1));
 
         jTCuartelCercano.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -269,7 +273,7 @@ public class GestionarSiniestros extends javax.swing.JInternalFrame {
         ));
         jScrollPane2.setViewportView(jTCuartelCercano);
 
-        jDesktopPane1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 40, 630, -1));
+        jDesktopPane1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 300, 630, -1));
 
         jBValidar.setText("Validar ");
         jBValidar.addActionListener(new java.awt.event.ActionListener() {
@@ -279,11 +283,19 @@ public class GestionarSiniestros extends javax.swing.JInternalFrame {
         });
         jDesktopPane1.add(jBValidar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 190, -1, -1));
 
+        jLabel18.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(51, 255, 204));
+        jLabel18.setText("BUSCAR SINIESTRO");
+        jDesktopPane1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 10, -1, -1));
+        jDesktopPane1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 192, 640, 10));
+        jDesktopPane1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 492, 520, 0));
+        jDesktopPane1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 490, 500, 30));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1258, Short.MAX_VALUE)
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1383, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -822,6 +834,7 @@ public class GestionarSiniestros extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -834,6 +847,9 @@ public class GestionarSiniestros extends javax.swing.JInternalFrame {
     private javax.swing.JSpinner jSPuntaje;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTextField jTCoord_X;
     private javax.swing.JTextField jTCoord_Y;
     private javax.swing.JTable jTCuartelCercano;

@@ -36,6 +36,11 @@ public class Bombero {
         this.estado = estado;
     }
 
+    public Bombero(boolean ocupado) {
+        this.ocupado = ocupado;
+    }
+    
+
     public Bombero() {
     }
 
