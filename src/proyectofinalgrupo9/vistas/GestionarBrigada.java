@@ -352,23 +352,23 @@ public class GestionarBrigada extends javax.swing.JInternalFrame {
     
     private void jBModificarBrigadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBModificarBrigadaActionPerformed
 
+            String id = jTBuscarID.getText();
+            String nombre = jTNombreDeBrigada.getText();
+            Especialidades especial;
+            especial = (Especialidades)jCEspecialidades.getSelectedItem();
+            
+            CuartelDeBomberos nro_cuartel = (CuartelDeBomberos) jCSeleccionarCuartel1.getSelectedItem();
+            Boolean estado = (Boolean) jCEstado.isSelected();
+            
+            if(id.isEmpty() || nombre.isEmpty() || especial == null || nro_cuartel == null || estado == null){
+            
+                JOptionPane.showMessageDialog(null, "Por favor complete todos los campos");
+            
+            }else{
+        
        try{
 
-            int cod= Integer.parseInt(jTBuscarID.getText());
-            String nombre = jTNombreDeBrigada.getText();
-
-            Especialidades especial = (Especialidades) jCEspecialidades.getSelectedItem();
-
-
-            CuartelDeBomberos nro_cuartel = (CuartelDeBomberos) jCSeleccionarCuartel1.getSelectedItem();
-            Boolean estado= (Boolean) jCEstado.isSelected();
-
-            if(cod ==0 || nombre.isEmpty() || jCEspecialidades.getSelectedIndex() == -1 || jCSeleccionarCuartel1.getSelectedIndex()== -1 || estado==false){
-
-                JOptionPane.showMessageDialog(this, "Por favor complete todos los datos.");
-                
-                return;
-            }
+            int cod= Integer.parseInt(id);
             
             Brigada bl = new Brigada(cod, nombre, especial, nro_cuartel, estado);
 
@@ -382,7 +382,7 @@ public class GestionarBrigada extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Error al modificar Brigada" + ex);
 
         }
-
+      }
     }//GEN-LAST:event_jBModificarBrigadaActionPerformed
 
     // ------------ ARMAR CABECERA ------------

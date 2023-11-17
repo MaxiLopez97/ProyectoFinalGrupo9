@@ -224,7 +224,7 @@ public class GestionarCuartel extends javax.swing.JInternalFrame {
                 cargarTabla();
 
             } else {
-                JOptionPane.showMessageDialog(this, "No seleccionaste ningun cuartel");
+                JOptionPane.showMessageDialog(this, "No seleccionó ningún Cuartel para Borrar");
             }
 
 //         
@@ -264,7 +264,7 @@ public class GestionarCuartel extends javax.swing.JInternalFrame {
             limpiarTabla();
             cargarTabla();
         } catch (ArrayIndexOutOfBoundsException ex) {
-            JOptionPane.showMessageDialog(this, "No se ha modificado el Cuartel" + ex);
+            JOptionPane.showMessageDialog(this, "Por favor asegúrese de haber modificado el Cuartel");
         }
     }//GEN-LAST:event_jBModificarActionPerformed
 

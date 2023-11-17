@@ -226,7 +226,7 @@ public class GestionarBombero extends javax.swing.JInternalFrame {
 
         } catch (NumberFormatException ex) {
             
-            JOptionPane.showMessageDialog(this, "Debe ingresar un numero valido" + ex);
+            JOptionPane.showMessageDialog(this, "Debe ingresar un DNI valido");
 
         }
         
@@ -239,28 +239,38 @@ public class GestionarBombero extends javax.swing.JInternalFrame {
 
 // GUARDAR
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
-
-        try {
+            
             String dni = jTDocumento.getText();
             String nombre = jTNombre.getText();
             String apellido = jTApellido.getText();
 
             java.util.Date fecha_nacimiento = jDateFecha.getDate();
-            LocalDate fecha_nac = fecha_nacimiento.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            
+            LocalDate fecha_nac = null;
+            
+            if (fecha_nacimiento != null) {
+                
+            fecha_nac = fecha_nacimiento.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            
+            } 
+            
             String celular = jTNumeroDeCelular.getText();
             Brigada brigada = (Brigada) jCCodigoDeBrigada.getSelectedItem();
             Boolean estado = jCActivo.isSelected();
-
-            if (dni.isEmpty() ||  nombre.isEmpty() ||  apellido.isEmpty() ||  fecha_nac == null ||  celular.isEmpty() || estado == false) {
+            
+            if (dni.isEmpty() || nombre.isEmpty() ||  apellido.isEmpty() ||  fecha_nac == null ||  celular.isEmpty() || jCCodigoDeBrigada.getSelectedIndex() == -1 || estado == false) {
                 
                 JOptionPane.showMessageDialog(this, "No puede haber campos vacios");
                 
-                return;
-                
-            }
-
+            }else {
+        
+        try {
+            
+            
             int codBrigada = brigada.getCodBrigada();
+            
             int count = 0;
+            
             ArrayList<Bombero> bomberos = (ArrayList<Bombero>) bomberoData.listarBomberos();
 
             for (Bombero bombero : bomberos) {
@@ -277,8 +287,24 @@ public class GestionarBombero extends javax.swing.JInternalFrame {
                 return;
                 
             }
-
+            
+            // --------- COMPARAR DNI DUPLICADO --------- 
+            
             if (bomberoNew == null) {
+                
+                for(Bombero b : bomberoData.listarBomberos()){
+                
+                    if(dni.equals(b.getDni())){
+                    
+                        JOptionPane.showMessageDialog(null, "El DNI que desea cargar ya está repetido");
+                        
+                        limpiarDni();
+                        
+                        return;
+                    
+                    }
+                
+                }
                 
                 bomberoNew = new Bombero(dni, nombre, apellido, fecha_nac, celular, brigada, estado);
                 
@@ -292,34 +318,43 @@ public class GestionarBombero extends javax.swing.JInternalFrame {
 
         } catch (NumberFormatException ex) {
             
-            JOptionPane.showMessageDialog(this, "error: " + ex);
+            JOptionPane.showMessageDialog(this, "error: ");
 
         }
-
+        
+       }
+      
     }//GEN-LAST:event_jBGuardarActionPerformed
 
     //MODIFICAR
     
     private void jBModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBModificarActionPerformed
 
-        try {
-
                 String dni = jTDocumento.getText();
                 String nombre = jTNombre.getText();
                 String apellido = jTApellido.getText();
 
                 java.util.Date fecha_nacimiento = jDateFecha.getDate();
-                LocalDate fecha_nac = fecha_nacimiento.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            
+                LocalDate fecha_nac = null;
+            
+                if (fecha_nacimiento != null) {
                 
+                fecha_nac = fecha_nacimiento.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            
+                } 
                 
                 String celular = jTNumeroDeCelular.getText();
                 Brigada brigada = (Brigada) jCCodigoDeBrigada.getSelectedItem();
                 
                 if(dni.isEmpty() || nombre.isEmpty() || apellido.isEmpty() || fecha_nac == null || celular.isEmpty() || brigada == null){
                 
-                    JOptionPane.showMessageDialog(null, "Complete los datos por favor: ");
+                    JOptionPane.showMessageDialog(null, "No se pudo modificar el Bombero por favor corrobore los datos ingresados");
                     
-                }
+                }else{
+        
+        try {
+           
                 
                 Bombero bomb = new Bombero(dni, nombre, apellido, fecha_nac, celular, brigada, true);
                 bomberoData.modificarBombero(bomb);
@@ -330,10 +365,10 @@ public class GestionarBombero extends javax.swing.JInternalFrame {
 
         } catch (ArrayIndexOutOfBoundsException ex) {
             
-            JOptionPane.showMessageDialog(this, "No se ha modificado el Bombero" + ex);
+            JOptionPane.showMessageDialog(this, "No se ha modificado el Bombero");
 
         }
-        
+      }
     }//GEN-LAST:event_jBModificarActionPerformed
     //BORRAR
     private void jBBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBorrarActionPerformed
@@ -345,6 +380,7 @@ public class GestionarBombero extends javax.swing.JInternalFrame {
             if(jTDocumento.getText().isEmpty()){
             
                 JOptionPane.showMessageDialog(null, "Ingrese un DNI por favor");
+                limpiarDni();
                 return;
             }
             
@@ -374,6 +410,12 @@ public class GestionarBombero extends javax.swing.JInternalFrame {
         jTNumeroDeCelular.setText("");
         jCCodigoDeBrigada.setSelectedIndex(-1);
         jCActivo.setSelected(false);
+    }
+    
+    public void limpiarDni(){
+    
+        jTDocumento.setText("");
+    
     }
 
     private void llenarCombo() {

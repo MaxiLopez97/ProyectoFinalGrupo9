@@ -11,7 +11,6 @@ import proyectofinalgrupo9.ClasesEntidades.Brigada;
 
 public class ConsultarBrigada extends javax.swing.JInternalFrame {
     
-    private ArrayList<Bombero> bombero;
     private ArrayList<Brigada> brigada;
     private BomberoData bomberoD = new BomberoData();
     private BrigadaData brigadaD = new BrigadaData();
@@ -22,7 +21,38 @@ public class ConsultarBrigada extends javax.swing.JInternalFrame {
 
         initComponents();
         
-        modelo = new DefaultTableModel();
+        modelo = new DefaultTableModel(){
+            @Override
+            public boolean isCellEditable(int f, int c) {
+                if (c == 0) {
+                    return false;
+                }
+                
+                if(f == 1){
+                
+                    return false;
+                
+                }
+                
+                if(f == 2){
+                
+                    return false;
+                
+                }
+                
+                if(f == 3){
+                
+                    return false;
+                    
+                }
+
+                if (c == 4) {
+
+                    return false;
+                }
+                return true;
+            }
+        };
         
         brigada = (ArrayList<Brigada>) brigadaD.listarBrigada();
         
@@ -54,8 +84,8 @@ public class ConsultarBrigada extends javax.swing.JInternalFrame {
         escritorio.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel1.setText("CONSULTAR BRIGADA");
-        escritorio.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 20, -1, -1));
+        jLabel1.setText("CONSULTAR BOMBEROS EN BRIGADAS");
+        escritorio.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, -1, -1));
 
         jLabel2.setText("Seleccionar Brigada :");
         escritorio.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, -1, -1));
@@ -75,10 +105,15 @@ public class ConsultarBrigada extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jBomberos);
 
-        escritorio.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 720, -1));
+        escritorio.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 720, -1));
 
         jSalir.setText("Salir");
-        escritorio.add(jSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 620, -1, -1));
+        jSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jSalirActionPerformed(evt);
+            }
+        });
+        escritorio.add(jSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 610, -1, -1));
 
         jBuscar.setText("Buscar");
         jBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -92,13 +127,13 @@ public class ConsultarBrigada extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio)
+            .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 772, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(escritorio))
+                .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 664, Short.MAX_VALUE))
         );
 
         pack();
@@ -125,6 +160,10 @@ public class ConsultarBrigada extends javax.swing.JInternalFrame {
                     modelo.addRow(fila);
                 
                 }
+            }else{
+            
+                JOptionPane.showMessageDialog(null, "Seleccione una Brigada por favor");
+            
             }
         
         }catch(NumberFormatException ex){
@@ -134,6 +173,12 @@ public class ConsultarBrigada extends javax.swing.JInternalFrame {
         }
         
     }//GEN-LAST:event_jBuscarActionPerformed
+
+    private void jSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSalirActionPerformed
+        
+        dispose();
+        
+    }//GEN-LAST:event_jSalirActionPerformed
 
     private void llenarBrigada(){
     

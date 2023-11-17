@@ -17,6 +17,7 @@ public class Brigada {
     private String nombre_br;
     private Especialidades especialidad;
     private CuartelDeBomberos nro_cuartel;
+    private boolean ocupado;
     private boolean estado;
 
     public Brigada(int codBrigada, String nombre_br, Especialidades especialidad, CuartelDeBomberos nro_cuartel, boolean estado) {
@@ -32,6 +33,14 @@ public class Brigada {
         this.especialidad = especialidad;
         this.nro_cuartel = nro_cuartel;
         this.estado = estado;
+    }
+
+    public boolean isOcupado() {
+        return ocupado;
+    }
+
+    public void setOcupado(boolean ocupado) {
+        this.ocupado = ocupado;
     }
 
     public Brigada() {

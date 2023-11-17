@@ -36,7 +36,6 @@ public class Conexion {
                 
                 connection = DriverManager.getConnection(URL + DB, usuario, password);
                 
-                JOptionPane.showMessageDialog(null, "Conectado");
                 
             } catch (ClassNotFoundException ex) {
                 

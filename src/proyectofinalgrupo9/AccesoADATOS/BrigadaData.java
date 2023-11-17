@@ -102,6 +102,49 @@ public class BrigadaData {
         return consultarBrigada;
 
     }
+    
+    public Brigada consultarTodasLasBrigadas(int id){
+    
+        String sql = "SELECT nombre_br, especialidad, nro_cuartel, estado FROM brigada "
+                + " WHERE codBrigada = ?";
+        
+        Brigada consultarBrigada = null;
+
+        try {
+
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ps.setInt(1, id);
+
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs.next()) {
+
+                consultarBrigada = new Brigada();
+
+                consultarBrigada.setCodBrigada(id);
+                consultarBrigada.setNombre_br(rs.getString("nombre_br"));
+                consultarBrigada.setEspecialidad(Especialidades.valueOf(rs.getString("especialidad"))); 
+                int codCuartel1=rs.getInt("nro_cuartel");
+                CuartelDeBomberos cuartel= cd.consultarCuartel(codCuartel1);
+                consultarBrigada.setNro_cuartel(cuartel);
+                consultarBrigada.setEstado(rs.getBoolean("estado"));
+
+            } else {
+
+                JOptionPane.showMessageDialog(null, "No existe el ID de la brigada ingresada.");
+
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla brigada");
+
+        }
+        return consultarBrigada;
+    
+    }
 
     public List<Brigada> listarBrigada() {
 
@@ -145,6 +188,49 @@ public class BrigadaData {
         
         return brigada;
 
+    }
+    
+    public List<Brigada> listarTodasLasBrigadas(){
+    
+        String sql = "SELECT codBrigada, nombre_br, especialidad, nro_cuartel, estado FROM brigada ";
+
+        ArrayList<Brigada> brigada = new ArrayList<>();
+
+        try {
+
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                Brigada brigadas = new Brigada();
+
+                brigadas.setCodBrigada(rs.getInt("codBrigada"));
+                brigadas.setNombre_br(rs.getString("nombre_br"));
+                
+                String especialidadString = rs.getString("especialidad");
+                Especialidades especialidad = Especialidades.valueOf(especialidadString);
+                brigadas.setEspecialidad(especialidad);
+                
+                CuartelData cuartelD = new CuartelData();
+                CuartelDeBomberos cuartel = cuartelD.consultarCuartel(rs.getInt("nro_cuartel"));
+                
+                brigadas.setNro_cuartel(cuartel);
+                brigadas.setEstado(rs.getBoolean("estado"));
+                
+                brigada.add(brigadas);
+
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla brigada" + ex);
+
+        }
+        
+        return brigada;
+    
     }
   
     public void eliminarBrigada(int codBrigada){
@@ -196,7 +282,6 @@ public class BrigadaData {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla brigada");
         
         }
-    
     }
     
     public void brigadaDesocupada(int codBrigada){
@@ -257,7 +342,7 @@ public class BrigadaData {
     
     public List<Brigada> listarBrigadaXCuartel(CuartelDeBomberos cuartel) {
 
-        String sql = "SELECT codBrigada, nombre_br, especialidad FROM brigada"
+        String sql = "SELECT codBrigada, nombre_br, especialidad, estado FROM brigada"
                 + " WHERE nro_cuartel=? ";
 
         ArrayList<Brigada> brigadas = new ArrayList<>();
@@ -278,6 +363,8 @@ public class BrigadaData {
                 String especialidadString = rs.getString("especialidad");
                 Especialidades especialidad = Especialidades.valueOf(especialidadString);
                 brig.setEspecialidad(especialidad);
+                
+                brig.setEstado(rs.getBoolean("estado"));
 
                 brig.setNro_cuartel(cuartel);
 

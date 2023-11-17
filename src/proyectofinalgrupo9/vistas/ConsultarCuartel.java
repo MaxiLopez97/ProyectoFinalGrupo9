@@ -60,10 +60,10 @@ public class ConsultarCuartel extends javax.swing.JInternalFrame {
         escritorio.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel1.setText("CONSULTAR CUARTEL");
-        escritorio.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 30, -1, -1));
+        jLabel1.setText("CONSULTAR BRIGADAS EN CUARTELES");
+        escritorio.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 40, -1, -1));
 
-        jLabel2.setText("Seleccionar cuartel :");
+        jLabel2.setText("Seleccionar Cuartel :");
         escritorio.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, -1, -1));
 
         escritorio.add(jCSeleccionarCuarteles, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, 360, -1));
@@ -84,6 +84,11 @@ public class ConsultarCuartel extends javax.swing.JInternalFrame {
         escritorio.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 170, 660, -1));
 
         jSalir.setText("Salir");
+        jSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jSalirActionPerformed(evt);
+            }
+        });
         escritorio.add(jSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 620, -1, -1));
 
         jBoton.setText("Buscar");
@@ -126,12 +131,16 @@ public class ConsultarCuartel extends javax.swing.JInternalFrame {
                 modeloTabla.setRowCount(0);
 
                 for (Brigada b : listaB) {
-                    Object[] fila = {b.getCodBrigada(), b.getNombre_br(), b.getEspecialidad(), b.getNro_cuartel().getCodCuartel()};
+                    Object[] fila = {b.getCodBrigada(), b.getNombre_br(), b.getEspecialidad(), b.getNro_cuartel().getCodCuartel(), b.isEstado()};
 
                     modelo.addRow(fila);
 
                 }
 
+            }else{
+            
+                JOptionPane.showMessageDialog(null, "Seleccione un cuartel por favor");
+            
             }
 
         } catch (NumberFormatException ex) {
@@ -141,6 +150,12 @@ public class ConsultarCuartel extends javax.swing.JInternalFrame {
         }
         
     }//GEN-LAST:event_jBotonActionPerformed
+
+    private void jSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSalirActionPerformed
+        
+        dispose();
+        
+    }//GEN-LAST:event_jSalirActionPerformed
 
     // ------------ LLENAR CUARTELES ------------
     private void llenarCuartel() {
@@ -162,6 +177,7 @@ public class ConsultarCuartel extends javax.swing.JInternalFrame {
         filaCabecera.add(" Nombre Brigada: ");
         filaCabecera.add(" Especialidad: ");
         filaCabecera.add(" Numero de Cuartel: ");
+        filaCabecera.add(" Estado: ");
 
         for (Object it : filaCabecera) {
 
@@ -173,12 +189,13 @@ public class ConsultarCuartel extends javax.swing.JInternalFrame {
     }
 
     // ------------ LLENAR TABLA ------------
+    
     private void llenarTabla() {
-        ArrayList<Brigada> listaB = (ArrayList<Brigada>) brigadaData.listarBrigada();
+        ArrayList<Brigada> listaB = (ArrayList<Brigada>) brigadaData.listarTodasLasBrigadas();
 
         for (Brigada a : listaB) {
 
-            modelo.addRow(new Object[]{a.getCodBrigada(), a.getNombre_br(), a.getEspecialidad(), a.getNro_cuartel().getCodCuartel()});
+            modelo.addRow(new Object[]{a.getCodBrigada(), a.getNombre_br(), a.getEspecialidad(), a.getNro_cuartel().getCodCuartel(), a.isEstado()});
 
         }
 

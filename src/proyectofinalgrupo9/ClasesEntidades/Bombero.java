@@ -12,6 +12,7 @@ public class Bombero {
     private LocalDate fecha_nac;
     private String celular;
     private Brigada codBrigada;
+    private boolean ocupado;
     private boolean estado;
 
     public Bombero(int id_Bombero, String dni, String nombre, String apellido, LocalDate fecha_nac, String celular, Brigada codBrigada, boolean estado) {
@@ -36,6 +37,14 @@ public class Bombero {
     }
 
     public Bombero() {
+    }
+
+    public boolean isOcupado() {
+        return ocupado;
+    }
+
+    public void setOcupado(boolean ocupado) {
+        this.ocupado = ocupado;
     }
 
     public int getId_Bombero() {

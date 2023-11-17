@@ -442,6 +442,7 @@ public class GestionarSiniestros extends javax.swing.JInternalFrame {
             
             int indice = jCSiniestros.getSelectedIndex();
             
+            
             if(indice > -1){
             
                 Siniestros siniestro = (Siniestros) jCSiniestros.getSelectedItem();
@@ -465,23 +466,32 @@ public class GestionarSiniestros extends javax.swing.JInternalFrame {
     // ------------ GUARDAR SINIESTRO RESUELTO ------------ 
     
     private void jbGuardarSiniestroResueltoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarSiniestroResueltoActionPerformed
-        
-        try{
             
-            Integer codigo = Integer.parseInt(jtCodigoSiniestro.getText());
             
+            String c = jtCodigoSiniestro.getText();
+    
             java.util.Date fecha_nacimiento = jDFresolucionS.getDate();
-            LocalDate fecha_nac = fecha_nacimiento.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            LocalDate fecha_nac = null;
+            
+            if(fecha_nacimiento != null){
+            
+                fecha_nac = fecha_nacimiento.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            
+            }
             
             int puntaje = (int) jSPuntaje.getValue();
             boolean realizado = jCRealizado.isSelected();
             
-            if(codigo == 0 || jDFresolucionS == null || puntaje == 0 || realizado == false){
+            if(c.isEmpty() || fecha_nac == null || puntaje == 0 || realizado == false){
             
                 JOptionPane.showMessageDialog(null, "Por favor complete todos los campos");
                 return;
             
-            }
+            }else{
+        
+        try{
+           
+            int codigo = Integer.parseInt(c);
             
             if(puntaje < 1){
             
@@ -519,7 +529,7 @@ public class GestionarSiniestros extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Por favor complete todos los campos");
             
         }
-        
+      }
     }//GEN-LAST:event_jbGuardarSiniestroResueltoActionPerformed
 
     // ------------ MODIFICAR ------------
@@ -569,7 +579,7 @@ public class GestionarSiniestros extends javax.swing.JInternalFrame {
         
         }catch(NullPointerException ex){
         
-            JOptionPane.showMessageDialog(null, "El siniestro no existe");
+            JOptionPane.showMessageDialog(null, "No puede haber campos vacíos");
         
         }
         
@@ -577,6 +587,7 @@ public class GestionarSiniestros extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jModificarActionPerformed
 
     private void jBValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBValidarActionPerformed
+        
         
         if (modelo.getColumnCount() != 8) {
             modelo.setColumnCount(8);
@@ -587,11 +598,22 @@ public class GestionarSiniestros extends javax.swing.JInternalFrame {
         Double[] distancias = new Double[cuarteles.size()];
 
         ArrayList<CuartelDeBomberos> cuartelesCercanos = new ArrayList<>();
+        
+        String textCoordX = jTCoord_X.getText();
+        String textCoordY = jTCoord_Y.getText();
+        
+        if(textCoordX.isEmpty() && textCoordY.isEmpty()){
+        
+            JOptionPane.showMessageDialog(null, "Ingrese las coordenadas por favor");
+        
+        } else {
 
-        int coordX1 = Integer.parseInt(jTCoord_X.getText());
-        int coordY1 = Integer.parseInt(jTCoord_Y.getText());
-
-        for(int i = 0; i < cuarteles.size() + cuartelesCercanos.size(); i++){
+        try{
+        
+            int coordX1 = Integer.parseInt(textCoordX);
+            int coordY1 = Integer.parseInt(textCoordY);
+            
+            for(int i = 0; i < cuarteles.size() + cuartelesCercanos.size(); i++){
 
             double menor = Double.MAX_VALUE;
 
@@ -628,8 +650,15 @@ public class GestionarSiniestros extends javax.swing.JInternalFrame {
 
         jBGuardar.setEnabled(true);
         
+        //limpiarCampos(); --- LO DEJO COMENTADO POR SI HAY QUE CALCULAR LA DISTANCIA
+            
+        }catch (NumberFormatException ex){}
+        
     }//GEN-LAST:event_jBValidarActionPerformed
- 
+    }
+    
+    
+    
     // ------------ LIMPIAR CAMPOS ------------
     
     public void limpiarCampos() {
