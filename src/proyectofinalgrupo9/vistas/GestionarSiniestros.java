@@ -639,6 +639,9 @@ public class GestionarSiniestros extends javax.swing.JInternalFrame {
 
                 int coordX2 = c.getCoord_X();
                 int coordY2 = c.getCoord_Y();
+                
+                // Ésta fórmula calcula la distancia entre dos puntos en un plano carteseano
+                // utilizando el teorema de Pitágoras.
 
                 double resultado = Math.sqrt(Math.pow(coordX2 - coordX1, 2) + Math.pow(coordY2 - coordY1, 2));
 
