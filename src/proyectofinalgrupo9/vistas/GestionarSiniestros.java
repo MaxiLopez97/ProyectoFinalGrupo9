@@ -1,5 +1,6 @@
 package proyectofinalgrupo9.vistas;
 
+import java.awt.Point;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -11,26 +12,52 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import proyectofinalgrupo9.AccesoADATOS.BrigadaData;
+import proyectofinalgrupo9.AccesoADATOS.CuartelData;
 import proyectofinalgrupo9.AccesoADATOS.SiniestrosData;
 import proyectofinalgrupo9.ClasesEntidades.Brigada;
+import proyectofinalgrupo9.ClasesEntidades.CuartelDeBomberos;
 import proyectofinalgrupo9.ClasesEntidades.Siniestros;
 
 public class GestionarSiniestros extends javax.swing.JInternalFrame {
 
+    private CuartelData cuartel = new CuartelData();
+    private CuartelData cuartel1;
+    private CuartelDeBomberos cuartelActual = null;
+    private List<CuartelDeBomberos> lista;
     private Siniestros siniestro = null;
     private Brigada brigada = null;
     private SiniestrosData sin = new SiniestrosData();
     private BrigadaData brig = new BrigadaData();
+    private DefaultTableModel modelo;
     
     
     public GestionarSiniestros() {
         
         initComponents();
+        
+        cuartel1 = new CuartelData();
+        lista = cuartel1.listarCuarteles();
+        
+        modelo = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int f, int c) {
+                if (c == 0) {
+                    return false;
+                }
 
+                if (c == 7) {
+
+                    return false;
+                }
+                return true;
+            }
+        };
         
         llenarBrigada();
         llenarSiniestros();
         llenarRegistroS();
+        cabecera();
+        cargarTabla();
         
         jCAsignarBrigada.setSelectedIndex(-1);
         jCSeleccionarSiniestro.setSelectedIndex(-1);
@@ -82,6 +109,10 @@ public class GestionarSiniestros extends javax.swing.JInternalFrame {
         jModificar = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
         jTID = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTCuartelCercano = new javax.swing.JTable();
+        jBValidar = new javax.swing.JButton();
 
         setClosable(true);
 
@@ -114,6 +145,7 @@ public class GestionarSiniestros extends javax.swing.JInternalFrame {
         jDesktopPane1.add(jTCoord_Y, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 220, 260, -1));
 
         jBGuardar.setText("Guardar");
+        jBGuardar.setEnabled(false);
         jBGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBGuardarActionPerformed(evt);
@@ -139,9 +171,9 @@ public class GestionarSiniestros extends javax.swing.JInternalFrame {
                 jBBorrarActionPerformed(evt);
             }
         });
-        jDesktopPane1.add(jBBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 450, -1, -1));
+        jDesktopPane1.add(jBBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 450, -1, -1));
 
-        jDesktopPane1.add(jCAsignarBrigada, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 360, 247, -1));
+        jDesktopPane1.add(jCAsignarBrigada, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 360, 340, -1));
 
         jLabel14.setText("Brigada:");
         jDesktopPane1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 360, -1, -1));
@@ -152,7 +184,7 @@ public class GestionarSiniestros extends javax.swing.JInternalFrame {
                 jBSalirActionPerformed(evt);
             }
         });
-        jDesktopPane1.add(jBSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 450, -1, -1));
+        jDesktopPane1.add(jBSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 450, -1, -1));
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -219,11 +251,39 @@ public class GestionarSiniestros extends javax.swing.JInternalFrame {
         jDesktopPane1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(371, 120, 20, 30));
         jDesktopPane1.add(jTID, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 120, 40, 30));
 
+        jLabel17.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(51, 255, 204));
+        jLabel17.setText("CUARTELES MÁS CERCANOS");
+        jDesktopPane1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 0, -1, -1));
+
+        jTCuartelCercano.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTCuartelCercano);
+
+        jDesktopPane1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 40, 630, -1));
+
+        jBValidar.setText("Validar ");
+        jBValidar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBValidarActionPerformed(evt);
+            }
+        });
+        jDesktopPane1.add(jBValidar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 190, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1258, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -331,13 +391,11 @@ public class GestionarSiniestros extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_jBBorrarActionPerformed
 
-    // ------------ MODIFICAR ------------
+    // ------------ BUSCAR ------------ 
     
     private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
         
         try{
-            
-            
             
             int indice = jCSeleccionarSiniestro.getSelectedIndex();
             
@@ -356,20 +414,18 @@ public class GestionarSiniestros extends javax.swing.JInternalFrame {
 
                 jTextArea1.setText(siniestros.getDetalles());
                 
-                jTID.setText(String.valueOf(siniestro.getCodBrigada().getCodBrigada()));
-
+                jTID.setText(String.valueOf(siniestros.getCodigo()));
+                
                 jCEstadoSiniestro1.setSelected(siniestros.isEstado());
                 
                 siniestro = null;
                 
-            
             }else{
             
                 JOptionPane.showMessageDialog(null, "Seleccione un Siniestro por favor");
             
             }
 
-        
         }catch(NullPointerException ex){
         
             JOptionPane.showMessageDialog(null, "El siniestro no existe" + ex);
@@ -434,7 +490,7 @@ public class GestionarSiniestros extends javax.swing.JInternalFrame {
             
             }
             
-            if(puntaje >= 10){
+            if(puntaje > 10){
             
                 JOptionPane.showMessageDialog(null, "Ingrese un número menor o igual a 10");
                 
@@ -469,9 +525,120 @@ public class GestionarSiniestros extends javax.swing.JInternalFrame {
     // ------------ MODIFICAR ------------
     
     private void jModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jModificarActionPerformed
+    
+        try{
+        
+            String tipo = jTTipoDeSiniestro.getText();
+            
+            java.util.Date fecha = jDFecha.getDate();
+            Instant instant = fecha.toInstant();
+            LocalDateTime fecha_a = instant.atZone(ZoneId.systemDefault()).toLocalDateTime();
+            DateTimeFormatter form = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            String fechh = fecha_a.format(form);
+            LocalDateTime fecha_nacim = LocalDateTime.parse(fechh, form);
+            
+            int codigo = Integer.parseInt(jTID.getText());
+            
+            Integer coord_X = Integer.parseInt(jTCoord_X.getText());
+            Integer coord_Y = Integer.parseInt(jTCoord_Y.getText());
+            
+            String detalles = jTextArea1.getText();
+            
+            Brigada brigada = (Brigada) jCAsignarBrigada.getSelectedItem();
+            
+            Boolean estado = jCEstadoSiniestro1.isSelected();
+            
+            if(tipo.isEmpty() || fecha_nacim == null || coord_X == null || coord_Y == null || detalles.isEmpty() || jCAsignarBrigada.getSelectedIndex() == -1 || estado == false){
+            
+                JOptionPane.showMessageDialog(null, "No puede haber campos vacíos");
+                
+                return;
+            }
+            
+            if(siniestro == null){
+            
+                siniestro = new Siniestros(codigo, tipo, fecha_nacim, coord_X, coord_Y, detalles, brigada, estado);
+                
+                sin.modificarSiniestro(siniestro);
+                
+                limpiarCampos();
+                
+                siniestro = null;
+            
+            }
+        
+        }catch(NullPointerException ex){
+        
+            JOptionPane.showMessageDialog(null, "El siniestro no existe");
+        
+        }
         
         
     }//GEN-LAST:event_jModificarActionPerformed
+
+    private void jBValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBValidarActionPerformed
+        
+        ArrayList<CuartelDeBomberos> cuarteles = (ArrayList<CuartelDeBomberos>) cuartel.listarCuarteles();
+        
+        ArrayList<CuartelDeBomberos> cuartelesCercanos = new ArrayList<>();
+        
+        int coordX = Integer.parseInt(jTCoord_X.getText());
+        int coordY = Integer.parseInt(jTCoord_Y.getText());
+        
+        int suma = coordX + coordY;
+        
+        for(int i = 0; i < cuarteles.size() + cuartelesCercanos.size(); i++){
+        
+            int menor = Integer.MAX_VALUE;
+            
+            CuartelDeBomberos cuartelCercano = null;
+            
+            for(CuartelDeBomberos c : cuarteles){
+            
+                int coordenadaX = c.getCoord_X();
+                int coordenadaY = c.getCoord_Y();
+                
+                int suma2 = coordenadaX + coordenadaY;
+                
+                int resultado;
+                
+                if(suma2 > suma){
+                
+                    resultado = suma2 - suma;
+                
+                }else{
+                
+                    resultado = suma - suma2;
+                
+                }
+            
+                if(resultado < menor){
+                
+                    menor = resultado;
+                    
+                    cuartelCercano = c;
+                    
+                }
+                
+            }
+        
+            cuartelesCercanos.add(cuartelCercano);
+            
+            cuarteles.remove(cuartelCercano);
+            
+        }
+        
+        modelo.setRowCount(0);
+        
+        for(CuartelDeBomberos c : cuartelesCercanos){
+        
+            modelo.addRow(new Object[]{c.getCodCuartel(), c.getNombre_cuartel(), c.getDireccion(), c.getCoord_X(), c.getCoord_Y(), c.getTelefono(), c.getCorreo(), true});
+        
+        }
+        
+        jBGuardar.setEnabled(true);
+        
+    }//GEN-LAST:event_jBValidarActionPerformed
  
     // ------------ LIMPIAR CAMPOS ------------
     
@@ -564,11 +731,60 @@ public class GestionarSiniestros extends javax.swing.JInternalFrame {
     
     }
     
+    // ------------ LIMPIAR TABLA ------------
+    
+    private void limpiarTabla() {
+
+        modelo.setRowCount(0);
+    }
+    
+    private void cabecera() {
+
+        ArrayList<Object> filaCabecera = new ArrayList<>();
+        filaCabecera.add(" ID:");
+        filaCabecera.add(" Nombre: ");
+        filaCabecera.add(" Direccion: ");
+        filaCabecera.add(" Coordenada X: ");
+        filaCabecera.add(" Coordenada Y: ");
+        filaCabecera.add(" Telefono: ");
+        filaCabecera.add(" Correo: ");
+        filaCabecera.add(" Estado: ");
+
+        for (Object it : filaCabecera) {
+
+            modelo.addColumn(it);
+
+        }
+        jTCuartelCercano.setModel(modelo);
+
+    }
+    
+    // ------------ CARGAR TABLA ------------
+    
+    private void cargarTabla() {
+
+        List<CuartelDeBomberos> lista = cuartel1.listarCuarteles();
+        for (CuartelDeBomberos a : lista) {
+            modelo.addRow(new Object[]{
+                a.getCodCuartel(),
+                a.getNombre_cuartel(),
+                a.getDireccion(),
+                a.getCoord_X(),
+                a.getCoord_Y(),
+                a.getTelefono(),
+                a.getCorreo(),
+                a.isEstado()
+            });
+        }
+
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBBorrar;
     private javax.swing.JButton jBBuscar;
     private javax.swing.JButton jBGuardar;
     private javax.swing.JButton jBSalir;
+    private javax.swing.JButton jBValidar;
     private javax.swing.JButton jBuscarr;
     private javax.swing.JComboBox<Brigada> jCAsignarBrigada;
     private javax.swing.JCheckBox jCEstadoSiniestro1;
@@ -586,6 +802,7 @@ public class GestionarSiniestros extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -597,8 +814,10 @@ public class GestionarSiniestros extends javax.swing.JInternalFrame {
     private javax.swing.JButton jModificar;
     private javax.swing.JSpinner jSPuntaje;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTCoord_X;
     private javax.swing.JTextField jTCoord_Y;
+    private javax.swing.JTable jTCuartelCercano;
     private javax.swing.JTextField jTID;
     private javax.swing.JTextField jTTipoDeSiniestro;
     private javax.swing.JTextArea jTextArea1;

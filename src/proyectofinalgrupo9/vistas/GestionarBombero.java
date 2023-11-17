@@ -118,6 +118,11 @@ public class GestionarBombero extends javax.swing.JInternalFrame {
         jLabel8.setText("Brigada:");
         jDesktopPane1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 350, 80, -1));
 
+        jCCodigoDeBrigada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCCodigoDeBrigadaActionPerformed(evt);
+            }
+        });
         jDesktopPane1.add(jCCodigoDeBrigada, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 350, 300, -1));
 
         jBModificar.setText("Modificar");
@@ -247,8 +252,11 @@ public class GestionarBombero extends javax.swing.JInternalFrame {
             Boolean estado = jCActivo.isSelected();
 
             if (dni.isEmpty() ||  nombre.isEmpty() ||  apellido.isEmpty() ||  fecha_nac == null ||  celular.isEmpty() || estado == false) {
+                
                 JOptionPane.showMessageDialog(this, "No puede haber campos vacios");
+                
                 return;
+                
             }
 
             int codBrigada = brigada.getCodBrigada();
@@ -307,9 +315,17 @@ public class GestionarBombero extends javax.swing.JInternalFrame {
                 String celular = jTNumeroDeCelular.getText();
                 Brigada brigada = (Brigada) jCCodigoDeBrigada.getSelectedItem();
                 
+                if(dni.isEmpty() || nombre.isEmpty() || apellido.isEmpty() || fecha_nac == null || celular.isEmpty() || brigada == null){
+                
+                    JOptionPane.showMessageDialog(null, "Complete los datos por favor: ");
+                    
+                }
+                
                 Bombero bomb = new Bombero(dni, nombre, apellido, fecha_nac, celular, brigada, true);
                 bomberoData.modificarBombero(bomb);
                 limpiarCampos();
+                
+                bomberoNew = null;
 
 
         } catch (ArrayIndexOutOfBoundsException ex) {
@@ -343,6 +359,10 @@ public class GestionarBombero extends javax.swing.JInternalFrame {
         }
         
     }//GEN-LAST:event_jBBorrarActionPerformed
+
+    private void jCCodigoDeBrigadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCCodigoDeBrigadaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCCodigoDeBrigadaActionPerformed
 
     // LIMPIAR CAMPOS
     public void limpiarCampos() {

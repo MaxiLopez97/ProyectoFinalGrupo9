@@ -108,7 +108,7 @@ public class BrigadaData {
         String sql = "SELECT codBrigada, nombre_br, especialidad, nro_cuartel FROM brigada "
                 + " WHERE estado = 1";
 
-        ArrayList<Brigada> brigada = new ArrayList();
+        ArrayList<Brigada> brigada = new ArrayList<>();
 
         try {
 
@@ -142,6 +142,7 @@ public class BrigadaData {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla brigada" + ex);
 
         }
+        
         return brigada;
 
     }
@@ -172,10 +173,62 @@ public class BrigadaData {
     
     }
     
+    public void brigadaOcupada(int codBrigada){
+    
+        String sql = "UPDATE brigada SET ocupado = 0 WHERE codBrigada = ?";
+        
+        try{
+        
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            ps.setInt(1,codBrigada);
+            
+            int ocupado = ps.executeUpdate();
+            
+            if(ocupado == 1){
+            
+                JOptionPane.showMessageDialog(null, "Brigada en camino al Siniestro");
+            
+            }
+        
+        }catch(SQLException ex){
+        
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla brigada");
+        
+        }
+    
+    }
+    
+    public void brigadaDesocupada(int codBrigada){
+    
+        String sql = "UPDATE brigada set ocupado = 1 WHERE codBrigada = ?";
+        
+        try{
+        
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            ps.setInt(1, codBrigada);
+            
+            int desocupado = ps.executeUpdate();
+            
+            if(desocupado == 1){
+            
+                JOptionPane.showMessageDialog(null, "Brigada desocupada");
+            
+            }
+        
+        }catch(SQLException ex){
+        
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla brigada");
+        
+        }
+    
+    }
+    
     public void modificarBrigada(Brigada brigada){
         
-        String sql = "UPDATE brigada SET nombre_br = ? especialidad = ?, nro_cuartel = ? "
-                + "WHERE codBrigada = ? AND estado = 1";
+        String sql = "UPDATE brigada SET nombre_br = ?, especialidad = ?, nro_cuartel = ? "
+                + "WHERE codBrigada = ?";
         
         try{
         
@@ -184,8 +237,7 @@ public class BrigadaData {
             ps.setString(1, brigada.getNombre_br());
             ps.setString(2, brigada.getEspecialidad().name());
             ps.setInt(3, brigada.getNro_cuartel().getCodCuartel());
-            ps.setBoolean(4, brigada.isEstado());
-            ps.setInt(5, brigada.getCodBrigada());
+            ps.setInt(4, brigada.getCodBrigada());
             
             int modificar = ps.executeUpdate();
             
@@ -197,7 +249,7 @@ public class BrigadaData {
             
         }catch(SQLException ex) {
             
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Brigada");
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Brigada" + ex);
             
         }
             

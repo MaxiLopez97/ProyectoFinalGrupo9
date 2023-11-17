@@ -145,6 +145,8 @@ public class BomberoData {
 
         return bombero;
     }
+    
+    // -------- LISTAR BOMBEROS --------
 
     public List<Bombero> listarBomberos() {
         String sql = "SELECT id_Bombero, dni, nombre, apellido, fecha_nac, celular, codBrigada FROM bombero "

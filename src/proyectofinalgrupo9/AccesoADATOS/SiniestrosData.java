@@ -11,10 +11,6 @@ import proyectofinalgrupo9.ClasesEntidades.Brigada;
 import proyectofinalgrupo9.ClasesEntidades.CuartelDeBomberos;
 import proyectofinalgrupo9.ClasesEntidades.Siniestros;
 
-/**
- *
- * @author NAHUEL
- */
 public class SiniestrosData {
 
     private Connection con = null;
@@ -269,21 +265,21 @@ public class SiniestrosData {
     
     public void modificarSiniestro(Siniestros siniestro){
         
-        String sql = "UPDATE siniestro SET codigo = ?, tipo = ?, fecha_siniestro = ?, coord_X = ?, coord_Y = ?, detalles = ?, codBrigada = ? "
-                + "WHERE estado = 1";
+        String sql = "UPDATE siniestro SET tipo = ?, fecha_siniestro = ?, coord_X = ?, coord_Y = ?, detalles = ?, codBrigada = ? "
+                + " WHERE codigo = ? AND estado = 1";
         
         try{
             
             PreparedStatement ps = con.prepareStatement(sql);
             
-            ps.setInt(1, siniestro.getCodigo());
-            ps.setString(2, siniestro.getTipo());
-            ps.setTimestamp(3, Timestamp.valueOf(siniestro.getFecha_siniestro()));
-            ps.setInt(4, siniestro.getCoord_X());
-            ps.setInt(5, siniestro.getCoord_Y());
-            ps.setString(6, siniestro.getDetalles());
-            ps.setInt(7, siniestro.getCodBrigada().getCodBrigada());
-            ps.setBoolean(8, siniestro.isEstado());
+            
+            ps.setString(1, siniestro.getTipo());
+            ps.setTimestamp(2, Timestamp.valueOf(siniestro.getFecha_siniestro()));
+            ps.setInt(3, siniestro.getCoord_X());
+            ps.setInt(4, siniestro.getCoord_Y());
+            ps.setString(5, siniestro.getDetalles());
+            ps.setInt(6, siniestro.getCodBrigada().getCodBrigada());
+            ps.setInt(7, siniestro.getCodigo());
             
             int modificar = ps.executeUpdate();
             

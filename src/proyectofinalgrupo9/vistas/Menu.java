@@ -40,12 +40,15 @@ public class Menu extends javax.swing.JFrame {
         jMGestionarBombero = new javax.swing.JMenuItem();
         jSiniestros = new javax.swing.JMenu();
         jMGestionarSiniestro = new javax.swing.JMenuItem();
-        jDistancias1 = new javax.swing.JMenu();
+        jConsulta = new javax.swing.JMenu();
+        jCCuarteles = new javax.swing.JMenuItem();
+        jCBrigadas = new javax.swing.JMenuItem();
+        jCSiniestros = new javax.swing.JMenuItem();
+        jSalir = new javax.swing.JMenu();
 
         jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(606, 500));
         setSize(new java.awt.Dimension(500, 500));
 
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
@@ -114,18 +117,51 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuBar1.add(jSiniestros);
 
-        jDistancias1.setText("Salir");
-        jDistancias1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jConsulta.setText("Consultas");
+        jConsulta.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jDistancias1MouseClicked(evt);
+                jConsultaMouseClicked(evt);
             }
         });
-        jDistancias1.addActionListener(new java.awt.event.ActionListener() {
+        jConsulta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jDistancias1ActionPerformed(evt);
+                jConsultaActionPerformed(evt);
             }
         });
-        jMenuBar1.add(jDistancias1);
+
+        jCCuarteles.setText("Cuarteles");
+        jCCuarteles.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCCuartelesActionPerformed(evt);
+            }
+        });
+        jConsulta.add(jCCuarteles);
+
+        jCBrigadas.setText("Brigadas");
+        jCBrigadas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBrigadasActionPerformed(evt);
+            }
+        });
+        jConsulta.add(jCBrigadas);
+
+        jCSiniestros.setText("Siniestros");
+        jCSiniestros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCSiniestrosActionPerformed(evt);
+            }
+        });
+        jConsulta.add(jCSiniestros);
+
+        jMenuBar1.add(jConsulta);
+
+        jSalir.setText("Salir");
+        jSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jSalirActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(jSalir);
 
         setJMenuBar(jMenuBar1);
 
@@ -183,14 +219,66 @@ public class Menu extends javax.swing.JFrame {
     private void jListarCuartelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jListarCuartelActionPerformed
     }//GEN-LAST:event_jListarCuartelActionPerformed
 
-    private void jDistancias1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDistancias1ActionPerformed
+    private void jConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConsultaActionPerformed
         
-    }//GEN-LAST:event_jDistancias1ActionPerformed
+    }//GEN-LAST:event_jConsultaActionPerformed
 
-    private void jDistancias1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jDistancias1MouseClicked
+    private void jConsultaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jConsultaMouseClicked
+        
+        
+
+    }//GEN-LAST:event_jConsultaMouseClicked
+
+    private void jSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSalirActionPerformed
+        
         dispose();
+        
+    }//GEN-LAST:event_jSalirActionPerformed
 
-    }//GEN-LAST:event_jDistancias1MouseClicked
+    private void jCCuartelesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCCuartelesActionPerformed
+        
+        escritorio.removeAll();
+        escritorio.repaint();
+        
+        ConsultarCuartel cc = new ConsultarCuartel();
+        
+        cc.setVisible(true);
+        
+        cc.getContentPane().setBackground(Color.white);
+        
+        escritorio.add(cc);
+        
+    }//GEN-LAST:event_jCCuartelesActionPerformed
+
+    private void jCBrigadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBrigadasActionPerformed
+        
+        escritorio.removeAll();
+        escritorio.repaint();
+        
+        ConsultarBrigada cb = new ConsultarBrigada();
+        
+        cb.setVisible(true);
+        
+        cb.getContentPane().setBackground(Color.white);
+        
+        escritorio.add(cb);
+        
+    }//GEN-LAST:event_jCBrigadasActionPerformed
+
+    private void jCSiniestrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCSiniestrosActionPerformed
+        
+        escritorio.removeAll();
+        escritorio.repaint();
+        
+        ConsultarSiniestro cs = new ConsultarSiniestro();
+        
+        cs.setVisible(true);
+        
+        cs.getContentPane().setBackground(Color.white);
+        
+        escritorio.add(cs);
+        
+    }//GEN-LAST:event_jCSiniestrosActionPerformed
 //-------------------------------------------------------------------------------------------
 
     public static void main(String args[]) {
@@ -229,7 +317,10 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JDesktopPane escritorio;
     private javax.swing.JMenu jBomberos;
     private javax.swing.JMenu jBrigadas;
-    private javax.swing.JMenu jDistancias1;
+    private javax.swing.JMenuItem jCBrigadas;
+    private javax.swing.JMenuItem jCCuarteles;
+    private javax.swing.JMenuItem jCSiniestros;
+    private javax.swing.JMenu jConsulta;
     private javax.swing.JMenu jListarCuartel;
     private javax.swing.JMenuItem jMGestionarBombero;
     private javax.swing.JMenuItem jMGestionarBrigada;
@@ -237,6 +328,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMGestionarSiniestro;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenu jSalir;
     private javax.swing.JMenu jSiniestros;
     // End of variables declaration//GEN-END:variables
 }

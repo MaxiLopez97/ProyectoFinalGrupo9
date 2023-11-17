@@ -11,9 +11,7 @@ public class GestionarCuartel extends javax.swing.JInternalFrame {
 
     private CuartelData cuartel = new CuartelData();
     private CuartelDeBomberos cuartelActual = null;
-
     private DefaultTableModel modelo;
-
     private List<CuartelDeBomberos> lista;
     private CuartelData cuartel1;
 
@@ -202,6 +200,9 @@ public class GestionarCuartel extends javax.swing.JInternalFrame {
                 limpiarCampos();
                 limpiarTabla();
                 cargarTabla();
+                
+                cuartelActual = null;
+                
             }
 
         } catch (NumberFormatException nfe) {

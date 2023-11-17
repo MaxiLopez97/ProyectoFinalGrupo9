@@ -396,7 +396,7 @@ public class GestionarBrigada extends javax.swing.JInternalFrame {
         
         for(Brigada b : listab){
         
-            modelo.addRow(new Object[] {b.getCodBrigada(), b.getNombre_br(), b.getEspecialidad(), b.getNro_cuartel().getNombre_cuartel(), b.isEstado()});
+            modelo.addRow(new Object[]{b.getCodBrigada(), b.getNombre_br(), b.getEspecialidad(), b.getNro_cuartel().getNombre_cuartel(), b.isEstado()});
         
         }
     
