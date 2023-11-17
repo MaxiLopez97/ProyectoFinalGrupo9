@@ -46,9 +46,9 @@ public class ConsultarSiniestro extends javax.swing.JInternalFrame {
         escritorio.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(249, 39, -1, -1));
 
         jLabel2.setText("Seleccionar Siniestros :");
-        escritorio.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(121, 127, -1, -1));
+        escritorio.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, -1, -1));
 
-        escritorio.add(jCSiniestros, new org.netbeans.lib.awtextra.AbsoluteConstraints(308, 122, 367, -1));
+        escritorio.add(jCSiniestros, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 120, 367, -1));
 
         jSiniestros.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

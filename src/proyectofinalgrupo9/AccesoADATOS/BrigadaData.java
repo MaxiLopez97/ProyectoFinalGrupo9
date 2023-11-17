@@ -254,5 +254,41 @@ public class BrigadaData {
         }
             
     }
+    
+    public List<Brigada> listarBrigadaXCuartel(CuartelDeBomberos cuartel) {
 
+        String sql = "SELECT codBrigada, nombre_br, especialidad FROM brigada"
+                + " WHERE nro_cuartel=? ";
+
+        ArrayList<Brigada> brigadas = new ArrayList<>();
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, cuartel.getCodCuartel());
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                Brigada brig = new Brigada();
+
+                brig.setCodBrigada(rs.getInt("codBrigada"));
+                brig.setNombre_br(rs.getString("nombre_br"));
+
+                String especialidadString = rs.getString("especialidad");
+                Especialidades especialidad = Especialidades.valueOf(especialidadString);
+                brig.setEspecialidad(especialidad);
+
+                brig.setNro_cuartel(cuartel);
+
+                brigadas.add(brig);
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+
+            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla brigada " + ex);
+        }
+        return brigadas;
+    }
 }

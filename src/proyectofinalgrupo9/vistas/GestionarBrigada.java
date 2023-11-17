@@ -262,8 +262,7 @@ public class GestionarBrigada extends javax.swing.JInternalFrame {
         
             jCSeleccionarCuartel1.addItem(c);
         
-        }
-        
+        }    
     } 
     
     // ------------ SALIR ------------
@@ -353,16 +352,36 @@ public class GestionarBrigada extends javax.swing.JInternalFrame {
     
     private void jBModificarBrigadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBModificarBrigadaActionPerformed
 
-        try{
-        
-            
-            
-        }catch(ArrayIndexOutOfBoundsException ex){
-        
-            JOptionPane.showMessageDialog(null, "Error al modificar Brigada" + ex);
-        
-        }
+       try{
 
+            int cod= Integer.parseInt(jTBuscarID.getText());
+            String nombre = jTNombreDeBrigada.getText();
+
+            Especialidades especial = (Especialidades) jCEspecialidades.getSelectedItem();
+
+
+            CuartelDeBomberos nro_cuartel = (CuartelDeBomberos) jCSeleccionarCuartel1.getSelectedItem();
+            Boolean estado= (Boolean) jCEstado.isSelected();
+
+            if(cod ==0 || nombre.isEmpty() || jCEspecialidades.getSelectedIndex() == -1 || jCSeleccionarCuartel1.getSelectedIndex()== -1 || estado==false){
+
+                JOptionPane.showMessageDialog(this, "Por favor complete todos los datos.");
+                
+                return;
+            }
+            
+            Brigada bl = new Brigada(cod, nombre, especial, nro_cuartel, estado);
+
+           brig.modificarBrigada(bl);
+
+           borrarTabla();
+           llenarTabla();
+
+       } catch (NullPointerException ex) {
+
+            JOptionPane.showMessageDialog(null, "Error al modificar Brigada" + ex);
+
+        }
 
     }//GEN-LAST:event_jBModificarBrigadaActionPerformed
 

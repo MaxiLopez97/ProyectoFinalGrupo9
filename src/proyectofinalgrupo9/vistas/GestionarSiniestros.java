@@ -578,64 +578,54 @@ public class GestionarSiniestros extends javax.swing.JInternalFrame {
 
     private void jBValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBValidarActionPerformed
         
+        if (modelo.getColumnCount() != 8) {
+            modelo.setColumnCount(8);
+        }
+
         ArrayList<CuartelDeBomberos> cuarteles = (ArrayList<CuartelDeBomberos>) cuartel.listarCuarteles();
-        
+
+        Double[] distancias = new Double[cuarteles.size()];
+
         ArrayList<CuartelDeBomberos> cuartelesCercanos = new ArrayList<>();
-        
-        int coordX = Integer.parseInt(jTCoord_X.getText());
-        int coordY = Integer.parseInt(jTCoord_Y.getText());
-        
-        int suma = coordX + coordY;
-        
+
+        int coordX1 = Integer.parseInt(jTCoord_X.getText());
+        int coordY1 = Integer.parseInt(jTCoord_Y.getText());
+
         for(int i = 0; i < cuarteles.size() + cuartelesCercanos.size(); i++){
-        
-            int menor = Integer.MAX_VALUE;
-            
+
+            double menor = Double.MAX_VALUE;
+
             CuartelDeBomberos cuartelCercano = null;
-            
+
             for(CuartelDeBomberos c : cuarteles){
-            
-                int coordenadaX = c.getCoord_X();
-                int coordenadaY = c.getCoord_Y();
-                
-                int suma2 = coordenadaX + coordenadaY;
-                
-                int resultado;
-                
-                if(suma2 > suma){
-                
-                    resultado = suma2 - suma;
-                
-                }else{
-                
-                    resultado = suma - suma2;
-                
-                }
-            
+
+                int coordX2 = c.getCoord_X();
+                int coordY2 = c.getCoord_Y();
+
+                double resultado = Math.sqrt(Math.pow(coordX2 - coordX1, 2) + Math.pow(coordY2 - coordY1, 2));
+
                 if(resultado < menor){
-                
+                    distancias[i] = resultado;
                     menor = resultado;
-                    
                     cuartelCercano = c;
-                    
                 }
-                
             }
-        
+
             cuartelesCercanos.add(cuartelCercano);
-            
+
             cuarteles.remove(cuartelCercano);
-            
+
         }
-        
+
         modelo.setRowCount(0);
-        
+        modelo.addColumn("Distancia");
+        int i = 0;
         for(CuartelDeBomberos c : cuartelesCercanos){
-        
-            modelo.addRow(new Object[]{c.getCodCuartel(), c.getNombre_cuartel(), c.getDireccion(), c.getCoord_X(), c.getCoord_Y(), c.getTelefono(), c.getCorreo(), true});
-        
+
+            modelo.addRow(new Object[]{c.getCodCuartel(), c.getNombre_cuartel(), c.getDireccion(), c.getCoord_X(), c.getCoord_Y(), c.getTelefono(), c.getCorreo(), true, Math.round(distancias[i])});
+            i++;
         }
-        
+
         jBGuardar.setEnabled(true);
         
     }//GEN-LAST:event_jBValidarActionPerformed
