@@ -91,28 +91,29 @@ public class GestionarBrigada extends javax.swing.JInternalFrame {
         jTNombreDeBrigada = new javax.swing.JTextField();
         jBGuardarBrigada1 = new javax.swing.JButton();
         jBSalirBrigadas = new javax.swing.JButton();
+        jCDisponible = new javax.swing.JCheckBox();
 
         setClosable(true);
 
         jDesktopPane1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jDesktopPane1.add(jTBuscarID, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 280, 210, -1));
+        jDesktopPane1.add(jTBuscarID, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 280, 210, -1));
 
         jLabel5.setText("Estado:");
-        jDesktopPane1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 173, -1, -1));
+        jDesktopPane1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 170, -1, -1));
 
         jLabel4.setText("Seleccione un cuartel:");
-        jDesktopPane1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 133, -1, -1));
+        jDesktopPane1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, -1, -1));
 
         jLabel3.setText("Especialidad:");
-        jDesktopPane1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 89, 126, -1));
+        jDesktopPane1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, 126, -1));
 
         jLabel2.setText("Nombre de Brigada:");
-        jDesktopPane1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 46, -1, -1));
+        jDesktopPane1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 0));
         jLabel1.setText("INCORPORACIÓN DE BRIGADA");
-        jDesktopPane1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 0, -1, -1));
+        jDesktopPane1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, -1, -1));
 
         jBuscar.setText("Buscar");
         jBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -120,15 +121,15 @@ public class GestionarBrigada extends javax.swing.JInternalFrame {
                 jBuscarActionPerformed(evt);
             }
         });
-        jDesktopPane1.add(jBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 280, 86, -1));
+        jDesktopPane1.add(jBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 272, 86, 40));
 
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 0));
         jLabel6.setText("LISTA DE BRIGADAS");
-        jDesktopPane1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 330, -1, -1));
+        jDesktopPane1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 330, -1, -1));
 
         jCEstado.setText("Activo");
-        jDesktopPane1.add(jCEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 169, -1, -1));
+        jDesktopPane1.add(jCEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 170, -1, -1));
 
         jTBrigadas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -143,9 +144,9 @@ public class GestionarBrigada extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTBrigadas);
 
-        jDesktopPane1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 480, 273));
+        jDesktopPane1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 630, 273));
 
-        jDesktopPane1.add(jCEspecialidades, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 84, 255, -1));
+        jDesktopPane1.add(jCEspecialidades, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 90, 255, -1));
 
         jBModificarBrigada.setText("Modificar");
         jBModificarBrigada.addActionListener(new java.awt.event.ActionListener() {
@@ -153,7 +154,7 @@ public class GestionarBrigada extends javax.swing.JInternalFrame {
                 jBModificarBrigadaActionPerformed(evt);
             }
         });
-        jDesktopPane1.add(jBModificarBrigada, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, 86, -1));
+        jDesktopPane1.add(jBModificarBrigada, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 220, 86, -1));
 
         jBBorrarBrigada.setText("Eliminar");
         jBBorrarBrigada.addActionListener(new java.awt.event.ActionListener() {
@@ -161,13 +162,13 @@ public class GestionarBrigada extends javax.swing.JInternalFrame {
                 jBBorrarBrigadaActionPerformed(evt);
             }
         });
-        jDesktopPane1.add(jBBorrarBrigada, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 210, 86, -1));
+        jDesktopPane1.add(jBBorrarBrigada, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 660, 86, -1));
 
-        jDesktopPane1.add(jCSeleccionarCuartel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 128, 255, -1));
+        jDesktopPane1.add(jCSeleccionarCuartel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 130, 255, -1));
 
         jLabel7.setText("ModificarPor ID");
-        jDesktopPane1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 90, -1));
-        jDesktopPane1.add(jTNombreDeBrigada, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 42, 255, -1));
+        jDesktopPane1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 280, 90, -1));
+        jDesktopPane1.add(jTNombreDeBrigada, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, 255, -1));
 
         jBGuardarBrigada1.setText("Guardar");
         jBGuardarBrigada1.addActionListener(new java.awt.event.ActionListener() {
@@ -175,7 +176,7 @@ public class GestionarBrigada extends javax.swing.JInternalFrame {
                 jBGuardarBrigada1ActionPerformed(evt);
             }
         });
-        jDesktopPane1.add(jBGuardarBrigada1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 210, 86, -1));
+        jDesktopPane1.add(jBGuardarBrigada1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 220, 86, -1));
 
         jBSalirBrigadas.setText("Salir");
         jBSalirBrigadas.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -190,11 +191,14 @@ public class GestionarBrigada extends javax.swing.JInternalFrame {
         });
         jDesktopPane1.add(jBSalirBrigadas, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 660, 93, -1));
 
+        jCDisponible.setText("Disponible");
+        jDesktopPane1.add(jCDisponible, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 170, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 525, Short.MAX_VALUE)
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 667, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -220,16 +224,14 @@ public class GestionarBrigada extends javax.swing.JInternalFrame {
             
             Integer id = Integer.parseInt(jTBuscarID.getText());
             
-            brigada = brig.consultarBrigada(id);
-            
-            CuartelDeBomberos cuartel = new CuartelDeBomberos();
-            
+            brigada = brig.consultarBrigada(id); 
                         
             if(brigada != null){
             
                 jTNombreDeBrigada.setText(brigada.getNombre_br());
                 jCEspecialidades.setSelectedItem(brigada.getEspecialidad());
-                jCSeleccionarCuartel1.setSelectedItem(brigada.getNombre_br());
+                jCSeleccionarCuartel1.setSelectedItem(brigada.getNro_cuartel().getCodCuartel());
+                jCDisponible.setSelected(brigada.isDisponible());
                 jCEstado.setSelected(brigada.isEstado());
                 
             }
@@ -286,9 +288,12 @@ public class GestionarBrigada extends javax.swing.JInternalFrame {
         
         CuartelDeBomberos cuartel = (CuartelDeBomberos) jCSeleccionarCuartel1.getSelectedItem();
         
+        Boolean disponible = jCDisponible.isSelected();
+        
         Boolean estado = jCEstado.isSelected();
+        
          
-           if (nombre.isEmpty() || jCEspecialidades.getSelectedIndex() == -1 || jCSeleccionarCuartel1.getSelectedIndex() == -1 || estado == false) {
+           if (nombre.isEmpty() || jCEspecialidades.getSelectedIndex() == -1 || jCSeleccionarCuartel1.getSelectedIndex() == -1 || disponible == false || estado == false) {
 
                 JOptionPane.showMessageDialog(this, "No puede haber campos vacios");
 
@@ -297,9 +302,11 @@ public class GestionarBrigada extends javax.swing.JInternalFrame {
            
            if(brigada == null){
            
-               brigada = new Brigada(nombre, especial, cuartel, estado);
+               brigada = new Brigada(nombre, especial, cuartel, disponible, estado);
                
                brig.guardarBrigada(brigada);
+               
+               brigada = null;
                
                limpiarCampos();
                borrarTabla();
@@ -395,6 +402,7 @@ public class GestionarBrigada extends javax.swing.JInternalFrame {
         filaCabecera.add(" Nombre: ");
         filaCabecera.add(" Especialidad: ");
         filaCabecera.add(" Cuartel: ");
+        filaCabecera.add(" Disponible: ");
         filaCabecera.add(" Estado: ");
         
         for(Object it : filaCabecera){
@@ -411,11 +419,11 @@ public class GestionarBrigada extends javax.swing.JInternalFrame {
     
     private void llenarTabla(){
     
-        List<Brigada> listab = (ArrayList) brig.listarBrigada();
+        List<Brigada> listab = (ArrayList) brig.listarTodasLasBrigadas();
         
         for(Brigada b : listab){
         
-            modelo.addRow(new Object[]{b.getCodBrigada(), b.getNombre_br(), b.getEspecialidad(), b.getNro_cuartel().getNombre_cuartel(), b.isEstado()});
+            modelo.addRow(new Object[]{b.getCodBrigada(), b.getNombre_br(), b.getEspecialidad(), b.getNro_cuartel().getNombre_cuartel(), b.isDisponible(), b.isEstado()});
         
         }
     
@@ -430,6 +438,8 @@ public class GestionarBrigada extends javax.swing.JInternalFrame {
         jCEspecialidades.setSelectedIndex(-1);
         
         jCSeleccionarCuartel1.setSelectedIndex(-1);
+        
+        jCDisponible.setSelected(false);
         
         jCEstado.setSelected(false);
 
@@ -456,6 +466,7 @@ public class GestionarBrigada extends javax.swing.JInternalFrame {
     private javax.swing.JButton jBModificarBrigada;
     private javax.swing.JButton jBSalirBrigadas;
     private javax.swing.JButton jBuscar;
+    private javax.swing.JCheckBox jCDisponible;
     private javax.swing.JComboBox<Especialidades> jCEspecialidades;
     private javax.swing.JCheckBox jCEstado;
     private javax.swing.JComboBox<CuartelDeBomberos> jCSeleccionarCuartel1;

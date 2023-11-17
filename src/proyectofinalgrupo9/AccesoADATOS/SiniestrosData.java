@@ -35,8 +35,6 @@ public class SiniestrosData {
             ps.setInt(3, siniestro.getCoord_X());
             ps.setInt(4, siniestro.getCoord_Y());
             ps.setString(5, siniestro.getDetalles());
-//            ps.setDate(6, Date.valueOf(siniestro.getFecha_resol()));
-//            ps.setInt(7, siniestro.getPuntuacion());
             ps.setInt(6, siniestro.getCodBrigada().getCodBrigada());
             ps.setBoolean(7, siniestro.isEstado());
 

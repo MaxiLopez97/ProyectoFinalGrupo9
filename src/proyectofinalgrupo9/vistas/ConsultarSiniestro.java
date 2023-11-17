@@ -27,8 +27,46 @@ public class ConsultarSiniestro extends javax.swing.JInternalFrame {
         modelo = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int f, int c) {
+                
                 if (c == 0) {
+                    
                     return false;
+                }
+                
+                if (f == 1){
+                
+                    return false;
+                
+                }
+                
+                if (f == 2){
+                
+                    return false;
+                
+                }
+                
+                if (f == 3){
+                
+                    return false;
+                
+                }
+                
+                if (f == 4){
+                
+                    return false;
+                
+                }
+                
+                if (f == 5){
+                
+                    return false;
+                
+                }
+                
+                if (f == 6){
+                
+                    return false;
+                
                 }
 
                 if (c == 7) {

@@ -345,6 +345,10 @@ public class GestionarSiniestros extends javax.swing.JInternalFrame {
                 
                 sin.registrarSiniestros(siniestro);
                 
+                int codBrigada = brigada.getCodBrigada();
+                
+                brig.brigadaOcupada(codBrigada);
+                
                 jCSeleccionarSiniestro.addItem(siniestro);
                 
                 jCSiniestros.addItem(siniestro);

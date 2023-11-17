@@ -105,11 +105,7 @@ public class CuartelData {
                 mostrarCuartel.setCorreo(rs.getString("correo"));
                 mostrarCuartel.setEstado(true);
 
-            } else {
-
-                JOptionPane.showMessageDialog(null, "No existe el ID del cuartel ingresado.");
-
-            }
+            } 
             ps.close();
 
         } catch (SQLException ex) {
@@ -119,6 +115,46 @@ public class CuartelData {
         }
         return mostrarCuartel;
 
+    }
+    
+    public CuartelDeBomberos cCuartel(int codCuartel){
+    
+        String sql = "SELECT nombre_cuartel, direccion, coord_X, coord_Y, telefono, correo, estado FROM cuartel"
+                + " WHERE codCuartel = ?";
+
+        CuartelDeBomberos mostrarCuartel = null;
+
+        try {
+
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ps.setInt(1, codCuartel);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+
+                mostrarCuartel = new CuartelDeBomberos();
+
+                mostrarCuartel.setCodCuartel(codCuartel);
+                mostrarCuartel.setNombre_cuartel(rs.getString("nombre_cuartel"));
+                mostrarCuartel.setDireccion(rs.getString("direccion"));
+                mostrarCuartel.setCoord_X(rs.getInt("coord_X"));
+                mostrarCuartel.setCoord_Y(rs.getInt("coord_Y"));
+                mostrarCuartel.setTelefono(rs.getString("telefono"));
+                mostrarCuartel.setCorreo(rs.getString("correo"));
+                mostrarCuartel.setEstado(true);
+
+            } 
+            ps.close();
+
+        } catch (SQLException ex) {
+
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cuartel");
+
+        }
+        return mostrarCuartel;
+    
     }
     
     public void eliminarCuartel(int codCuartel){

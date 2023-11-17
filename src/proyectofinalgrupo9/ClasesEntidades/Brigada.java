@@ -1,16 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package proyectofinalgrupo9.ClasesEntidades;
 
 import proyectofinalgrupo9.AccesoADATOS.Especialidades;
 
-/**
- *
- * @author Maxi
- */
 public class Brigada {
    
     private int codBrigada;
@@ -28,10 +20,11 @@ public class Brigada {
         this.estado = estado;
     }
 
-    public Brigada(String nombre_br, Especialidades especialidad, CuartelDeBomberos nro_cuartel, boolean estado) {
+    public Brigada(String nombre_br, Especialidades especialidad, CuartelDeBomberos nro_cuartel, boolean disponible, boolean estado) {
         this.nombre_br = nombre_br;
         this.especialidad = especialidad;
         this.nro_cuartel = nro_cuartel;
+        this.disponible = disponible;
         this.estado = estado;
     }
 

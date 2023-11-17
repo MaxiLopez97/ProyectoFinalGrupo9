@@ -27,7 +27,40 @@ public class ConsultarCuartel extends javax.swing.JInternalFrame {
         
         initComponents();
         
-        modelo= new DefaultTableModel();
+        modelo= new DefaultTableModel(){
+            @Override
+            public boolean isCellEditable(int f, int c) {
+                
+                if (c == 0) {
+                    return false;
+                }
+                
+                if(f == 1){
+                
+                    return false;
+                
+                }
+                
+                if(f == 2){
+                
+                    return false;
+                
+                }
+                
+                if(f == 3){
+                
+                    return false;
+                    
+                }
+
+                if (c == 4) {
+
+                    return false;
+                }
+                
+                return true;
+            }
+        };
 
 
 
@@ -136,7 +169,7 @@ public class ConsultarCuartel extends javax.swing.JInternalFrame {
                 modeloTabla.setRowCount(0);
 
                 for (Brigada b : listaB) {
-                    Object[] fila = {b.getCodBrigada(), b.getNombre_br(), b.getEspecialidad(), b.getNro_cuartel().getCodCuartel(), b.isEstado()};
+                    Object[] fila = {b.getCodBrigada(), b.getNombre_br(), b.getEspecialidad(), b.getNro_cuartel().getCodCuartel(), b.isDisponible(), b.isEstado()};
 
                     modelo.addRow(fila);
 
@@ -182,6 +215,7 @@ public class ConsultarCuartel extends javax.swing.JInternalFrame {
         filaCabecera.add(" Nombre Brigada: ");
         filaCabecera.add(" Especialidad: ");
         filaCabecera.add(" Numero de Cuartel: ");
+        filaCabecera.add(" Disponible: ");
         filaCabecera.add(" Estado: ");
 
         for (Object it : filaCabecera) {
@@ -200,7 +234,7 @@ public class ConsultarCuartel extends javax.swing.JInternalFrame {
 
         for (Brigada a : listaB) {
 
-            modelo.addRow(new Object[]{a.getCodBrigada(), a.getNombre_br(), a.getEspecialidad(), a.getNro_cuartel().getCodCuartel(), a.isEstado()});
+            modelo.addRow(new Object[]{a.getCodBrigada(), a.getNombre_br(), a.getEspecialidad(), a.getNro_cuartel().getCodCuartel(), a.isDisponible(), a.isEstado()});
 
         }
 

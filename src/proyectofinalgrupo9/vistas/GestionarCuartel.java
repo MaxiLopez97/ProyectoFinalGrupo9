@@ -77,36 +77,36 @@ public class GestionarCuartel extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("INCORPORACIÓN DE CUARTELES");
-        jDesktopPane1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 0, -1, 30));
+        jDesktopPane1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 10, -1, 30));
 
         jLabel2.setText("Nombre del Cuartel:");
-        jDesktopPane1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, -1, 20));
+        jDesktopPane1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 80, -1, 20));
 
         jLabel3.setText("Direccion:");
-        jDesktopPane1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 75, -1));
+        jDesktopPane1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 120, 75, -1));
 
         jLabel4.setText("Coordenada X:");
-        jDesktopPane1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, 99, -1));
+        jDesktopPane1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 160, 99, -1));
 
         jLabel5.setText("Coordenada Y:");
-        jDesktopPane1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 200, 99, -1));
+        jDesktopPane1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 200, 99, -1));
 
         jLabel6.setText("Telefono:");
-        jDesktopPane1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 250, 75, -1));
+        jDesktopPane1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 240, 75, -1));
 
         jLabel8.setText("Correo:");
-        jDesktopPane1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 290, 70, -1));
-        jDesktopPane1.add(jTTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 240, 274, -1));
-        jDesktopPane1.add(jTCoord_Y, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 200, 274, -1));
-        jDesktopPane1.add(jTCoor_X, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, 274, -1));
-        jDesktopPane1.add(jTDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, 274, -1));
-        jDesktopPane1.add(jTNombreDelCuartel, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 80, 274, -1));
+        jDesktopPane1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 280, 70, -1));
+        jDesktopPane1.add(jTTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 240, 274, -1));
+        jDesktopPane1.add(jTCoord_Y, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 200, 274, -1));
+        jDesktopPane1.add(jTCoor_X, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 160, 274, -1));
+        jDesktopPane1.add(jTDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 120, 274, -1));
+        jDesktopPane1.add(jTNombreDelCuartel, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 80, 274, -1));
 
         jCEstado.setText("Activo");
-        jDesktopPane1.add(jCEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 324, -1, 30));
+        jDesktopPane1.add(jCEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 320, -1, 30));
 
         jLabel7.setText("Estado:");
-        jDesktopPane1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 330, -1, -1));
+        jDesktopPane1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 330, -1, -1));
 
         jBGuardar.setText("Guardar");
         jBGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -114,7 +114,7 @@ public class GestionarCuartel extends javax.swing.JInternalFrame {
                 jBGuardarActionPerformed(evt);
             }
         });
-        jDesktopPane1.add(jBGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, -1, -1));
+        jDesktopPane1.add(jBGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 340, -1, -1));
 
         jBModificar.setText("Modificar");
         jBModificar.addActionListener(new java.awt.event.ActionListener() {
@@ -122,7 +122,7 @@ public class GestionarCuartel extends javax.swing.JInternalFrame {
                 jBModificarActionPerformed(evt);
             }
         });
-        jDesktopPane1.add(jBModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 750, -1, -1));
+        jDesktopPane1.add(jBModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 740, -1, -1));
 
         jBBorrar.setText("Borrar");
         jBBorrar.addActionListener(new java.awt.event.ActionListener() {
@@ -130,8 +130,8 @@ public class GestionarCuartel extends javax.swing.JInternalFrame {
                 jBBorrarActionPerformed(evt);
             }
         });
-        jDesktopPane1.add(jBBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 750, -1, -1));
-        jDesktopPane1.add(jTCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 290, 274, -1));
+        jDesktopPane1.add(jBBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 740, -1, -1));
+        jDesktopPane1.add(jTCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 280, 274, -1));
 
         jTCuarteles.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -146,7 +146,7 @@ public class GestionarCuartel extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTCuarteles);
 
-        jDesktopPane1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 450, 570, 265));
+        jDesktopPane1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 450, 840, 265));
 
         jBSalirCuarteles.setText("Salir");
         jBSalirCuarteles.addActionListener(new java.awt.event.ActionListener() {
@@ -154,18 +154,18 @@ public class GestionarCuartel extends javax.swing.JInternalFrame {
                 jBSalirCuartelesActionPerformed(evt);
             }
         });
-        jDesktopPane1.add(jBSalirCuarteles, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 750, 65, -1));
+        jDesktopPane1.add(jBSalirCuarteles, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 740, 65, -1));
 
         jLabel10.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("CUARTELES");
-        jDesktopPane1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 410, -1, -1));
+        jDesktopPane1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 410, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 624, Short.MAX_VALUE)
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 898, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -187,11 +187,29 @@ public class GestionarCuartel extends javax.swing.JInternalFrame {
             String correo = jTCorreo.getText();
             Boolean estado = jCEstado.isSelected();
 
-            if (nombre.isEmpty() || direccion.isEmpty() || coor_x == null || coor_y == null || correo.isEmpty() || numero.isEmpty() || estado == false) {
+            if (nombre.isEmpty() || direccion.isEmpty() || coor_x == null || coor_y == null ||  correo.isEmpty() ||  numero.isEmpty() ||  estado == false) {
 
                 JOptionPane.showMessageDialog(this, "No puede haber campos vacios");
 
                 return;
+            }
+
+            if (cuartelActual == null) {
+
+                for (CuartelDeBomberos c : cuartel.listarCuarteles()) {
+
+                    if (direccion.equals(c.getDireccion()) || coor_x.equals(c.getCoord_X()) && coor_y.equals(c.getCoord_Y()) ||  numero.equals(c.getTelefono()) || correo.equals(c.getCorreo())){
+                        
+                        JOptionPane.showMessageDialog(null, "Se han ingresado datos pertenecientes a otro Cuartel de Bomberos.");
+
+                        limpiarAlgunosCampos();
+                        
+                        return;
+                        
+                    }
+
+                }
+
             }
 
             if (cuartelActual == null) {
@@ -200,9 +218,9 @@ public class GestionarCuartel extends javax.swing.JInternalFrame {
                 limpiarCampos();
                 limpiarTabla();
                 cargarTabla();
-                
+
                 cuartelActual = null;
-                
+
             }
 
         } catch (NumberFormatException nfe) {
@@ -324,8 +342,7 @@ public class GestionarCuartel extends javax.swing.JInternalFrame {
             modelo.removeRow(i);
         }
     }
-
-    //--------------Limpiar Campos (FUNCIONA BIEN)-----------------------------------
+    
     public void limpiarCampos() {
 
         jTNombreDelCuartel.setText("");
@@ -336,6 +353,14 @@ public class GestionarCuartel extends javax.swing.JInternalFrame {
         jTCorreo.setText("");
         jCEstado.setSelected(false);
 
+    }
+    
+    public void limpiarAlgunosCampos() {
+        jTDireccion.setText("");
+        jTCoor_X.setText("");
+        jTCoord_Y.setText("");
+        jTTelefono.setText("");
+        jTCorreo.setText("");
     }
 
 

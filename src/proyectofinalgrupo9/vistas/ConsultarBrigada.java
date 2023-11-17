@@ -24,6 +24,7 @@ public class ConsultarBrigada extends javax.swing.JInternalFrame {
         modelo = new DefaultTableModel(){
             @Override
             public boolean isCellEditable(int f, int c) {
+                
                 if (c == 0) {
                     return false;
                 }
@@ -50,6 +51,7 @@ public class ConsultarBrigada extends javax.swing.JInternalFrame {
 
                     return false;
                 }
+                
                 return true;
             }
         };
@@ -78,6 +80,7 @@ public class ConsultarBrigada extends javax.swing.JInternalFrame {
         jBomberos = new javax.swing.JTable();
         jSalir = new javax.swing.JButton();
         jBuscar = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         setClosable(true);
 
@@ -105,7 +108,7 @@ public class ConsultarBrigada extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jBomberos);
 
-        escritorio.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 720, -1));
+        escritorio.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 720, -1));
 
         jSalir.setText("Salir");
         jSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -113,7 +116,7 @@ public class ConsultarBrigada extends javax.swing.JInternalFrame {
                 jSalirActionPerformed(evt);
             }
         });
-        escritorio.add(jSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 610, -1, -1));
+        escritorio.add(jSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 620, -1, -1));
 
         jBuscar.setText("Buscar");
         jBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -122,6 +125,10 @@ public class ConsultarBrigada extends javax.swing.JInternalFrame {
             }
         });
         escritorio.add(jBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 90, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel3.setText("BOMBEROS:");
+        escritorio.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 150, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -230,6 +237,7 @@ public class ConsultarBrigada extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<Brigada> jCSeleccionarBrigadas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JButton jSalir;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
